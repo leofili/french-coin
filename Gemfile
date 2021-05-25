@@ -33,6 +33,7 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 # creating user
 gem 'devise'
+gem 'pundit'
 
 group :development, :test do
   gem 'pry-byebug'
