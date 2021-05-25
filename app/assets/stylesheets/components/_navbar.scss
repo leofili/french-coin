@@ -4,12 +4,22 @@
   width: 100%;
   top: 0;
   z-index: 10;
+  background: $blue;
+  a {
+    color: $white;
+    margin-right: 20px;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
-.navbar .navbar-collapse {
-  flex-grow: 0;
-}
-
-.navbar .navbar-brand img {
-  width: 40px;
+.navbar-left {
+  img {
+    width: 45px;
+  }
+  a {
+    margin-left: 30px;
+    margin-right: 0;
+  }
 }
