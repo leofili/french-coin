@@ -6,7 +6,7 @@
     <h1 class="hero-title animate fadeInLeft delay-600 text-center">French Coin</h1>
   </div>
   <div class="hero-container">
-    <a href="#" class="hero-button animate fadeInLeft delay-800" title="Click to see more">Investir</a>
-    <a href="#" class="hero-button animate fadeInLeft delay-800" title="Click to see more">Emprunter</a>
+    <%= link_to 'Investir', '/', class: "hero-button animate fadeInLeft delay-800"%>
+    <%= link_to 'Emprunter', new_loan_path, class: "hero-button animate fadeInLeft delay-800"%>
   </div>
 </div>
