@@ -1,4 +1,4 @@
-class Transaction < ApplicationRecord
+class Transfer < ApplicationRecord
   has_one :payment
   belongs_to :user
   belongs_to :loan
