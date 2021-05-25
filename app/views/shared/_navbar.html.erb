@@ -1,0 +1,15 @@
+<div class="navbar d-flex justify-content-between align-items-center">
+  <div class="navbar-left d-flex align-items-center">
+    <%# logo-img %>
+    <a href="#">Earn</a>
+    <a href="#">Borrow</a>
+  </div>
+  <div class="navbar-right d-flex align-items-center">
+    <a href='#'>My loans</a>
+      <% if current_user.avatar.attached? %>
+        <%= cl_image_tag current_user.avatar.key, class: 'avatar dropdown-toggle', id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+      <% else %>
+        <%= image_tag 'blank_avatar.png', class: 'avatar dropdown-toggle', id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+      <% end %>
+  </div>
+</div>
