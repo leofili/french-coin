@@ -2,7 +2,9 @@
   background-color: black;
   text-decoration: none;
   color: white;
-  &:hover{
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  &:hover {
     opacity: 0.8;
   }
 }
