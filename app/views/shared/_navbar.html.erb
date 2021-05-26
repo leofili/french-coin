@@ -7,16 +7,23 @@
     <%= link_to 'Emprunter', new_loan_path %>
   </div>
   <div class="navbar-right d-flex align-items-center">
-  <% if user_signed_in? %>
-    <%= link_to 'My dashboard', dashboard_path %>
+    <% if user_signed_in? %>
+      <%= link_to 'My dashboard', dashboard_path %>
       <% if current_user.avatar.attached? %>
         <%= cl_image_tag current_user.avatar.key, class: 'avatar dropdown-toggle', id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
       <% else %>
         <%= image_tag 'blank_avatar.png', class: 'avatar dropdown-toggle', id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
       <% end %>
-  <% else %>
-    <%= link_to 'Log in', new_user_session_path%>
-    <%= link_to 'Sign up', new_user_registration_path%>
-  <% end %>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+      <%= link_to 'Log out', destroy_user_session_path, class: "dropdown-item", method: :delete %>
+    </div>
+    <% else %>
+      <li class="nav-item">
+        <%= link_to 'Log in', new_user_session_path%>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Sign up', new_user_registration_path%>
+      </li>
+    <% end %>
   </div>
 </div>
