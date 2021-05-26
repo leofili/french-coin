@@ -24,6 +24,7 @@ require("channels")
 
 // External imports
 import "bootstrap";
+import { initToggle } from "../plugins/init_toggle";
 import { initTabsClick } from "../plugins/init_tabs_click";
 
 // Internal imports, e.g:
@@ -32,6 +33,7 @@ import { initTabsClick } from "../plugins/init_tabs_click";
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
+  initToggle();
   initTabsClick();
 });
 

@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_141114) do
     t.date "start_date"
     t.date "end_date"
     t.integer "interest_rate"
-    t.string "status"
+    t.string "status", default: 0
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
