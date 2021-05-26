@@ -1,5 +1,5 @@
-.bouton{
-  background-color: black;
+.bouton {
+  padding: 10px;
   text-decoration: none;
   color: white;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -7,4 +7,8 @@
   &:hover {
     opacity: 0.8;
   }
+}
+
+.btn-middle-blue {
+  background-color: $middle-blue;
 }
