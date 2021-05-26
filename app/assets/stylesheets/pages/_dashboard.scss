@@ -10,12 +10,6 @@
   flex: 1 1 auto;
   margin-top: 50px;
   height: 70vh;
-  h3, .my-loans {
-    padding-left: 160px;
-  }
-  .my-loans {
-    padding-right: 160px;
-  }
 }
 
 .dashboard-sidebar {
@@ -24,4 +18,14 @@
 
 .my-loans {
   flex: 0 1 auto;
+  padding-right: 160px;
+  padding-left: 160px;
+}
+
+.collateral-fluctuation {
+  display: none;
+}
+
+.my-infos {
+  display: none;
 }
