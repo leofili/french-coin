@@ -21,3 +21,18 @@
   border-bottom: 3px solid #555555;
   padding-bottom: 8px;
 }
+
+.tab-blue {
+  background-color: $blue;
+}
+
+.tab-vertical {
+  position: relative;
+  i {
+    position: absolute;
+    color: $blue;
+    right: -31px;
+    top: -19px;
+    font-size: 95px;
+  }
+}
