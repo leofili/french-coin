@@ -1,0 +1,23 @@
+.tabs {
+  margin-bottom: 35px;
+}
+
+.tab {
+  text-decoration: none;
+  color: rgb(180, 180, 180) ;
+  font-weight: 400;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.tab:hover {
+  text-decoration: none;
+  color: rgb(120, 120, 120) ;
+  font-weight: 400;
+}
+
+.tab.active {
+  color: #555555;
+  border-bottom: 3px solid #555555;
+  padding-bottom: 8px;
+}
