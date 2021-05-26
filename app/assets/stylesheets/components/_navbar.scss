@@ -1,6 +1,6 @@
 .navbar {
   justify-content: space-between;
-  position: fixed;
+  // position: fixed;
   width: 100%;
   top: 0;
   z-index: 10;
@@ -26,22 +26,4 @@
     margin-right: 30px;
   }
 }
-
-
-
 }
-// .dropdown-item {
-//     // position: relative;
-//     // width: auto;
-//     // margin: 0px;
-//     color: black;
-//     // border-radius: 4px;
-//     // font-weight: 500;
-//     // color: rgb(22, 82, 240);
-//     // cursor: pointer;
-// }
-// .dropdown-item {
-// white-space:nowrap;
-// display:block;
-// color: black;
-// }
