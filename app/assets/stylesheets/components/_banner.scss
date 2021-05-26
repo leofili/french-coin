@@ -66,7 +66,6 @@
 }
 
 .hero-button {
-  background: rgba(255,255,255,0.8);
   color: #44575b;
   font-size: 24px;
   float: left;
@@ -75,6 +74,31 @@
   margin-top: 30px;
   padding: 20px 90px;
   text-decoration: none;
+}
+
+.bouton-banner-inv{
+  background: rgba(255,255,255,0.8);
+  color: $blue;
+  border-radius: 5px;
+  
+  &:hover{
+    text-decoration: none;
+    color: rgba(0,30,150,0.7);
+    background-color: rgba(255,255,255,0.8);
+    box-shadow: 0 2px 14px rgba(0,30,150,0.5);
+  }
+}
+
+.bouton-banner-emp{
+  background: rgba(0,30,150,0.8);
+  color: white;
+  border-radius: 5px;
+  &:hover{
+    text-decoration: none;
+    background-color: rgba(0,30,150,0.7);
+    color:rgba(255,255,255,0.8);
+    box-shadow: 0 2px 14px rgba(255,255,255,0.1);
+  }
 }
 
 .hero-title {
@@ -160,3 +184,4 @@
 .delay-800 {
   animation-delay: 0.8s;
 }
+
