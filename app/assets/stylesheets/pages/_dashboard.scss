@@ -1,0 +1,31 @@
+
+.dashboard {
+  display: flex;
+}
+
+.dashboard-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 auto;
+  margin-top: 50px;
+  height: 70vh;
+}
+
+.dashboard-sidebar {
+  flex: 0 0 250px;
+}
+
+.my-loans {
+  flex: 0 1 auto;
+  padding-right: 160px;
+  padding-left: 160px;
+}
+
+.collateral-fluctuation {
+  display: none;
+}
+
+.my-infos {
+  display: none;
+}
