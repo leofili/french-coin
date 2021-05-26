@@ -1,1 +1,52 @@
-<%= @loan.name %>
+<div class="container" id="show">
+  <h2 class="show-header p-4">Loan for: <%=@loan.name%></h2>
+
+  <ul class="tabs list-inline" id="mytabs">
+    <li class="tab list-inline-item active" id="resume">Resume</li>
+    <li class="tab list-inline-item" id="next-payment">Next payment</li>
+    <li class="tab list-inline-item" id="historical-payment">Historical payment</li>
+  </ul>
+
+  <div data-controller="update-status">
+    <div class="resume">
+      <h4>Please do the collateral's transfer to confirm the following transaction</h4>
+      <p class="text-center p-3">Loan information</p>
+      
+      <div class="card-vertical card-white card-rounded p-4">
+        <div class="card-horizontal">
+          <div class="mr-2 text-center">
+            <p class="text-middle-blue border-b-middle-blue pb-3">Collatéral à déposer</p>
+            <p class="font-weight-light mb-0">10 000 €</p>
+          </div>
+          <div class="mx-2 text-center">
+            <p class="text-middle-blue border-b-middle-blue pb-3">Capital emprunté</p>
+            <p class="font-weight-light mb-0">4 000 €</p>
+          </div>
+          <div class="mx-2 text-center">
+            <p class="text-middle-blue border-b-middle-blue pb-3">Currency</p>
+            <p class="font-weight-light mb-0">Ethereum</p>
+          </div>
+        </div>
+        <div class="card-horizontal">
+          <div class="mx-2 text-center">
+            <p class="text-middle-blue border-b-middle-blue pb-3">Intérêts par mois</p>
+            <p class="font-weight-light mb-0">1,23€</p>
+          </div>
+          <div class="mx-2 text-center">
+            <p class="text-middle-blue border-b-middle-blue pb-3">Durée (mois)</p>
+            <p class="font-weight-light mb-0">12</p>
+          </div>
+          <div class="mx-2 text-center">
+            <p class="text-middle-blue border-b-middle-blue pb-3">Loan to Value</p>
+            <p class="font-weight-light mb-0">50%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="next-payment">
+    </div>
+
+    <div class="historical-payment">
+    </div>
+</div>
