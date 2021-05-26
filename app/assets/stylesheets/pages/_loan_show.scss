@@ -1,14 +1,13 @@
 .table {
   width: 90%;
   margin: auto;
-
-//   .col-ms-2{
-//     font-weight: 100;
-
-// }
 }
 
 .next-payment {
+  display: none;
+}
+
+.historical-payment {
   display: none;
 }
 
@@ -19,6 +18,12 @@
 .information-card-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  flex: 1;
+}
+
+.information-card-container2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   flex: 1;
 }
 
