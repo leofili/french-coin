@@ -1,30 +1,42 @@
-<h1>this is ur dashboard</h1>
-<p>iaiaiaia</p>
+<div class="dashboard">
 
+  <div class="sidebar sidebar-middle-blue dashboard-sidebar">
 
-<div class="card-vertical card-white card-rounded p-4 m-5">
-    <h3 class="h4 text-blue pb-2">Achat voiture</h3>
-  <div class="card-horizontal">
-    <div class="mr-2 text-center">
-      <p class="text-middle-blue border-b-middle-blue pb-3">Collatéral déposée</p>
-      <p class="font-weight-light mb-0">10 000 €</p>
+    <div class="user-infos my-5">
+      <% if current_user.avatar.attached? %>
+        <%= cl_image_tag current_user.avatar.key, class: 'avatar' %>
+      <% else %>
+        <%= image_tag 'blank_avatar.png', class: 'avatar' %>
+      <% end %>
+      <p><%= current_user.first_name %> <%= current_user.last_name %></p>
     </div>
-    <div class="mx-2 text-center">
-      <p class="text-middle-blue border-b-middle-blue pb-3">Capital emprunté</p>
-      <p class="font-weight-light mb-0">4 000 €</p>
+
+    <div class="tabs-vertical w-100 mt-2 pt-5">
+      <div class="tab-vertical tab-blue text-white text-center p-3"><p class='mb-0'>Mes emprunts</p><i class="fas fa-caret-right"></i></div>
+      <div class="tab-vertical tab-blue text-white text-center p-3"><p class="mb-0">Évolution de mon collatéral</p></div>
+      <div class="tab-vertical tab-blue text-white text-center p-3"><p class="mb-0">Mes informations</p></div>
     </div>
-    <div class="mx-2 text-center">
-      <p class="text-middle-blue border-b-middle-blue pb-3">Montant remboursé</p>
-      <p class="font-weight-light mb-0">1200 €</p>
-    </div>
-    <div class="mx-2 text-center">
-      <p class="text-middle-blue border-b-middle-blue pb-3">Capital restant dû</p>
-      <p class="font-weight-light mb-0">2 800 €</p>
-    </div>
-    <div class="mx-2 text-center ml-auto">
-      <a href="#" class="bouton btn-middle-blue">Voir le détail</a>
-    </div>
+
   </div>
+
+  <div class="dashboard-right">
+
+    <div class="dashboard-right-header">
+      <h2 class="mb-3">Mon dashboard</h2>
+    </div>
+
+    <h3 class="my-loans-title mr-auto mb-4">Mes emprunts</h3>
+
+    <div class="my-loans w-100 d-flex flex-column overflow-auto">
+      <div class="loan-info-cards">
+        <%= render 'loan-info-cards' %>
+      </div>
+    </div>
+
+  </div>
+
 </div>
+
+
 
 
