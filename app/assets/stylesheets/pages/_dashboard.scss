@@ -16,7 +16,7 @@
   flex: 0 0 250px;
 }
 
-.my-loans {
+.my-loans, .collateral-fluctuation {
   flex: 0 1 auto;
   padding-right: 160px;
   padding-left: 160px;
@@ -24,6 +24,15 @@
 
 .collateral-fluctuation {
   display: none;
+}
+
+.collateral-infos {
+  p {
+    font-weight: 100;
+  }
+  p, h4 {
+    flex: 1 1 auto;
+  }
 }
 
 .my-infos {
