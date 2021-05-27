@@ -1,23 +1,26 @@
 
-<% 5.times do %>
+<%# getting all loans with the collateral paid -> create a each do%>
+ <%loans.each do |loan|%>
+
+<%# <%= if loan.tranfer? %>
   <div class="card-vertical card-white card-rounded p-4 my-3">
-      <h4 class="h4 text-blue pb-2">Achat voiture</h4>
+      <h4 class="h4 text-blue pb-2"><%= loan.name %><%# Insert the name of the loan, ex: Achat voiture %></h4>
     <div class="card-horizontal">
       <div class="mr-2 text-center">
         <p class="text-middle-blue border-b-middle-blue pb-3">Collatéral déposée</p>
-        <p class="font-weight-light mb-0">10 000 €</p>
+        <p class="font-weight-light mb-0"><%=loan.collateral_currency%><%# Insert the collateral of the loan with currency %></p>
       </div>
       <div class="mx-2 text-center">
         <p class="text-middle-blue border-b-middle-blue pb-3">Capital emprunté</p>
-        <p class="font-weight-light mb-0">4 000 €</p>
+        <p class="font-weight-light mb-0"><%=loan.amount_currency %><%# Insert the amount of the loan with currency %></p>
       </div>
       <div class="mx-2 text-center">
         <p class="text-middle-blue border-b-middle-blue pb-3">Montant remboursé</p>
-        <p class="font-weight-light mb-0">1200 €</p>
+        <p class="font-weight-light mb-0"><%= loan.payments.sum(:refund_amount_cents) %><%# Insert the amount refunded of the loan with currency (with the loan_payments table)%></p>
       </div>
       <div class="mx-2 text-center">
         <p class="text-middle-blue border-b-middle-blue pb-3">Capital restant dû</p>
-        <p class="font-weight-light mb-0">2 800 €</p>
+        <p class="font-weight-light mb-0"><%=loan.amount_cents - loan.payments.sum(:refund_amount_cents)  %><%# Insert the difference betweent the two above%></p>
       </div>
       <div class="mx-2 text-center ml-auto">
         <a href="#" class="bouton btn-middle-blue">Voir le détail</a>

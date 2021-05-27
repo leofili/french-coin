@@ -5,5 +5,8 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    @loans = current_user.loans
   end
+
+
 end
