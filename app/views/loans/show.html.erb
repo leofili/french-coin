@@ -12,7 +12,7 @@
       <% if @loan.collateral_cents == 0 %>
       <h4>Please do the collateral's transfer to confirm the following transaction</h4>
       <p class="text-center p-3">Loan information</p>
-      
+
       <div class="card-white p-3" id="loan-information">
         <div class="information-card-container mr-3">
           <div class="information-card">
@@ -107,7 +107,7 @@
       <div class="container m-5 mx-auto">
         <div class="row">
           <div class="col-sm">
-            <div class="text-center">
+            <div class="text-left">
               <h1>Relevé de remboursement</h1>
             </div>
             <table class="table my-5">
@@ -120,7 +120,7 @@
               <tr>
                 <td class="col-ms-2 bg-gradient-primary text-middle-blue">Prelevement à venir</td>
                 <td class="col-ms-2"> 200€ </td>
-                <td class="text-center bg-gradient-primary text-middle-blue">PDate prochaine échéance</td>
+                <td class="text-center bg-gradient-primary text-middle-blue">Date prochaine échéance</td>
                 <td class="text-center">31 Mai 2021</td>
               </tr>
               <tr>
@@ -143,6 +143,63 @@
     </div>
 
     <div class="historical-payment">
+            <div class="container my-5 mx-auto">
+        <div class="column">
+          <div class="col-sm">
+            <div class="text-left my-5">
+              <h1>Historique de paiement</h1>
+            </div>
+            <table class="table table-loan-infos">
+              <thead>
+                <th>Solde au 25/05/021 -400€</th>
+                <th class="text-center">Durée 12 mois</th>
+                <th class="text-center">Prochaine échéance 31/05/2021</th>
+              </thead>
+            </table>
+
+            <table class="table my-5">
+              <tr>
+                <td class="text-center bg-gradient-primary text-middle-blue">Date</td>
+                <td class="text-center bg-gradient-primary text-middle-blue">Prélèvements</td>
+                <td class="text-center bg-gradient-primary text-middle-blue">Intérêts</td>
+                <td class="text-center bg-gradient-primary text-middle-blue">Capital amorti</td>
+              </tr>
+              <tr>
+                <td class="text-center">30/04/2021</td>
+                <td class="text-center">-200,31€</td>
+                <td class="text-center">1,32€</td>
+                <td class="text-center">200€</td>
+              </tr>
+              <tr>
+                <td class="text-center">31/04/2021</td>
+                <td class="text-center">-200,31€</td>
+                <td class="text-center">1,32€</td>
+                <td class="text-center">200€</td>
+              </tr>
+              <tr>
+                  <td class="text-center">02/05/2021</td>
+                  <td class="text-center">-200,31€</td>
+                  <td class="text-center">1,32€</td>
+                  <td class="text-center">200€</td>
+              </tr>
+              <tr>
+                  <td class="text-center">06/05/2021</td>
+                  <td class="text-center">-200,31€</td>
+                  <td class="text-center">1,32€</td>
+                  <td class="text-center">200€</td>
+              </tr>
+              <tr>
+                  <td class="text-center">16/05/2021</td>
+                  <td class="text-center">-200,31€</td>
+                  <td class="text-center">1,32€</td>
+                  <td class="text-center">200€</td>
+              </tr>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

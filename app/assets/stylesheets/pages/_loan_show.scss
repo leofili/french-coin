@@ -3,6 +3,19 @@
   margin: auto;
 }
 
+.table-loan-infos thead {
+  th {
+    border: none;
+    color: $light-blue;
+    font-size: 20px;
+  }
+}
+
+// .thead {
+//   color: #b2bbdf;
+//   font-size: 20px;
+// }
+
 .next-payment {
   display: none;
 }
