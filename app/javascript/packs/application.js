@@ -27,6 +27,7 @@ import "bootstrap";
 import { initToggle } from "../plugins/init_toggle";
 import { initTabsClick } from "../plugins/init_tabs_click";
 import { initCollat } from "../plugins/init_collat";
+import { initConversion } from "../plugins/init_conversion";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -36,6 +37,7 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   initToggle();
   initCollat();
+  initConversion();
   initTabsClick();
 });
 
