@@ -9,6 +9,7 @@
 
   <div data-controller="update-status">
     <div class="resume">
+      <% if @loan.collateral_cents == 0 %>
       <h4>Please do the collateral's transfer to confirm the following transaction</h4>
       <p class="text-center p-3">Loan information</p>
 
@@ -45,6 +46,61 @@
           <%= link_to 'Cancel', '#', class: "bouton btn-middle-blue"%>
         </div>
       </div>
+
+      <% else %>
+      <div>
+        <div id="loan-information" class="justify-content-center">
+          <div>
+            <div class="text-center p-3">Loan information</div>
+              <div class="information-card-container2 card-white p-3 mr-3">
+                <div>
+                <div class="information-card">
+                  <div class="text-middle-blue border-b-middle-blue">Collatéral déposé</div>
+                  <div class="font-weight-light">50%</div>
+                </div>
+                <div class="information-card">
+                  <div class="text-middle-blue border-b-middle-blue">Capital emprunté</div>
+                  <div class="font-weight-light">50%</div>
+                </div>
+                </div>
+                <div>
+                <div class="information-card">
+                  <div class="text-middle-blue border-b-middle-blue">Montant remboursé</div>
+                  <div class="font-weight-light">50%</div>
+                </div>
+                <div class="information-card">
+                  <div class="text-middle-blue border-b-middle-blue">Capital restant dû</div>
+                  <div class="font-weight-light">50%</div>
+                </div>
+                </div>
+              </div>
+          </div>
+          <div>
+            <div class="text-center p-3">Collateral fluctuation</div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <table class="table">
+                    <tr>
+                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Collatéral déposé</td>
+                      <td class="col-ms-2">10€</td>
+                    </tr>
+                    <tr>
+                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Total +/- values</td>
+                      <td class="col-ms-2">-400</td>
+                    </tr>
+                    <tr>
+                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Valeur actuelle du collatéral</td>
+                      <td class="col-ms-2">-400</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
     </div>
 
     <div class="next-payment">

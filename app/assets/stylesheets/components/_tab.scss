@@ -29,6 +29,13 @@
 .tab-vertical {
   position: relative;
   i {
+    display: none;
+  }
+}
+
+.tab-vertical.active {
+  i {
+    display: block;
     position: absolute;
     color: $blue;
     right: -31px;
