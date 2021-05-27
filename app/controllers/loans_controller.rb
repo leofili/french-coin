@@ -14,8 +14,10 @@ class LoansController < ApplicationController
   def create
     @loan = Loan.new(loan_params)
     @loan.user = current_user
+    @loan.duration =  params[:month].to_i
     authorize @loan
       if @loan.save
+
         redirect_to loan_path(@loan)
       else
         render "loans/new"

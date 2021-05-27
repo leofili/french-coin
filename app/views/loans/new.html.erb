@@ -1,13 +1,13 @@
 <div class="add-a-loan mb-5 m-5" id="new-loan">
   <div class="row">
-    <div class="col-12 col-lg-6 offset-lg-3">
+    <div class="contener col-12 col-lg-6 offset-lg-3">
       <h3 class="text-center m-5">New loan</h3>
       <%= simple_form_for(@loan) do |f| %>
         <%= f.input :name, label: "Intitulé de mon emprunt" %>
         <%= f.input :amount_cents, class: "amount_cents", label: "Montant de mon emprunt", :input_html => { :value =>  500 } %>
-        <%= f.select :amount_currency, options_for_select(["Euro", "Ethereum"]), :class => 'genForm_dropBox'%>
-        <%= f.input :collateral_cents, label: "Collateral nécessaire", :input_html => { :value => 600  } %>
-        <%= f.select :collateral_currency, options_for_select(["Ethereum", "Euro"]), :class => 'genForm_dropBox'%>
+        <%= f.select :amount_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
+        <%= f.input :collateral_cents, label: "Collateral nécessaire", :input_html => { :value => 2000  } %>
+        <%= f.select :collateral_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
         <br>
         <fieldset id="fieldset1">
             <legend>Nombre de mois</legend>
@@ -49,19 +49,16 @@
         </fieldset>
         <div>Interest
           <br>
-          <span class="interest" value="2.50">2.50</span>
+          <span class="interest" name="interest" value="2.50">2.50</span>
         </div>
         <div>APR
-        <br>
-          <span class="apr" value="1.00">1.00</span>
+          <br>
+          <span class="apr" value="1">1.00</span>
         </div>
+        <%= f.input :interest_rate, as: :hidden , :class => "interestRate", :input_html => { :value => 0 } %>
         <br>
         <%= f.submit%>
-        <%= @loan.start_date = Time.new.strftime("%d/%m/%Y") %>
-        
       <% end %>
-
-      <% @loan.interest_rate =  %>
     </div>
   </div>
 </div>
