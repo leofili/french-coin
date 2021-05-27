@@ -5,7 +5,7 @@
       <%= simple_form_for(@loan) do |f| %>
         <%= f.input :name, label: "Intitulé de mon emprunt" %>
         <%= f.input :amount_cents, class: "amount_cents", label: "Montant de mon emprunt", :input_html => { :value =>  500 } %>
-        <%= f.select :amount_currency, options_for_select(["Euro", "Ethereum"]), :class => 'genForm_dropBox'%>
+        <%= f.select :amount_currency, options_for_select(["Euros", "Ethereum"]), :class => 'genForm_dropBox'%>
         <%= f.input :collateral_cents, label: "Collateral nécessaire", :input_html => { :value => 600  } %>
         <%= f.select :collateral_currency, options_for_select(["Ethereum", "Euro"]), :class => 'genForm_dropBox'%>
         <br>
