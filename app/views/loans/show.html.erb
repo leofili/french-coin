@@ -1,15 +1,15 @@
 <div class="container" id="show">
   <h2 class="show-header p-4">Loan for: <%=@loan.name%></h2>
-<%= @loan.duration %>
   <ul class="tabs list-inline" id="mytabs">
-    <li class="tab tab-horizontal list-inline-item active" id="resume">Resume</li>
-    <li class="tab tab-horizontal list-inline-item" id="next-payment">Next payment</li>
-    <li class="tab tab-horizontal list-inline-item" id="historical-payment">Historical payment</li>
+    <li class="tab tab-horizontal list-inline-item active" id="resume">Résumé</li>
+    <% if @loan.transfers != [] %>
+    <li class="tab tab-horizontal list-inline-item" id="historical-payment">Historique</li>
+    <%end%>
   </ul>
 
   <div data-controller="update-status">
     <div class="resume">
-      <% if @loan.collateral_cents == 0 %>
+      <% if @loan.transfers == [] %>
       <h4>Please do the collateral's transfer to confirm the following transaction</h4>
       <p class="text-center p-3">Loan information</p>
 
@@ -24,20 +24,20 @@
             <div class="font-weight-light"><%= @loan.amount_cents%> <%= @loan.amount_currency%></div>
           </div>
           <div class="information-card">
-            <div class="text-middle-blue border-b-middle-blue">Taux d'intérêt</div>
+            <div class="text-middle-blue border-b-middle-blue">Taux d'intérêt (%)</div>
             <div class="font-weight-light"><%= @loan.interest_rate%></div>
           </div>
           <div class="information-card">
             <div class="text-middle-blue border-b-middle-blue">Intérêts par mois</div>
-            <div class="font-weight-light"><%= @loan.interest_rate / @loan.duration %></div>
+            <div class="font-weight-light"><%= @loan.interest_cents / @loan.duration %> <%= @loan.amount_currency%></div>
           </div>
           <div class="information-card">
-            <div class="text-middle-blue border-b-middle-blue">Durée (mois)</div>
+            <div class="text-middle-blue border-b-middle-blue">Durée du prêt (mois)</div>
             <div class="font-weight-light"><%= @loan.duration %></div>
           </div>
           <div class="information-card">
-            <div class="text-middle-blue border-b-middle-blue">Loan to Value</div>
-            <div class="font-weight-light">50%</div>
+            <div class="text-middle-blue border-b-middle-blue">Loan to Value (%)</div>
+            <div class="font-weight-light"><%= (@loan.amount_cents * 100 / @loan.collateral_cents)  %></div>
           </div>
         </div>
         <div class="button-container">
@@ -48,103 +48,77 @@
       </div>
 
       <% else %>
-      <div>
-        <div id="loan-information" class="justify-content-center">
-          <div>
+        <div id="loan-information" class="justify-content-center w-100 flex-wrap">
+          <div class="w-100">
             <div class="text-center p-3">Loan information</div>
-              <div class="information-card-container2 card-white p-3 mr-3">
-                <div>
-                <div class="information-card">
-                  <div class="text-middle-blue border-b-middle-blue">Collatéral déposé</div>
-                  <div class="font-weight-light"><%= @loan.collateral_cents%> <%= @loan.collateral_currency%></div>
-                </div>
-                <div class="information-card">
-                  <div class="text-middle-blue border-b-middle-blue">Capital emprunté</div>
-                  <div class="font-weight-light"><%= @loan.amount_cents%> <%= @loan.amount_currency%></div>
-                </div>
-                </div>
-                <div>
-                <div class="information-card">
-                  <div class="text-middle-blue border-b-middle-blue">Montant remboursé</div>
-                  <div class="font-weight-light">50%</div>
-                </div>
-                <div class="information-card">
-                  <div class="text-middle-blue border-b-middle-blue">Capital restant dû</div>
-                  <div class="font-weight-light">50%</div>
-                </div>
-                </div>
+            <div class="information-card-container2 card-white p-3 mr-3">
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Collatéral déposé</div>
+                <div class="font-weight-light"><%= @loan.collateral_cents / 100%> <%= @loan.collateral_currency%></div>
               </div>
-              <% #intérêts par mois + durée à ajouter %>
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Capital emprunté</div>
+                <div class="font-weight-light"><%= @loan.amount_cents / 100%> <%= @loan.amount_currency%></div>
+              </div>
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Montant remboursé</div>
+                <div class="font-weight-light"><%= @loan.payments.where('transfer_id IS NOT NULL').sum('amount_cents') / 100 %> <%= @loan.amount_currency%></div>
+              </div>
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Date prochaine échéance</div>
+                <div class="font-weight-light"><%= @loan.payments.where('transfer_id IS NULL').first.due_date %></div>
+              </div>
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Intérêts par mois</div>
+                <div class="font-weight-light"><%= @loan.interest_cents / @loan.duration / 100 %> <%= @loan.amount_currency%></div>
+              </div>
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Durée du prêt (mois)</div>
+                <div class="font-weight-light"><%= @loan.duration %></div>
+              </div>
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Capital restant dû</div>
+                <div class="font-weight-light"><%= @loan.payments.where('transfer_id IS NULL').sum('amount_cents') / 100 %> <%= @loan.amount_currency%></div>
+              </div>
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Prochain prélévement</div>
+                <div class="font-weight-light"><%= @loan.payments.where('transfer_id IS NULL').first.amount_cents / 100 %> <%= @loan.amount_currency%></div>
+              </div>
+            </div>
           </div>
-          <div>
+
+          <div class="w-75 my-5">
             <div class="text-center p-3">Collateral fluctuation</div>
-            <div class="container">
-              <div class="row">
-                <div class="col-sm">
-                  <table class="table">
-                    <tr>
-                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Collatéral déposé</td>
-                      <td class="col-ms-2">10€</td>
-                    </tr>
-                    <tr>
-                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Total +/- values</td>
-                      <td class="col-ms-2">-400</td>
-                    </tr>
-                    <tr>
-                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Valeur actuelle du collatéral</td>
-                      <td class="col-ms-2">-400</td>
-                    </tr>
-                  </table>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm">
+                    <table class="table">
+                      <tr>
+                        <td class="col-ms-2 bg-gradient-primary text-middle-blue">Collatéral déposé</td>
+                        <td class="col-ms-2">10€</td>
+                      </tr>
+                      <tr>
+                        <td class="col-ms-2 bg-gradient-primary text-middle-blue">Total +/- values</td>
+                        <td class="col-ms-2">-400</td>
+                      </tr>
+                      <tr>
+                        <td class="col-ms-2 bg-gradient-primary text-middle-blue">Valeur actuelle du collatéral</td>
+                        <td class="col-ms-2">-400</td>
+                      </tr>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       <% end %>
     </div>
 
-    <div class="next-payment">
-      <div class="container m-5 mx-auto">
-        <div class="row">
-          <div class="col-sm">
-            <div class="text-left">
-              <h1>Relevé de remboursement</h1>
-            </div>
-            <table class="table my-5">
-              <tr>
-                <td class="col-ms-2 bg-gradient-primary text-middle-blue">Solde au 26 Mai 2021</td>
-                <td class="col-ms-2">-400</td>
-                <td class="text-center bg-gradient-primary text-middle-blue">Date d'échéance</td>
-                <td class="text-center">30 Mai 2021</td>
-              </tr>
-              <tr>
-                <td class="col-ms-2 bg-gradient-primary text-middle-blue">Prelevement à venir</td>
-                <td class="col-ms-2"> 200€ </td>
-                <td class="text-center bg-gradient-primary text-middle-blue">Date prochaine échéance</td>
-                <td class="text-center">31 Mai 2021</td>
-              </tr>
-              <tr>
-                  <td class="col-ms-2 bg-gradient-primary text-middle-blue">Intérêts Prélevés</td>
-                  <td class="col-ms-2"> 20€ </td>
-                  <td class="text-center bg-gradient-primary text-middle-blue">Taux</td>
-                  <td class="text-center">2%</td>
-              </tr>
-              <tr>
-                  <td class="col-ms-2 bg-gradient-primary text-middle-blue">Durée</td>
-                  <td class="col-ms-2"> 12 mois </td>
-                  <td class="text-center bg-gradient-primary text-middle-blue">Echéances restantes</td>
-                  <td class="text-center">1 mois</td>
-              </tr>
-            </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    
+    <% if @loan.transfers != [] %>
     <div class="historical-payment">
-            <div class="container my-5 mx-auto">
+      <div class="container my-5 mx-auto">
         <div class="column">
           <div class="col-sm">
             <div class="text-left my-5">
@@ -152,56 +126,37 @@
             </div>
             <table class="table table-loan-infos">
               <thead>
-                <th>Solde au 25/05/021 -400€</th>
-                <th class="text-center">Durée 12 mois</th>
-                <th class="text-center">Prochaine échéance 31/05/2021</th>
+                <th>Solde au <%= Date.today %> : <%= @loan.payments.where('transfer_id IS NULL').sum('amount_cents') / 100 %> <%= @loan.amount_currency %></th>
+                <th class="text-center">Durée <%= @loan.duration %> mois</th>
+                <th class="text-center">Prochaine échéance <%= @loan.payments.where('transfer_id IS NULL').first.due_date %></th>
               </thead>
             </table>
 
             <table class="table my-5">
               <tr>
                 <td class="text-center bg-gradient-primary text-middle-blue">Date</td>
-                <td class="text-center bg-gradient-primary text-middle-blue">Prélèvements</td>
+                <td class="text-center bg-gradient-primary text-middle-blue">Emprunt</td>
                 <td class="text-center bg-gradient-primary text-middle-blue">Intérêts</td>
+                <td class="text-center bg-gradient-primary text-middle-blue">Prélèvements</td>
                 <td class="text-center bg-gradient-primary text-middle-blue">Capital amorti</td>
               </tr>
+              <% refund = 0 %>
+              <% @loan.payments.where('transfer_id IS NOT NULL').each do |payment| %>
               <tr>
-                <td class="text-center">30/04/2021</td>
-                <td class="text-center">-200,31€</td>
-                <td class="text-center">1,32€</td>
-                <td class="text-center">200€</td>
+                <td class="text-center"><%= payment.due_date %></td>
+                <td class="text-center"><%= payment.refund_amount_cents / 100 %> <%= @loan.amount_currency%></td>
+                <td class="text-center"><%= payment.interest_amount_cents / 100 %> <%= @loan.amount_currency%></td>
+                <td class="text-center"><%= (payment.interest_amount_cents + payment.refund_amount_cents) / 100 %> <%= @loan.amount_currency%></td>
+                <td class="text-center"><%= refund += ((payment.interest_amount_cents + payment.refund_amount_cents) /100) %> <%= @loan.amount_currency%></td>
               </tr>
-              <tr>
-                <td class="text-center">31/04/2021</td>
-                <td class="text-center">-200,31€</td>
-                <td class="text-center">1,32€</td>
-                <td class="text-center">200€</td>
-              </tr>
-              <tr>
-                  <td class="text-center">02/05/2021</td>
-                  <td class="text-center">-200,31€</td>
-                  <td class="text-center">1,32€</td>
-                  <td class="text-center">200€</td>
-              </tr>
-              <tr>
-                  <td class="text-center">06/05/2021</td>
-                  <td class="text-center">-200,31€</td>
-                  <td class="text-center">1,32€</td>
-                  <td class="text-center">200€</td>
-              </tr>
-              <tr>
-                  <td class="text-center">16/05/2021</td>
-                  <td class="text-center">-200,31€</td>
-                  <td class="text-center">1,32€</td>
-                  <td class="text-center">200€</td>
-              </tr>
+              <%end%>
             </table>
             </div>
           </div>
         </div>
       </div>
-
     </div>
+    <%end%>
   </div>
 </div>
 
