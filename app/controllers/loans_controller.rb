@@ -27,6 +27,6 @@ class LoansController < ApplicationController
   private
 
   def loan_params
-    params.require(:loan).permit(:collateral_cents, :collateral_currency, :amount_cents, :amount_currency, :start_date, :end_date, :interest_rate, :status, :name)
+    params.require(:loan).permit(:collateral_cents, :collateral_currency, :amount_cents, :amount_currency, :start_date, :end_date, :interest_rate, :interest_cents, :status, :name, :duration)
   end
 end
