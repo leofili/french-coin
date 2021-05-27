@@ -49,19 +49,18 @@
         </fieldset>
         <div>Interest
           <br>
-          <span class="interest" value="2.50">2.50</span>
+          <span class="interest" name="interest" value="2.50">2.50</span>
         </div>
         <div>APR
         <br>
           <span class="apr" value="1.00">1.00</span>
         </div>
+        <% f.input :interest_rate, as: :hidden, :input_html => { :value => 0 }, class: "interest-amount" %>
         <br>
         <%= f.submit%>
         <%= @loan.start_date = Time.new.strftime("%d/%m/%Y") %>
         
       <% end %>
-
-      <% @loan.interest_rate =  %>
     </div>
   </div>
 </div>

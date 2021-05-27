@@ -58,15 +58,15 @@ ActiveRecord::Schema.define(version: 2021_05_27_084158) do
     t.integer "amount_cents"
     t.integer "interest_amount_cents"
     t.integer "refund_amount_cents"
-    t.bigint "transfer_id", null: false
+    t.bigint "transaction_id", null: false
     t.date "due_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["loan_id"], name: "index_payments_on_loan_id"
-    t.index ["transfer_id"], name: "index_payments_on_transfer_id"
+    t.index ["transaction_id"], name: "index_payments_on_transaction_id"
   end
 
-  create_table "transfers", force: :cascade do |t|
+  create_table "transactions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "loan_id", null: false
     t.integer "amount_cents"
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 2021_05_27_084158) do
     t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["loan_id"], name: "index_transfers_on_loan_id"
-    t.index ["user_id"], name: "index_transfers_on_user_id"
+    t.index ["loan_id"], name: "index_transactions_on_loan_id"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_084158) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "loans", "users"
   add_foreign_key "payments", "loans"
-  add_foreign_key "payments", "transfers"
-  add_foreign_key "transfers", "loans"
-  add_foreign_key "transfers", "users"
+  add_foreign_key "payments", "transactions"
+  add_foreign_key "transactions", "loans"
+  add_foreign_key "transactions", "users"
 end
