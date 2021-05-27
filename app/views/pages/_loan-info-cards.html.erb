@@ -1,29 +1,28 @@
 
-<%# getting all loans with the collateral paid -> create a each do%>
- <%loans.each do |loan|%>
 
-<%# <%= if loan.tranfer? %>
+ <%loans.select { |loan| loan.transfers != [] }.each do |loan| %>
+
   <div class="card-vertical card-white card-rounded p-4 my-3">
-      <h4 class="h4 text-blue pb-2"><%= loan.name %><%# Insert the name of the loan, ex: Achat voiture %></h4>
+      <h4 class="h4 text-blue pb-2"><%= loan.name %></h4>
     <div class="card-horizontal">
       <div class="mr-2 text-center">
         <p class="text-middle-blue border-b-middle-blue pb-3">Collatéral déposée</p>
-        <p class="font-weight-light mb-0"><%=loan.collateral_currency%><%# Insert the collateral of the loan with currency %></p>
+        <p class="font-weight-light mb-0"><%=loan.collateral_cents.div(100)%> <%=loan.collateral_currency%></p>
       </div>
       <div class="mx-2 text-center">
         <p class="text-middle-blue border-b-middle-blue pb-3">Capital emprunté</p>
-        <p class="font-weight-light mb-0"><%=loan.amount_currency %><%# Insert the amount of the loan with currency %></p>
+        <p class="font-weight-light mb-0"><%=loan.amount_cents.div(100)%> <%=loan.amount_currency%></p>
       </div>
       <div class="mx-2 text-center">
         <p class="text-middle-blue border-b-middle-blue pb-3">Montant remboursé</p>
-        <p class="font-weight-light mb-0"><%= loan.payments.sum(:refund_amount_cents) %><%# Insert the amount refunded of the loan with currency (with the loan_payments table)%></p>
+        <p class="font-weight-light mb-0"><%= loan.payments.where('transfer_id IS NOT NULL').sum(:amount_cents).div(100) %></p>
       </div>
       <div class="mx-2 text-center">
         <p class="text-middle-blue border-b-middle-blue pb-3">Capital restant dû</p>
-        <p class="font-weight-light mb-0"><%=loan.amount_cents - loan.payments.sum(:refund_amount_cents)  %><%# Insert the difference betweent the two above%></p>
+        <p class="font-weight-light mb-0"><%=loan.payments.where('transfer_id IS NULL').sum(:amount_cents).div(100)  %></p>
       </div>
       <div class="mx-2 text-center ml-auto">
-        <a href="#" class="bouton btn-middle-blue">Voir le détail</a>
+        <%= link_to 'Voir le détail', loan_path(loan), class: 'bouton btn-middle-blue'%>
       </div>
     </div>
   </div>
