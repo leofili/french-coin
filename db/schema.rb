@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_27_084158) do
+ActiveRecord::Schema.define(version: 2021_05_27_104427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,13 +43,14 @@ ActiveRecord::Schema.define(version: 2021_05_27_084158) do
     t.string "amount_currency"
     t.date "start_date"
     t.date "end_date"
-    t.integer "interest_rate"
-    t.string "status"
+    t.float "interest_rate"
+    t.integer "status", default: 0
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.integer "duration"
+    t.integer "interest_cents"
     t.index ["user_id"], name: "index_loans_on_user_id"
   end
 
@@ -58,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_084158) do
     t.integer "amount_cents"
     t.integer "interest_amount_cents"
     t.integer "refund_amount_cents"
-    t.bigint "transfer_id", null: false
+    t.bigint "transfer_id"
     t.date "due_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

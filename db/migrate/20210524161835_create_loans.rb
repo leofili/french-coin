@@ -8,7 +8,7 @@ class CreateLoans < ActiveRecord::Migration[6.0]
       t.date :start_date
       t.date :end_date
       t.integer :interest_rate
-      t.string :status
+      t.integer :status, default: 0
       t.references :user, null: false, foreign_key: true
 
       t.timestamps
