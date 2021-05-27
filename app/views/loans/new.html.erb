@@ -55,7 +55,8 @@
           <br>
           <span class="apr" value="1">1.00</span>
         </div>
-        <%= f.input :interest_rate, as: :hidden , :class => "interestRate", :input_html => { :value => 0 } %>
+        <%= f.input :interest_cents, as: :hidden , :input_html => { :value => 250 } %>
+        <%= f.input :interest_rate, as: :hidden, :input_html => { :value => 1 } %>
         <br>
         <%= f.submit%>
       <% end %>

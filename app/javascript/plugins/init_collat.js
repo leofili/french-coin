@@ -9,21 +9,21 @@ const initCollat = () => {
         let month = document.querySelector(".choice-toggle.selected input").value;
         let interest = ((amount * apr) / (12 / month)).toFixed(2);
         document.querySelector(".interest").innerText = interest;
-        document.querySelector(".loan_interest_sents input").value = interest * 100;
+        document.querySelector(".loan_interest_cents input").value = interest * 100;
         document.querySelector(".loan_collateral_cents input").value = amount * 4;
       } else if (lvt === "33") {
         let apr = 695/10000;
         let month = document.querySelector(".choice-toggle.selected input").value;
         let interest = ((amount * apr) / (12 / month)).toFixed(2);
         document.querySelector(".interest").innerText = interest;
-        document.querySelector(".loan_interest_sents input").value = interest * 100;
+        document.querySelector(".loan_interest_cents input").value = interest * 100;
         document.querySelector(".loan_collateral_cents input").value = amount * 3;
       } else if (lvt === "50") {
         let apr = 895/10000;
         let month = document.querySelector(".choice-toggle.selected input").value;
         let interest = ((amount * apr) / (12 / month)).toFixed(2);
         document.querySelector(".interest").innerText = interest;
-        document.querySelector(".loan_interest_sents input").value = interest * 100;
+        document.querySelector(".loan_interest_cents input").value = interest * 100;
         document.querySelector(".loan_collateral_cents input").value = amount * 2;
       };
     });

@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_104427) do
     t.date "start_date"
     t.date "end_date"
     t.float "interest_rate"
-    t.integer "status", default: 0
+    t.string "status"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_05_27_104427) do
     t.integer "amount_cents"
     t.integer "interest_amount_cents"
     t.integer "refund_amount_cents"
-    t.bigint "transfer_id"
+    t.bigint "transaction_id", null: false
     t.date "due_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
