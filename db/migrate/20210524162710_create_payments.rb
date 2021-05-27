@@ -5,7 +5,7 @@ class CreatePayments < ActiveRecord::Migration[6.0]
       t.integer :amount_cents
       t.integer :interest_amount_cents
       t.integer :refund_amount_cents
-      t.references :transfer, null: false, foreign_key: true
+      t.references :transfer, foreign_key: true
       t.date :due_date
 
       t.timestamps
