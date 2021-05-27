@@ -15,7 +15,6 @@ class LoansController < ApplicationController
     @loan = Loan.new(loan_params)
     @loan.user = current_user
     @loan.duration =  params[:month].to_i
-    raise
     authorize @loan
       if @loan.save
 
