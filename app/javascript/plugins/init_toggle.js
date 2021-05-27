@@ -10,18 +10,19 @@ const initToggle = () => {
         let amount = document.querySelector(".loan_amount_cents input").value;
         if (document.querySelector(".choice-toggle2.selected input").value === "25") {
           let apr = 100/10000;
-          document.querySelector(".apr").innerText = apr * 100;
-          document.querySelector(".interest").innerText = (amount * apr) / (12 / month);
-        };
-        if (document.querySelector(".choice-toggle2.selected input").value === "33") {
-          let apr = 695;
-          document.querySelector(".apr").innerText = apr / 100;
-          document.querySelector(".interest").innerText = (amount * apr / 10000) / (12 / month);
-        };
-        if (document.querySelector(".choice-toggle2.selected input").value === "50") {
+          document.querySelector(".apr").innerText = (apr * 100).toFixed(2);
+          let interest = ((amount * apr) / (12 / month)).toFixed(2);
+          document.querySelector(".interest").innerText = interest;
+        } else if (document.querySelector(".choice-toggle2.selected input").value === "33") {
+          let apr = 695/10000;
+          document.querySelector(".apr").innerText = (apr * 100).toFixed(2);
+          let interest = ((amount * apr) / (12 / month)).toFixed(2);
+          document.querySelector(".interest").innerText = interest;
+        } else if (document.querySelector(".choice-toggle2.selected input").value === "50") {
           let apr = 895/10000;
-          document.querySelector(".apr").innerText = apr * 100;
-          document.querySelector(".interest").innerText = (amount * apr) / (12 / month);
+          document.querySelector(".apr").innerText = (apr * 100).toFixed(2);
+          let interest = ((amount * apr) / (12 / month)).toFixed(2);
+          document.querySelector(".interest").innerText = interest;
         };
       });
     });
@@ -33,10 +34,32 @@ const initToggle = () => {
         document.querySelector(".choice-toggle2.selected").classList.remove("selected");
         choice.classList.toggle("selected");
         choice.querySelector("input").setAttribute("checked", "");
+        let lvt = document.querySelector(".choice-toggle2.selected input").value;
+        let amount = document.querySelector(".loan_amount_cents input").value;
+        let apr = 0;
+        if (lvt === "25") {
+          apr = 100/10000;
+          document.querySelector(".apr").innerText = (apr * 100).toFixed(2);          
+        } else if (lvt === "33") {
+          apr = 695/10000;
+          document.querySelector(".apr").innerText = (apr * 100).toFixed(2);
+        } else if (lvt === "50") {
+          apr = 895/10000;
+          document.querySelector(".apr").innerText = (apr * 100).toFixed(2);
+        };
+        if (document.querySelector(".choice-toggle.selected input").value === "6") {
+          document.querySelector(".interest").innerText = ((amount * apr) / 2).toFixed(2);
+        } else if (document.querySelector(".choice-toggle.selected input").value === "12") {
+          document.querySelector(".interest").innerText = (amount * apr).toFixed(2);
+        } else if (document.querySelector(".choice-toggle.selected input").value === "24") {
+          document.querySelector(".interest").innerText = ((amount * apr) / (12 / 24)).toFixed(2);
+        } else if (document.querySelector(".choice-toggle.selected input").value === "36") {
+          document.querySelector(".interest").innerText = ((amount * apr) / (12 / 36)).toFixed(2);
+        };  
       });
     });
   };
   
 };
 
-export { initToggle }
+export { initToggle };
