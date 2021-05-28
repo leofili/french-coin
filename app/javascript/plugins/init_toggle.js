@@ -7,7 +7,7 @@ const initToggle = () => {
         document.querySelector(".choice-toggle.selected").classList.remove("selected");
         choice.classList.toggle("selected");
         choice.querySelector("input").setAttribute("checked", "");
-        // update de Interets et APR
+        // update d'Interets et APR
         let month = document.querySelector(".choice-toggle.selected input").value;
         const selectElmt = document.querySelector(".dropboxnewloan1 select");
         let currency = selectElmt.options[selectElmt.selectedIndex].value;
