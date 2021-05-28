@@ -4,49 +4,60 @@
       <h3 class="text-center m-5">New loan</h3>
       <%= simple_form_for(@loan) do |f| %>
         <%= f.input :name, label: "Intitulé de mon emprunt" %>
+        
         <%= f.input :amount_cents, class: "amount_cents", label: "Montant de mon emprunt", :input_html => { :value =>  500 } %>
-        <%= f.select :amount_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
+        <div class="dropboxnewloan">
+          <div class="dropboxnewloan1">
+            <%= f.select :amount_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
+          </div>
+        </div>
         <%= f.input :collateral_cents, label: "Collateral nécessaire", :input_html => { :value => 2000  } %>
-        <%= f.select :collateral_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
+        <div class="dropboxnewloan">
+          <div class="dropboxnewloan2">
+            <%= f.select :collateral_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
+          </div>
+        </div>
         <br>
-        <fieldset id="fieldset1">
-            <legend>Nombre de mois</legend>
-            <div>
-                <label class="toggle-new-load choice-toggle selected">
-                  6
-                  <input name="month" type="radio" value="6" checked />
-                </label>
-                <label class="toggle-new-load choice-toggle">
-                  12
-                  <input name="month" type="radio" value="12" />
-                </label>
-                <label class="toggle-new-load choice-toggle">
-                  24
-                  <input name="month" type="radio" value="24" />
-                </label>
-                <label class="toggle-new-load choice-toggle">
-                  36
-                  <input name="month" type="radio" value="36" />
-                </label>
-            </div>
-        </fieldset>
-        <fieldset id="fieldset2">
-            <legend>Pourcentage d'emprunt (LVT)</legend>
-            <div>
-                <label class="toggle-new-load choice-toggle2 selected">
-                  25%
-                  <input name="loan[loan_to_value]" type="radio" value="25" checked />
-                </label>
-                <label class="toggle-new-load choice-toggle2">
-                  33%
-                  <input name="loan[loan_to_value]" type="radio" value="33" />
-                </label>
-                <label class="toggle-new-load choice-toggle2">
-                  50%
-                  <input name="loan[loan_to_value]" type="radio" value="50" />
-                </label>
-            </div>
-        </fieldset>
+        <div class="fieldset_new_loan">
+          <fieldset id="fieldset1">
+              <legend class="legend_new_loan">Nombre de mois</legend>
+              <div>
+                  <label class="toggle-new-load choice-toggle selected">
+                    6
+                    <input  class="input_radio_new_loan" name="month" type="radio" value="6" checked />
+                  </label>
+                  <label class="toggle-new-load choice-toggle">
+                    12
+                    <input  class="input_radio_new_loan" name="month" type="radio" value="12" />
+                  </label>
+                  <label class="toggle-new-load choice-toggle">
+                    24
+                    <input class="input_radio_new_loan" name="month" type="radio" value="24" />
+                  </label>
+                  <label class="toggle-new-load choice-toggle">
+                    36
+                    <input class="input_radio_new_loan" name="month" type="radio" value="36" />
+                  </label>
+              </div>
+          </fieldset>
+          <fieldset id="fieldset2">
+              <legend class="legend_new_loan">Pourcentage d'emprunt (LVT)</legend>
+              <div>
+                  <label class="toggle-new-load choice-toggle2 selected">
+                    25%
+                    <input class="input_radio_new_loan" name="lvt" type="radio" value="25" checked />
+                  </label>
+                  <label class="toggle-new-load choice-toggle2">
+                    33%
+                    <input class="input_radio_new_loan" name="lvt" type="radio" value="33" />
+                  </label>
+                  <label class="toggle-new-load choice-toggle2">
+                    50%
+                    <input class="input_radio_new_loan" name="lvt" type="radio" value="50" />
+                  </label>
+              </div>
+          </fieldset>
+        </div>
         <div>Interest
           <br>
           <span class="interest" name="interest" value="2.50">2.50</span>
