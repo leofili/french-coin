@@ -9,7 +9,7 @@
   <div class="navbar-right d-flex align-items-center">
     <% if user_signed_in? %>
       <%= link_to 'Mon portefeuille', wallet_path %>
-       <%= link_to 'Mon Dashboard', dashboard_path %>
+       <%= link_to 'Mes emprunts', dashboard_path %>
         <% if current_user.avatar.attached? %>
         <%= cl_image_tag current_user.avatar.key, class: 'avatar dropdown-toggle', id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
       <% else %>
