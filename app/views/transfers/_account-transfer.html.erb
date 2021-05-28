@@ -1,0 +1,12 @@
+<h3 class="mt-5 pt-5">Transfer money to your wallet</h3>
+<%= simple_form_for [loan, transfer] do |f| %>
+  <% if transfer.amount_currency == 'EUR' %>
+  <%= f.input :amount_cents, label: 'How much euros do you want to transfer to your french coin wallet ?' %>
+  <% elsif transfer.amount_currency == 'ETH' %>
+  <%= f.input :amount_cents, label: 'How much ethereum do you want to transfer to your french coin wallet ?' %>
+  <% end %>
+  <%= f.hidden_field :amount_currency, value: transfer.amount_currency %>
+  <%= f.hidden_field :payment_mean, value: transfer.amount_currency == 'EUR' ? 'card' : 'crypto' %>
+  <%= f.button :submit, 'Transfer', class:'bouton btn-middle-blue w-100 mt-5' %>
+<% end %>
+

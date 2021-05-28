@@ -6,4 +6,9 @@ class PagesController < ApplicationController
 
   def dashboard
   end
+
+  def wallet
+    @loan = Loan.find(1)
+    @transfer = Transfer.new
+  end
 end

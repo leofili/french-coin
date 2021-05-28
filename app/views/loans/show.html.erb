@@ -1,6 +1,5 @@
 <div class="container" id="show">
   <h2 class="show-header p-4">Loan for: <%=@loan.name%></h2>
-<%= @loan.duration %>
   <ul class="tabs list-inline" id="mytabs">
     <li class="tab tab-horizontal list-inline-item active" id="resume">Resume</li>
     <li class="tab tab-horizontal list-inline-item" id="next-payment">Next payment</li>
@@ -9,7 +8,7 @@
 
   <div data-controller="update-status">
     <div class="resume">
-      <% if @loan.collateral_cents == 0 %>
+      <% if @loan.transfers == [] %>
       <h4>Please do the collateral's transfer to confirm the following transaction</h4>
       <p class="text-center p-3">Loan information</p>
 
@@ -41,7 +40,7 @@
           </div>
         </div>
         <div class="button-container">
-          <%= link_to 'Transfer the collateral', '#', class: "bouton btn-middle-blue"%>
+          <%= link_to 'Transfer the collateral', new_loan_transfer_path(@loan), class: "bouton btn-middle-blue"%>
           <%= link_to 'Edit', '#', class: "bouton btn-middle-blue"%>
           <%= link_to 'Cancel', '#', class: "bouton btn-middle-blue"%>
         </div>

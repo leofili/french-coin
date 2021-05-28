@@ -1,0 +1,30 @@
+<%= simple_form_for [loan, transfer] do |f| %>
+
+  <% if (loan.collateral_currency == 'EUR' && current_user.euro_balance < loan.collateral_cents) || (loan.collateral_currency == 'ETH' && current_user.crypto_balance < loan.collateral_cents) %>
+    <p class='alert alert-warning'>You cannot use your <%= @loan.collateral_currency %> wallet to pay the collateral because you don't have enough money on it. You need to use an external way of payment.</p>
+    <%= f.hidden_field :payment_mean, value: @loan.collateral_currency == "EUR" ? "card" : "crypto" %>
+
+  <% elsif loan.collateral_currency == 'EUR' %>
+    <%= f.input :payment_mean, as: :radio_buttons, collection: [['euro_wallet', 'Yes'], ['card', 'No']], label_method: :second, value_method: :first, class: 'payment_button', label: "Do you want to use your wallet to pay the collateral ?" %>
+    <div class="d-flex align-items-center justify-content-center mt-4">
+      <i class="fas fa-exclamation-triangle mr-4 h2 text-danger"></i>
+      <p class='h6 mb-0'>You are about to pay the collateral of  <%= @loan.collateral_cents.fdiv(100) %> <%= @loan.collateral_currency %>. Once the transaction is complete, your loan will be validated and start, and you will receive the <%= @loan.amount_cents.fdiv(100) %> <%= @loan.collateral_currency %> of your loan on your <%= @loan.collateral_currency %> wallet.</p>
+    </div>
+
+
+  <% elsif loan.collateral_currency == 'ETH' %>
+    <%= f.input :payment_mean, as: :radio_buttons, collection: [['crypto_wallet', 'Yes'], ['crypto', 'No']], label_method: :second, value_method: :first, class: 'payment_button', label: "Do you want to use your wallet to pay the collateral ?" %>
+    <div class="d-flex align-items-center justify-content-center mt-4">
+      <i class="fas fa-exclamation-triangle mr-4 h2 text-danger"></i>
+      <p class='h6 mb-0'>You are about to pay the collateral of  <%= @loan.collateral_cents.fdiv(100) * 0.00044 %> <%= @loan.collateral_currency %>. Once the transaction is complete, your loan will be validated and start, and you will receive the <%= @loan.amount_cents.fdiv(100) * 0.00044 %> <%= @loan.collateral_currency %> of your loan on your <%= @loan.collateral_currency %> wallet.</p>
+    </div>
+
+  <% end %>
+
+  <div class="d-flex align-items-center justify-content-between mt-5">
+    <%= link_to 'You can still edit your loan if you want', dashboard_path, class:'bouton btn-middle-blue w-100 text-center' %>
+    <p class='h4 mx-4 mb-0'>OR</p>
+    <%= f.button :submit, 'Pay collateral', class:'bouton btn-middle-blue w-100 text-center' %>
+  </div>
+
+<% end %>
