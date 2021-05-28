@@ -7,14 +7,14 @@
         <div class="row border-bottom p-3">
           <div class="col">
             <h4>Intitulé de mon emprunt</h4>
-            <%= f.input :name, label: "Reseigner le nom personnalisé de votre emprunt" %>
+            <%= f.input :name, label: "Renseigner le nom personnalisé de votre emprunt" %>
           </div>
         </div>
         <div class="row border-bottom p-3">
           <div class="col">
             <div class="input_amount_loan">
               <h4>Montant de mon emprunt</h4>
-              <%= f.input :amount_cents, class: "amount_cents", label: "Indiquer l'emprunter en EUR ou en ETH", :input_html => { :value =>  500 } %>
+              <%= f.input :amount_cents, class: "amount_cents", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  500 } %>
             </div>
             <div class="dropboxnewloan">
               <div class="dropboxnewloan1">
@@ -25,7 +25,7 @@
           <div class="col">
             <fieldset id="fieldset1">
                 <legend class="legend_new_loan"><h4>Durée de l'emprunt</h4></legend>
-                <p>Nombre de mois de la durée de votre prochain emprunt</p>
+                <p>Durée de votre prochain emprunt (mois)</p>
                 <div>
                     <label class="toggle-new-load choice-toggle selected">
                       6
@@ -49,7 +49,7 @@
           <div class="col">
             <fieldset id="fieldset2">
                 <legend class="legend_new_loan"><h4>Pourcentage d'emprunt</h4></legend>
-                <p>Le pourcentage global de collateral que vous souhaitez déposer</p>
+                <p>Le pourcentage global de collatéral que vous souhaitez déposer</p>
                 <div>
                     <label class="toggle-new-load choice-toggle2 selected">
                       25%
@@ -74,8 +74,8 @@
         <div class="row border-bottom p-3">
           <div class="col">
             <div class="input_amount_loan">
-              <h4>Collateral nécessaire</h4>
-              <%= f.input :collateral_cents, label: "Collateral nécessaire pour pouvoir emprunter", :input_html => { :value => 2000  }, readonly: true %>
+              <h4>Collatéral nécessaire</h4>
+              <%= f.input :collateral_cents, label: "Collatéral nécessaire pour pouvoir emprunter", :input_html => { :value => 2000  }, readonly: true %>
             </div>
             <div class="dropboxnewloan">
               <div class="dropboxnewloan2">
