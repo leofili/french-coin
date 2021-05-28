@@ -7,13 +7,13 @@ class TransfersController < ApplicationController
   end
 
   def create
-    if params[:commit] == 'Transfer'
+    if params[:commit] == 'Transférer'
       transfer_money
     else
       save_new_loan
     end
     if @transfer.save
-      redirect_to params[:commit] == 'Transfer' ? wallet_path : dashboard_path
+      redirect_to params[:commit] == 'Transférer' ? wallet_path : dashboard_path
     else
       render :new
     end
