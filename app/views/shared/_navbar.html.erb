@@ -8,22 +8,22 @@
   </div>
   <div class="navbar-right d-flex align-items-center">
     <% if user_signed_in? %>
-      <%= link_to 'My wallet', wallet_path %>
-       <%= link_to 'My dashboard', dashboard_path %>
+      <%= link_to 'Mon portefeuille', wallet_path %>
+       <%= link_to 'Mon Dashboard', dashboard_path %>
         <% if current_user.avatar.attached? %>
         <%= cl_image_tag current_user.avatar.key, class: 'avatar dropdown-toggle', id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
       <% else %>
         <%= image_tag 'blank_avatar.png', class: 'avatar dropdown-toggle', id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
       <% end %>
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-      <%= link_to 'Log out', destroy_user_session_path, class: "dropdown-item", method: :delete %>
+      <%= link_to 'Se déconnecter', destroy_user_session_path, class: "dropdown-item", method: :delete %>
     </div>
     <% else %>
       <li class="nav-item">
-        <%= link_to 'Log in', new_user_session_path%>
+        <%= link_to 'Se connecter', new_user_session_path%>
       </li>
       <li class="nav-item">
-        <%= link_to 'Sign up', new_user_registration_path%>
+        <%= link_to 'Creer un compte', new_user_registration_path%>
       </li>
     <% end %>
   </div>
