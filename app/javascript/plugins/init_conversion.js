@@ -10,15 +10,15 @@ const initConversion = () => {
         let amount = inputResult.value;
         let currency = event.currentTarget.value;
         if (currency === "Euros") {
-          inputResult.value = amount * 2800;
+          inputResult.value = amount * 2273;
         };
 
         if (currency === "Ethereums") {
-          inputResult.value = amount / 2800;
-        }; 
-      }); 
+          inputResult.value = amount / 2273;
+        };
+      });
     })
   };
 };
 
-export {initConversion}
+export { initConversion }

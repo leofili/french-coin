@@ -10,7 +10,7 @@
       </div>
       <div class="wallet d-flex align-items-center justify-content-between card-white card-rounded p-5 mt-4">
         <div class="wallet-value h3">
-          <%= (current_user.crypto_balance.fdiv(100) * 0.00044).round(3) %> ETH
+          <%= (current_user.crypto_balance.fdiv(100) * 0.00044).round(2) %> ETH
         </div>
         <%= link_to 'Recharger mon portefeuille CRYPTO', new_loan_transfer_path(@loan, money: 'ETH'), class: 'bouton btn-middle-blue' %>
       </div>

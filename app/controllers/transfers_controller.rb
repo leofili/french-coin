@@ -66,6 +66,8 @@ class TransfersController < ApplicationController
     collateral_transfer
     authorize @loan, :create_transfer?
     @loan.accepted!
+    @loan.start_date = Date.today
+    @loan.end_date = @loan.start_date + @loan.duration.months
     create_empty_payments
     balance_operations
   end

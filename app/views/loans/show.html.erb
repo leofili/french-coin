@@ -1,5 +1,5 @@
 <div class="container" id="show">
-  <h2 class="show-header p-4">Loan for: <%=@loan.name%></h2>
+  <h2 class="show-header p-4">Intitulé de mon prêt : <%=@loan.name%></h2>
   <ul class="tabs list-inline" id="mytabs">
     <li class="tab tab-horizontal list-inline-item active" id="resume">Résumé</li>
     <% if @loan.transfers != [] %>
@@ -9,10 +9,10 @@
   <div data-controller="update-status">
     <div class="resume">
       <% if @loan.transfers == [] %>
-      <h4>Please do the collateral's transfer to confirm the following transaction</h4>
-      <p class="text-center p-3">Loan information</p>
+      <h4>Merci de verser le collatéral nécessaire pour déclencher le prêt</h4>
+      <p class="text-center p-3">Informations sur votre prêt</p>
 
-      <div class="card-white p-3" id="loan-information">
+      <div class="card-white mb-5 p-3" id="loan-information">
         <div class="information-card-container mr-3">
           <div class="information-card">
             <div class="text-middle-blue border-b-middle-blue">Collatéral à déposer</div>
@@ -20,7 +20,7 @@
           </div>
           <div class="information-card">
             <div class="text-middle-blue border-b-middle-blue">Capital emprunté</div>
-            <div class="font-weight-light"><%= Loan.convert_amount(@loan.amount_cents, @loan.amount_currency)%> <%= @loan.amount_currency%></div>
+            <div class="font-weight-light"><%= (Loan.convert_amount(@loan.amount_cents, @loan.amount_currency)).round(2)%> <%= @loan.amount_currency%></div>
           </div>
           <div class="information-card">
             <div class="text-middle-blue border-b-middle-blue">Taux d'intérêt (%)</div>
@@ -35,14 +35,14 @@
             <div class="font-weight-light"><%= @loan.duration %></div>
           </div>
           <div class="information-card">
-            <div class="text-middle-blue border-b-middle-blue">Loan to Value (%)</div>
+            <div class="text-middle-blue border-b-middle-blue">Pourcentage d'emprunt (%)</div>
             <div class="font-weight-light"><%= (@loan.amount_cents * 100 / @loan.collateral_cents)  %></div>
           </div>
         </div>
         <div class="button-container">
-          <%= link_to 'Transfer the collateral', new_loan_transfer_path(@loan), class: "bouton btn-middle-blue"%>
-          <%= link_to 'Edit', '#', class: "bouton btn-middle-blue"%>
-          <%= link_to 'Cancel', '#', class: "bouton btn-middle-blue"%>
+          <%= link_to 'Verser le collatéral', new_loan_transfer_path(@loan), class: "bouton btn-middle-blue"%>
+          <%= link_to 'Modifier', '#', class: "bouton btn-middle-blue"%>
+          <%= link_to 'Annuler', '#', class: "bouton btn-middle-blue"%>
         </div>
       </div>
 
@@ -50,7 +50,7 @@
         <div id="loan-information" class="justify-content-center w-100 flex-wrap">
           <div class="w-100">
             <div class="text-left mb-5">
-              <h1>Informations sur le prêt</h1>
+              <h1>Informations sur votre prêt</h1>
             </div>
             <div class="information-card-container2 card-white p-3 mr-3">
               <div class="information-card my-2">
@@ -89,7 +89,7 @@
           </div>
 
           <div class="w-75 my-5">
-            <div class="text-center p-3">Evolution de votre collatéral</div>
+            <div class="text-center p-3">Évolution de votre collatéral</div>
               <div class="container">
                 <div class="row">
                   <div class="col-sm">
@@ -99,12 +99,12 @@
                         <td class="col-ms-2"><%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency)%> <%= @loan.collateral_currency%></td>
                       </tr>
                       <tr>
-                        <td class="col-ms-2 bg-gradient-primary text-middle-blue">Total +/- values</td>
+                        <td class="col-ms-2 bg-gradient-primary text-middle-blue">Variation</td>
                         <td class="col-ms-2">+1000€</td>
                       </tr>
                       <tr>
                         <td class="col-ms-2 bg-gradient-primary text-middle-blue">Valeur actuelle du collatéral</td>
-                        <td class="col-ms-2"><%= Loan.convert_amount(@loan.collateral_cents, "EUR").to_i%> <%= "EUR" %></td>
+                        <td class="col-ms-2"><%= Loan.convert_amount(@loan.collateral_cents, "EUR").to_i + 1000%> <%= "EUR" %></td>
                       </tr>
                     </table>
                   </div>
@@ -152,6 +152,9 @@
               </tr>
               <%end%>
             </table>
+            <% if @loan.payments.where('transfer_id IS NOT NULL') == [] %>
+            <p class='alert alert-secondary'>Vous n'avez pas encore effectué de versements.</p>
+            <%end%>
           </div>
         </div>
       </div>
