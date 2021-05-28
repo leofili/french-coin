@@ -1,3 +1,4 @@
+// calcul lors du changement d'input
 const initCollat = () => {
   document.querySelectorAll(".input_amount_loan").forEach((choice) => {
     choice.addEventListener("change", function (event) {
