@@ -9,20 +9,21 @@
   align-items: center;
   flex: 1 1 auto;
   margin-top: 50px;
-  height: 70vh;
+  height: 85vh;
+  padding-bottom: 15px;
 }
 
 .dashboard-sidebar {
   flex: 0 0 250px;
 }
 
-.my-loans, .collateral-fluctuation {
+.my-loans, .collateral-fluctuation, .my-unvalidated-loans {
   flex: 0 1 auto;
   padding-right: 160px;
   padding-left: 160px;
 }
 
-.collateral-fluctuation {
+.collateral-fluctuation, .my-unvalidated-loans {
   display: none;
 }
 

@@ -1,0 +1,24 @@
+<% loans_to_confirm = loans.select { |loan| loan.transfers == [] } %>
+<% if loans_to_confirm == [] %>
+  <p class='alert alert-secondary'>Vous n'avez actuellement pas d'emprunts à confirmer.</p>
+
+<% else %>
+  <% loans_to_confirm.each do |loan| %>
+    <div class="card-vertical card-white card-rounded p-4 my-3">
+        <h4 class="h4 text-blue pb-2"><%= loan.name %></h4>
+      <div class="card-horizontal">
+        <div class="mx-2 text-center">
+          <p class="text-middle-blue border-b-middle-blue pb-3">Montant du prêt</p>
+          <p class="font-weight-light mb-0"><%=loan.amount_cents.div(100)%> <%=loan.amount_currency%></p>
+        </div>
+        <div class="mr-2 text-center">
+          <p class="text-middle-blue border-b-middle-blue pb-3">Collatéral à déposer</p>
+          <p class="font-weight-light mb-0"><%=loan.collateral_cents.div(100)%> <%=loan.collateral_currency%></p>
+        </div>
+        <div class="mx-2 text-center ml-auto">
+          <%= link_to 'Voir le détail', loan_path(loan), class: 'bouton btn-middle-blue'%>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
