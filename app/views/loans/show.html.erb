@@ -16,7 +16,7 @@
         <div class="information-card-container mr-3">
           <div class="information-card">
             <div class="text-middle-blue border-b-middle-blue">Collatéral à déposer</div>
-            <div class="font-weight-light"><%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency)%> <%= @loan.collateral_currency%></div>
+            <div class="font-weight-light"><%= (Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency)).round(2)%> <%= @loan.collateral_currency%></div>
           </div>
           <div class="information-card">
             <div class="text-middle-blue border-b-middle-blue">Capital emprunté</div>

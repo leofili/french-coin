@@ -1,18 +1,23 @@
-<div class="row">
+<div class="mt-5">
   <div class="col-12 col-lg-6 offset-lg-3">
     <div class="wallets mt-5 p-5">
-      <h2 class='mb-5'>Mes wallets</h2>
-      <div class="wallet d-flex align-items-center justify-content-between card-white card-rounded p-5 mt-4">
-        <div class="wallet-value h3">
+      <div class="wallet d-flex align-items-center justify-content-between card-white card-rounded p-4 mt-4">
+        <div class="wallet-value h3 pl-4">
           <%= current_user.euro_balance.fdiv(100) %> EUR
         </div>
-        <%= link_to 'Recharger mon portefeuille EURO', new_loan_transfer_path(@loan, money: 'EUR'), class: 'bouton btn-middle-blue' %>
+        <div class="d-flex flex-column align-items-center">
+          <%= link_to 'Recharger mon portefeuille EURO', new_loan_transfer_path(@loan, money: 'EUR'), class: 'bouton btn-middle-blue w-100 text-decoration-none' %>
+          <a href="#" class="bouton btn-success mt-3 w-100 text-decoration-none">Virer vers mon compte bancaire</a>
+        </div>
       </div>
-      <div class="wallet d-flex align-items-center justify-content-between card-white card-rounded p-5 mt-4">
-        <div class="wallet-value h3">
+      <div class="wallet d-flex align-items-center justify-content-between card-white card-rounded p-4 mt-4">
+        <div class="wallet-value h3 pl-4">
           <%= (current_user.crypto_balance.fdiv(100) * 0.00044).round(2) %> ETH
         </div>
-        <%= link_to 'Recharger mon portefeuille CRYPTO', new_loan_transfer_path(@loan, money: 'ETH'), class: 'bouton btn-middle-blue' %>
+        <div class="d-flex flex-column align-items-center">
+          <%= link_to 'Recharger mon portefeuille CRYPTO', new_loan_transfer_path(@loan, money: 'ETH'), class: 'bouton btn-middle-blue w-100 text-decoration-none' %>
+          <a href="#" class="bouton btn-success mt-3 w-100 text-decoration-none">Virer vers un autre portefeuille crypto</a>
+        </div>
       </div>
     </div>
   </div>
