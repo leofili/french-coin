@@ -8,8 +8,8 @@
   </div>
   <div class="navbar-right d-flex align-items-center">
     <% if user_signed_in? %>
-      <%= link_to 'My wallet', dashboard_path %>
-       <%= link_to 'My dashboard', wallet_path %>
+      <%= link_to 'My wallet', wallet_path %>
+       <%= link_to 'My dashboard', dashboard_path %>
         <% if current_user.avatar.attached? %>
         <%= cl_image_tag current_user.avatar.key, class: 'avatar dropdown-toggle', id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
       <% else %>
