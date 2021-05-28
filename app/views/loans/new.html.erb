@@ -1,97 +1,119 @@
 <div class="add-a-loan mb-5 m-5" id="new-loan">
   <div class="row">
-      <div class="contener col-12 col-lg-6 offset-lg-3">
-        <h2 class="text-center m-5">Nouvel Emprunt</h2>
-        <%= simple_form_for(@loan) do |f| %>
-        <div class="container">
-          <div class="row">
-            <div calss="col">
-              <h4>Intitulé de mon emprunt</h4>
-              <%= f.input :name, label: "Reseigner le nom personalisé de votre emprunt" %>
-              <div class="input_amount_loan">
-                <h4>Montant de mon emprunt</h4>
-                <%= f.input :amount_cents, class: "amount_cents", label: "Indiquer le montant à emprunter en Euros ou en Ethereums", :input_html => { :value =>  500 } %>
-              </div>
-              <div class="dropboxnewloan">
-                <div class="dropboxnewloan1">
-                  <%= f.select :amount_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
-                </div>
-              </div>
-              <br>
-              <div class="input_amount_loan">
-                <h4>Collateral nécessaire</h4>
-                <%= f.input :collateral_cents, label: "Collateral nécessaire pour pouvoir emprunter", :input_html => { :value => 2000  } %>
-              </div>
-              <div class="dropboxnewloan">
-                <div class="dropboxnewloan2">
-                  <%= f.select :collateral_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
-                </div>
-              </div>
-            </div>
-            <br>
-            <div class="col-2"></div>
-            <div class="fieldset_new_loan col">
-              <fieldset id="fieldset1">
-                  <legend class="legend_new_loan"><h4>Durée de l'emprunt</h4></legend>
-                  <p>Nombre de mois</p>
-                  <div>
-                      <label class="toggle-new-load choice-toggle selected">
-                        6
-                        <input  class="input_radio_new_loan" name="month" type="radio" value="6" checked />
-                      </label>
-                      <label class="toggle-new-load choice-toggle">
-                        12
-                        <input  class="input_radio_new_loan" name="month" type="radio" value="12" />
-                      </label>
-                      <label class="toggle-new-load choice-toggle">
-                        24
-                        <input class="input_radio_new_loan" name="month" type="radio" value="24" />
-                      </label>
-                      <label class="toggle-new-load choice-toggle">
-                        36
-                        <input class="input_radio_new_loan" name="month" type="radio" value="36" />
-                      </label>
-                  </div>
-              </fieldset>
-              <br>
-              <br>
-              <fieldset id="fieldset2">
-                  <legend class="legend_new_loan"><h4>Pourcentage d'emprunt</h4></legend>
-                  <p>Le pourcentage global de collateral que vous souhaitez déposer</p>
-                  <div>
-                      <label class="toggle-new-load choice-toggle2 selected">
-                        25%
-                        <input class="input_radio_new_loan" name="lvt" type="radio" value="25" checked />
-                      </label>
-                      <label class="toggle-new-load choice-toggle2">
-                        33%
-                        <input class="input_radio_new_loan" name="lvt" type="radio" value="33" />
-                      </label>
-                      <label class="toggle-new-load choice-toggle2">
-                        50%
-                        <input class="input_radio_new_loan" name="lvt" type="radio" value="50" />
-                      </label>
-                  </div>
-              </fieldset>
-            </div>
+    <div class="col-12 col-lg-6 offset-lg-3">
+      <h2 class="text-center mt-3 mb-5">Nouvel Emprunt</h2>
+      <%= simple_form_for(@loan) do |f| %>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h4>Intitulé de mon emprunt</h4>
+            <%= f.input :name, label: "Reseigner le nom personnalisé de votre emprunt" %>
           </div>
-          <div class="interest_new_loan">Interest
-            <br>
-            <div class="interest_span_new_loan">
-            <span class="interest" name="interest" value="2.50">2.50</span>€
-            </div>
-          </div>
-          <div class="apr_new_loan">APR
-            <br>
-            <div class="apr_span_new_loan">
-              <span class="apr" value="1">1.00</span>%
-            </div>
-          </div>
-          <%= f.input :interest_cents, as: :hidden , :input_html => { :value => 250 } %>
-          <%= f.input :interest_rate, as: :hidden, :input_html => { :value => 1 } %>
-          <br>
         </div>
-        <%= f.submit%>
+
+        <br>
+        <br>
+
+        <div class="row">
+          <div class="col">
+            <div class="input_amount_loan">
+              <h4>Montant de mon emprunt</h4>
+              <%= f.input :amount_cents, class: "amount_cents", label: "Indiquer le montant à emprunter en Euros ou en Ethereums", :input_html => { :value =>  500 } %>
+            </div>
+            <div class="dropboxnewloan">
+              <div class="dropboxnewloan1">
+                <%= f.select :amount_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <fieldset id="fieldset1">
+                <legend class="legend_new_loan"><h4>Durée de l'emprunt</h4></legend>
+                <p>Nombre de mois</p>
+                <div>
+                    <label class="toggle-new-load choice-toggle selected">
+                      6
+                      <input  class="input_radio_new_loan" name="month" type="radio" value="6" checked />
+                    </label>
+                    <label class="toggle-new-load choice-toggle">
+                      12
+                      <input  class="input_radio_new_loan" name="month" type="radio" value="12" />
+                    </label>
+                    <label class="toggle-new-load choice-toggle">
+                      24
+                      <input class="input_radio_new_loan" name="month" type="radio" value="24" />
+                    </label>
+                    <label class="toggle-new-load choice-toggle">
+                      36
+                      <input class="input_radio_new_loan" name="month" type="radio" value="36" />
+                    </label>
+                </div>
+            </fieldset>
+          </div>
+          <div class="col">
+            <fieldset id="fieldset2">
+                <legend class="legend_new_loan"><h4>Pourcentage d'emprunt</h4></legend>
+                <p>Le pourcentage global de collateral que vous souhaitez déposer</p>
+                <div>
+                    <label class="toggle-new-load choice-toggle2 selected">
+                      25%
+                      <input class="input_radio_new_loan" name="lvt" type="radio" value="25" checked />
+                    </label>
+                    <label class="toggle-new-load choice-toggle2">
+                      33%
+                      <input class="input_radio_new_loan" name="lvt" type="radio" value="33" />
+                    </label>
+                    <label class="toggle-new-load choice-toggle2">
+                      50%
+                      <input class="input_radio_new_loan" name="lvt" type="radio" value="50" />
+                    </label>
+                </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
+          <div class="col">
+            <div class="input_amount_loan">
+              <h4>Collateral nécessaire</h4>
+              <%= f.input :collateral_cents, label: "Collateral nécessaire pour pouvoir emprunter", :input_html => { :value => 2000  } %>
+            </div>
+            <div class="dropboxnewloan">
+              <div class="dropboxnewloan2">
+                <%= f.select :collateral_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="interest_new_loan">Interest
+              <br>
+              <div class="interest_span_new_loan">
+                <span class="interest" name="interest" value="2.50">2.50</span>€
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="apr_new_loan">APR
+              <br>
+              <div class="apr_span_new_loan">
+                <span class="apr" value="1">1.00</span>%
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <%= f.input :interest_cents, as: :hidden , :input_html => { :value => 250 } %>
+        <%= f.input :interest_rate, as: :hidden, :input_html => { :value => 1 } %>
+        <br>
+        <div class="row">
+          <div class="col">
+            <%= f.submit %>
+          </div>
+        </div>
+      </div>
       <% end %>
     </div>
   </div>
