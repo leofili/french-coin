@@ -1,9 +1,9 @@
-fieldset {
+.fieldset_new_loan {
   border: none;
   padding: 0;
   margin: 0;
 }
-legend {
+.legend_new_loan {
   padding: 0;
   margin: 0;
 }
@@ -21,16 +21,16 @@ legend {
   background-image: linear-gradient(rgba(255,255,255,.2), rgba(0,0,0,.2));
   box-shadow: 1px 1px 1px rgba(255,255,255,.2) inset, -1px -1px 1px rgba(0,0,0,.2) inset;
 }
-label:first-child {
+.toggle-new-load:first-child {
   border-left-width: 1px;
   border-top-left-radius: .2em;
   border-bottom-left-radius: .2em;
 }
-label:last-child {
+.toggle-new-load:last-child {
   border-top-right-radius: .2em;
   border-bottom-right-radius: .2em;
 }
-label.selected {
+.toggle-new-load.selected {
   background-color: #0066CC;
   color: white;
   border-color: darkblue;
@@ -39,7 +39,8 @@ label.selected {
   background-image: linear-gradient(rgba(0,0,0,.2), rgba(255,255,255,.2));
   box-shadow: 1px 1px 1px rgba(0,0,0,.2) inset;
 }
-input[type="radio"] {
+
+.input_radio_new_loan {
  position: absolute;
  top: -9999px;
  left: -9999px;

@@ -9,7 +9,12 @@ const initToggle = () => {
         choice.querySelector("input").setAttribute("checked", "");
         // update de Interets et APR
         let month = document.querySelector(".choice-toggle.selected input").value;
+        const selectElmt = document.querySelector(".dropboxnewloan1 select");
+        let currency = selectElmt.options[selectElmt.selectedIndex].value;
         let amount = document.querySelector(".loan_amount_cents input").value;
+        if (currency === "Ethereums") {
+          amount = document.querySelector(".loan_amount_cents input").value * 2800;       
+        };
         if (document.querySelector(".choice-toggle2.selected input").value === "25") {
           let apr = 100/10000;
           document.querySelector(".apr").innerText = (apr * 100).toFixed(2);

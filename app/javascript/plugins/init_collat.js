@@ -2,7 +2,13 @@ const initCollat = () => {
   document.querySelectorAll(".contener").forEach((choice) => {
     choice.addEventListener("change", function(event) {
       event.preventDefault();
+      const selectElmt = document.querySelector(".dropboxnewloan1 select");
+      let currency = selectElmt.options[selectElmt.selectedIndex].value;
       let amount = document.querySelector(".loan_amount_cents input").value;
+      if (currency === "Ethereums") {
+        amount = document.querySelector(".loan_amount_cents input").value * 2800;       
+      };
+      console.log(amount);
       let lvt = document.querySelector(".choice-toggle2.selected input").value;
       if (lvt === "25") {
         let apr = 100/10000;
