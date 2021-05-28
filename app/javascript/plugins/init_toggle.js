@@ -11,9 +11,10 @@ const initToggle = () => {
         let month = document.querySelector(".choice-toggle.selected input").value;
         const selectElmt = document.querySelector(".dropboxnewloan1 select");
         let currency = selectElmt.options[selectElmt.selectedIndex].value;
+        
         let amount = document.querySelector(".loan_amount_cents input").value;
         if (currency === "Ethereums") {
-          amount = document.querySelector(".loan_amount_cents input").value * 2800;       
+          amount = document.querySelector(".loan_amount_cents input").value * 2800;     
         };
         if (document.querySelector(".choice-toggle2.selected input").value === "25") {
           let apr = 100/10000;
@@ -48,23 +49,41 @@ const initToggle = () => {
         // update du collateral selon emprunt
         // update de Interets et APR
         let lvt = document.querySelector(".choice-toggle2.selected input").value;
+        const selectElmt = document.querySelector(".dropboxnewloan1 select");
+        let currency = selectElmt.options[selectElmt.selectedIndex].value;
         let amount = document.querySelector(".loan_amount_cents input").value;
-
+        if (currency === "Ethereums") {
+          amount = document.querySelector(".loan_amount_cents input").value * 2800;       
+        };
+        const selectElmt2 = document.querySelector(".dropboxnewloan2 select");
+        let currency2 = selectElmt2.options[selectElmt2.selectedIndex].value;
         let apr = 0;
         if (lvt === "25") {
           apr = 100/10000;
-          document.querySelector(".apr").innerText = (apr * 100).toFixed(2); 
-          document.querySelector(".loan_collateral_cents input").value = amount * 4;
+          document.querySelector(".apr").innerText = (apr * 100).toFixed(2);
+          if (currency2 === "Ethereums"){
+            document.querySelector(".loan_collateral_cents input").value = (amount * 4)/2800;
+          } else if (currency2 === "Euros") {
+            document.querySelector(".loan_collateral_cents input").value = (amount * 4);
+          };
           document.querySelector(".loan_interest_rate input").value = (apr * 100).toFixed(2);
         } else if (lvt === "33") {
           apr = 695/10000;
           document.querySelector(".apr").innerText = (apr * 100).toFixed(2);
-          document.querySelector(".loan_collateral_cents input").value = amount * 3;
+          if (currency2 === "Ethereums"){
+            document.querySelector(".loan_collateral_cents input").value = (amount * 3)/2800;
+          } else if (currency2 === "Euros") {
+            document.querySelector(".loan_collateral_cents input").value = (amount * 3);
+          };
           document.querySelector(".loan_interest_rate input").value = (apr * 100).toFixed(2);
         } else if (lvt === "50") {
           apr = 895/10000;
           document.querySelector(".apr").innerText = (apr * 100).toFixed(2);
-          document.querySelector(".loan_collateral_cents input").value = amount * 2;
+          if (currency2 === "Ethereums"){
+            document.querySelector(".loan_collateral_cents input").value = (amount * 2)/2800;
+          } else if (currency2 === "Euros") {
+            document.querySelector(".loan_collateral_cents input").value = (amount * 2);
+          };
           document.querySelector(".loan_interest_rate input").value = (apr * 100).toFixed(2);
         };
         if (document.querySelector(".choice-toggle.selected input").value === "6") {

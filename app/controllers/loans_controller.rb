@@ -15,6 +15,19 @@ class LoansController < ApplicationController
     @loan = Loan.new(loan_params)
     @loan.user = current_user
     @loan.duration =  params[:month].to_i
+    # Envoi des données amount en centimes d'euros
+    if params[:loan][:amount_currency] == "Ethereums"
+      @loan.amount_cents = params[:loan][:amount_cents].to_f * 2800 * 100
+
+    elsif params[:loan][:amount_currency] == "Euros"
+      @loan.amount_cents = params[:loan][:amount_cents].to_f * 100
+    end
+    # Envoi des données collateral en centimes d'euros
+    if params[:loan][:collateral_currency] == "Ethereums"
+      @loan.collateral_cents = params[:loan][:collateral_cents].to_f * 2800 * 100
+    elsif params[:loan][:collateral_currency] == "Euros"
+      @loan.collateral_cents = params[:loan][:collateral_cents].to_f * 100
+    end
     authorize @loan
       if @loan.save
 
