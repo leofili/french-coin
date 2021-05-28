@@ -1,8 +1,8 @@
 # admin = User.create(email: "admin@example.com", password: "admin@example.com", password_confirmation: "admin@example.com")
 
-User.create(first_name: "Helen", last_name: "Star", email: "helen@example.com", password: "helen@example.com", password_confirmation: "helen@example.com", phone_number: "0606060606", address: "6, rue du Faucon, 75011 Paris", crypto_balance: 10000, euro_balance: 10000)
+User.create(first_name: "Paul", last_name: "Star", email: "paul@example.com", password: "paul@example.com", password_confirmation: "paul@example.com", phone_number: "0606060606", address: "6, rue du Faucon, 75011 Paris", crypto_balance: 10000, euro_balance: 10000)
 
-helen = User.find_by(email: "helen@example.com")
+helen = User.find_by(email: "paul@example.com")
 
 #Creating fake loan
 # Loan.create(user: admin)
