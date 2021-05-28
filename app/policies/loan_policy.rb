@@ -12,4 +12,8 @@ class LoanPolicy < ApplicationPolicy
   def create?
     return true
   end
+
+  def create_transfer?
+    (record.user == user && record.status != 'cancelled') || record.id == 1
+  end
 end

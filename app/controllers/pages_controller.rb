@@ -8,5 +8,8 @@ class PagesController < ApplicationController
     @loans = current_user.loans
   end
 
-
+  def wallet
+    @loan = Loan.find(1)
+    @transfer = Transfer.new
+  end
 end

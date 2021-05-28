@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-12 col-lg-6 offset-lg-3">
+    <div class="wallets mt-5 p-5">
+      <h2 class='mb-5'>My wallets</h2>
+      <div class="wallet d-flex align-items-center justify-content-between card-white card-rounded p-5 mt-4">
+        <div class="wallet-value h3">
+          <%= current_user.euro_balance.fdiv(100) %> EUR
+        </div>
+        <%= link_to 'Add money to my euro wallet', new_loan_transfer_path(@loan, money: 'EUR'), class: 'bouton btn-middle-blue' %>
+      </div>
+      <div class="wallet d-flex align-items-center justify-content-between card-white card-rounded p-5 mt-4">
+        <div class="wallet-value h3">
+          <%= (current_user.crypto_balance.fdiv(100) * 0.00044).round(3) %> ETH
+        </div>
+        <%= link_to 'Add money to my crypto wallet', new_loan_transfer_path(@loan, money: 'ETH'), class: 'bouton btn-middle-blue' %>
+      </div>
+    </div>
+  </div>
+</div>
+
