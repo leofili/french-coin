@@ -11,4 +11,7 @@
 
 .btn-middle-blue {
   background-color: $middle-blue;
+  &:hover {
+    text-decoration: none;
+  }
 }
