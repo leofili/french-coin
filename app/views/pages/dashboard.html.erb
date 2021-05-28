@@ -13,8 +13,12 @@
 
     <div class="tabs-vertical w-100 mt-2 pt-5">
       <div class="tab active tab-vertical tab-blue text-white text-center p-3" id="my-loans">
-        <p class='mb-0'>Mes emprunts</p>
+        <p class='mb-0'>Mes emprunts en cours</p>
         <i class="fas fa-caret-right active"></i>
+      </div>
+      <div class="tab tab-vertical tab-blue text-white text-center p-3" id="my-unvalidated-loans">
+        <p class="mb-0">Mes emprunts à confirmer</p>
+        <i class="fas fa-caret-right"></i>
       </div>
       <div class="tab tab-vertical tab-blue text-white text-center p-3" id="collateral-fluctuation">
         <p class="mb-0">Évolution de mon collatéral</p>
@@ -35,8 +39,7 @@
     </div>
 
     <div class="my-loans w-100 overflow-auto">
-      <h3 class="mr-auto mb-4">Mes emprunts</h3>
-
+      <h3 class="mr-auto mb-4">Mes emprunts en cours</h3>
       <div class="d-flex flex-column">
         <div class="loan-info-cards">
           <%= render 'loan-info-cards', loans: @loans %>
@@ -44,9 +47,17 @@
       </div>
     </div>
 
+    <div class="my-unvalidated-loans w-100 overflow-auto">
+      <h3 class="mr-auto mb-4">Mes emprunts à confirmer</h3>
+      <div class="d-flex flex-column">
+        <div class="unvalidated-loan-cards">
+          <%= render 'unvalidated-loan-cards', loans: @loans %>
+        </div>
+      </div>
+    </div>
 
     <div class="collateral-fluctuation w-100">
-      <h3 class="mr-auto mb-4">Évolution de mon collatéral</h3>
+      <h3 class="mr-auto mb-4">Évolution de mes collatéraux</h3>
       <div class="collateral-infos card-white card-rounded d-flex">
         <div class="d-flex flex-column text-center flex-grow-1">
           <h4 class="text-middle-blue mb-0 py-3">Collatéral déposé</h4>
