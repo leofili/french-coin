@@ -15,3 +15,24 @@
     text-decoration: none;
   }
 }
+
+.btn-middle-light-blue {
+  background-color: #339AF0;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.btn-middle-green {
+  background-color: $green;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.btn-middle-yellow {
+  background-color: $yellow;
+  &:hover {
+    text-decoration: none;
+  }
+}
