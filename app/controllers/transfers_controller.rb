@@ -11,18 +11,35 @@ class TransfersController < ApplicationController
       transfer_money
     else
       save_new_loan
+      session = create_stripe_session
     end
-    if @transfer.save
-      redirect_to params[:commit] == 'Transférer' ? wallet_path : dashboard_path
-    else
-      render :new
-    end
+    @transfer.update(checkout_session_id: @session.id)
+    # if @transfer.save
+    redirect_to new_transfer_transfer_payment_path(@transfer)
+    # redirect_to params[:commit] == 'Transférer' ? wallet_path : dashboard_path
+    # else
+    #   render :new
+    # end
   end
 
   private
 
   def transfer_params
     params.require(:transfer).permit(:amount_currency, :payment_mean)
+  end
+
+  def create_stripe_session
+    Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      line_items: [{
+        name: @transfer.category,
+        amount: @transfer.amount_cents,
+        currency: 'eur',
+        quantity: 1
+      }],
+      success_url: loan_url(@loan),
+      cancel_url: loan_url(@loan)
+    )
   end
 
   def transfer_money
@@ -32,8 +49,10 @@ class TransfersController < ApplicationController
     @transfer.loan = @loan
     @transfer.user = current_user
     @transfer.category = 'account_transfer'
+    @transfer.status = 'pending'
     authorize @loan, :create_transfer?
-    add_to_balance(@transfer)
+    @transfer.save
+    @session = create_stripe_session
   end
 
   def convert_amount
@@ -79,6 +98,7 @@ class TransfersController < ApplicationController
     @transfer.amount_currency = @loan.collateral_currency
     @transfer.user = current_user
     @transfer.category = 'collateral_payment'
+    @transfer.status = 'pending'
   end
 
   def create_empty_payments

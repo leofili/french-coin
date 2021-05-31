@@ -3,9 +3,16 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :loans, only: %i[new create show] do
-    resources :transfers, only: %i[new create]
+    resources :transfers, only: %i[new create] do
+    end
   end
   get '/dashboard', to: 'pages#dashboard'
   get '/wallet', to: 'pages#wallet'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  resources :transfers do
+    resources :transfer_payments, only: %i[new]
+  end
+
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
+
 end

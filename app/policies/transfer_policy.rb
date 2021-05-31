@@ -4,4 +4,8 @@ class TransferPolicy < ApplicationPolicy
       scope.all
     end
   end
+
+  def create?
+    record.user = user
+  end
 end
