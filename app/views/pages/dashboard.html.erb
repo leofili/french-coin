@@ -72,9 +72,40 @@
       </div>
     </div>
 
-    <div class="my-infos">
 
+  <div class=container>
+    <div class="my-infos w-100">
+      <h3 class="mr-auto mt-5">Mes informations</h3>
+      <div class="collateral-infos card-white card-rounded d-flex">
+        <div class="d-flex flex-column text-center flex-grow-1">
+          <h5 class="text-middle-blue mb-0 py-3">Nom</h5>
+          <h5 class="text-middle-blue mb-0 py-3">Prénom</h5>
+          <h5 class="text-middle-blue mb-0 py-3">Courriel</h5>
+          <h5 class="text-middle-blue mb-0 py-3">Adresse principale</h5>
+        </div>
+        <div class="d-flex flex-column text-center flex-grow-1">
+          <p class="mb-0 py-3 h5"><%= current_user.last_name %></p>
+          <p class="mb-0 py-3 h5"><%= current_user.first_name %></p>
+          <p class="mb-0 py-3 h5"><%= current_user.email %></p>
+          <p class="mb-0 py-3 h5"><%= current_user.address %></p>
+        </div>
+      </div>
+        <div class="my-iban mt-5">
+          <h3 class="mr-auto">Mes moyens de paiement</h3>
+          <div class="card-white card-rounded d-flex">
+            <div class="d-flex flex-column text-center flex-grow-1">
+              <h6 class="text-middle-blue mb-0 py-3">RIB</h6>
+              <h6 class="text-middle-blue mb-0 py-3">BIC</h6>
+            </div>
+            <div class="d-flex flex-column text-center flex-grow-1">
+              <p class="mb-0 py-3 h6">BBBBB*****CCCC****CCCKK</p>
+              <p class="mb-0 py-3 h6">AGPKPHHT000</p>
+            </div>
+          </div>
+        </div>
     </div>
+  </div>
+    <%# ----------- %>
 
   </div>
 

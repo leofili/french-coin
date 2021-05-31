@@ -11,27 +11,35 @@
   margin-top: 50px;
   height: 85vh;
   padding-bottom: 15px;
+
+  .btn btn-primary {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 }
 
 .dashboard-sidebar {
   flex: 0 0 250px;
 }
 
-.my-loans, .collateral-fluctuation, .my-unvalidated-loans {
+.my-loans, .collateral-fluctuation, .my-unvalidated-loans, .my-infos {
   flex: 0 1 auto;
   padding-right: 160px;
   padding-left: 160px;
+
 }
 
-.collateral-fluctuation, .my-unvalidated-loans {
+.collateral-fluctuation, .my-unvalidated-loans, .my-infos {
   display: none;
 }
 
-.collateral-infos {
+.collateral-infos, .my-infos{
   p {
     font-weight: 100;
   }
-  p, h4 {
+  p, h4, h5, h6 {
     flex: 1 1 auto;
   }
 }
