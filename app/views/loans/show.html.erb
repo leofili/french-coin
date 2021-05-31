@@ -67,7 +67,7 @@
               </div>
               <div class="information-card my-2">
                 <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Date prochaine échéance</div>
-                <div class="font-weight-light"><%= @loan.payments.where('transfer_id IS NULL').first.due_date %></div>
+                <div class="font-weight-light"><%= @loan.payments.where('transfer_id IS NULL').first.due_date.strftime("%d-%m-%y") %></div>
               </div>
               <div class="information-card my-2">
                 <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Intérêts par mois</div>
@@ -127,9 +127,9 @@
           <div class="col-sm">
             <table class="table table-loan-infos">
               <thead>
-                <th>Solde au <%= Date.today %> : <%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').sum('amount_cents'), @loan.amount_currency).round(2) %> <%= @loan.amount_currency %></th>
+                <th>Restant dû au <%= Date.today.strftime("%d-%m-%y")  %> : <%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').sum('amount_cents'), @loan.amount_currency).round(2) %> <%= @loan.amount_currency %></th>
                 <th class="text-center">Durée du prêt : <%= @loan.duration %> mois</th>
-                <th class="text-center">Prochaine échéance : <%= @loan.payments.where('transfer_id IS NULL').first.due_date %></th>
+                <th class="text-center">Prochaine échéance : <%= @loan.payments.where('transfer_id IS NULL').first.due_date.strftime("%d-%m-%y") %></th>
               </thead>
             </table>
 
@@ -144,7 +144,7 @@
               <% refund = 0 %>
               <% @loan.payments.where('transfer_id IS NOT NULL').each do |payment| %>
               <tr>
-                <td class="text-center"><%= payment.due_date %></td>
+                <td class="text-center"><%= payment.due_date.strftime("%d-%m-%y") %></td>
                 <td class="text-center"><%= Loan.convert_amount(payment.refund_amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></td>
                 <td class="text-center"><%= Loan.convert_amount(payment.interest_amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></td>
                 <td class="text-center"><%= Loan.convert_amount((payment.interest_amount_cents + payment.refund_amount_cents), @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></td>
