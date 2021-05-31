@@ -2,6 +2,10 @@ class LoansController < ApplicationController
   skip_before_action :authenticate_user!, only: :new
 
   def show
+    if params[:session_id]
+      session = Stripe::Checkout::Session.retrieve(params[:session_id])
+      flash[:notice] = session.payment_status == "paid" ? "Votre collatéral a bien été versé !" : "Votre collatéral n'a pas pu être versé !"
+    end
     @loan = Loan.find(params[:id])
     authorize @loan
   end

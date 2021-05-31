@@ -2,6 +2,9 @@
   <h2 class="show-header p-4">Intitulé de mon prêt : <%=@loan.name%></h2>
   <ul class="tabs list-inline" id="mytabs">
     <li class="tab tab-horizontal list-inline-item active" id="resume">Résumé</li>
+    <% if flash[:notice] %>
+      <p class='alert alert-success'> <%= flash[:notice] %> </p>
+    <% end %>
     <% if @loan.transfers != [] %>
     <li class="tab tab-horizontal list-inline-item" id="historical-payment">Historique</li>
     <%end%>
@@ -116,7 +119,7 @@
       <% end %>
     </div>
 
-    
+
     <% if @loan.transfers != [] %>
     <div class="historical-payment">
       <div class="text-left mb-5">

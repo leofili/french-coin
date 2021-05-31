@@ -9,6 +9,10 @@ class PagesController < ApplicationController
   end
 
   def wallet
+    if params[:session_id]
+      session = Stripe::Checkout::Session.retrieve(params[:session_id])
+      flash[:notice] = session.payment_status == "paid" ? "Vos euros ont été transférés avec succès sur votre compte !" : "Vos euros n'ont pas pu être transférés sur votre compte !"
+    end
     @loan = Loan.find(1)
     @transfer = Transfer.new
   end
