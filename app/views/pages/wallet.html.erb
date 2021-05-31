@@ -1,25 +1,57 @@
-<div class="mt-5">
-  <div class="col-12 col-lg-6 offset-lg-3">
-    <div class="wallets mt-5 p-5">
-      <div class="wallet d-flex align-items-center justify-content-between card-white card-rounded p-4 mt-4">
-        <div class="wallet-value h3 pl-4">
-          <%= current_user.euro_balance.fdiv(100) %> EUR
-        </div>
-        <div class="d-flex flex-column align-items-center">
-          <%= link_to 'Recharger mon portefeuille EURO', new_loan_transfer_path(@loan, money: 'EUR'), class: 'bouton btn-middle-blue w-100 text-decoration-none' %>
-          <a href="#" class="bouton btn-success mt-3 w-100 text-decoration-none">Virer vers mon compte bancaire</a>
+<div class="container">
+  <h2>Mon portefeuille</h2>
+  <div class="mt-4">
+    <div class="wallets">
+      <div class="wallet mt-4">
+        <h2>EUR</h2>
+        <hr>
+        <div class="d-flex align-items-start justify-content-between">
+          <div class="d-flex align-items-center">
+            <div class="wallet-value mr-5">
+              <p>Balance</p>
+              <p class="amount text-blue"><%= current_user.euro_balance.fdiv(100) %> EUR</p>
+            </div>
+            <div class="wallet-value">
+              <p>Total des gains</p>
+              <p class="amount text-green"><%= current_user.euro_balance.fdiv(100) %> EUR</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center w-25 justify-content-around">
+            <%= link_to new_loan_transfer_path(@loan, money: 'EUR'), class: 'd-flex flex-column align-items-center text-decoration-none' do %>
+            <p>Déposer</p>
+            <%= image_tag "vaadin_money-deposit.svg"%>
+            <% end %>
+            <a href="#" class="d-flex flex-column align-items-center text-decoration-none ml-3">
+            <p>Retirer</p>
+            <%= image_tag "vaadin_money-withdraw.svg"%></a>
+          </div>
         </div>
       </div>
-      <div class="wallet d-flex align-items-center justify-content-between card-white card-rounded p-4 mt-4">
-        <div class="wallet-value h3 pl-4">
-          <%= (current_user.crypto_balance.fdiv(100) * 0.00044).round(2) %> ETH
-        </div>
-        <div class="d-flex flex-column align-items-center">
-          <%= link_to 'Recharger mon portefeuille CRYPTO', new_loan_transfer_path(@loan, money: 'ETH'), class: 'bouton btn-middle-blue w-100 text-decoration-none' %>
-          <a href="#" class="bouton btn-success mt-3 w-100 text-decoration-none">Virer vers un autre portefeuille crypto</a>
+      <div class="wallet mt-4">
+        <h2>ETH</h2>
+        <hr>
+        <div class="d-flex align-items-start justify-content-between">
+          <div class="d-flex align-items-center">
+            <div class="wallet-value mr-5">
+              <p>Balance</p>
+              <p class="amount text-blue"><%= (current_user.crypto_balance.fdiv(100) * 0.00044).round(2) %> EUR</p>
+            </div>
+            <div class="wallet-value">
+              <p>Total des gains</p>
+              <p class="amount text-green"><%= (current_user.crypto_balance.fdiv(100) * 0.00044).round(2) %> EUR</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center w-25 justify-content-around">
+            <%= link_to new_loan_transfer_path(@loan, money: 'ETH'), class: 'd-flex flex-column align-items-center text-decoration-none' do %>
+            <p>Déposer</p>
+            <%= image_tag "vaadin_money-deposit.svg"%>
+            <% end %>
+            <a href="#" class="d-flex flex-column align-items-center text-decoration-none ml-3">
+            <p>Retirer</p>
+            <%= image_tag "vaadin_money-withdraw.svg"%></a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
