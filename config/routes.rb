@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
 
-  resources :loans, only: %i[new create show] do
+  resources :loans, only: %i[new create show destroy] do
     resources :transfers, only: %i[new create]
   end
   get '/dashboard', to: 'pages#dashboard'
