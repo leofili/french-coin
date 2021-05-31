@@ -84,8 +84,8 @@ class TransfersController < ApplicationController
   def create_empty_payments
     @loan.duration.times do |num|
       payment = Payment.new(
-        interest_amount_cents: @loan.interest_cents.fdiv(6).round,
-        refund_amount_cents: @loan.amount_cents.fdiv(6).round,
+        interest_amount_cents: @loan.interest_cents.fdiv(@loan.duration).round,
+        refund_amount_cents: @loan.amount_cents.fdiv(@loan.duration).round,
         loan: @loan,
         due_date: @loan.start_date + (num + 1).months
       )
