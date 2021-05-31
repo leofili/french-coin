@@ -2,12 +2,12 @@
 #home {
   * {
     box-sizing: border-box;
-    line-height: 1.5;
+    line-height: 1.1;
     font-family: 'Open Sans', sans-serif;
   }
 
   img {
-    max-width: 100%;
+    max-width: 190%;
   }
 
   .container {
@@ -41,6 +41,7 @@
     &__image {
       opacity: 0;
       animation: ImageFadeIn .8s 1.4s forwards;
+      height: 270px;
     }
 
     &__title {
