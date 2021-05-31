@@ -1,115 +1,139 @@
-<div class="add-a-loan mb-5 m-5" id="new-loan">
-  <div class="row">
-    <div class="background-new-loan col-12 col-lg-7 offset-lg-3">
-      <h2 class="text-center mt-3 mb-5 p-3 border-bottom">Nouvel Emprunt</h2>
-      <%= simple_form_for(@loan) do |f| %>
+<div class="add-a-loan mb-5 m-5" id="new-loan" data-controller="new-loan">
+  <div class="row align-items-start custom-line">
+    <div class="col background-new-loan">
       <div class="container">
-        <div class="row border-bottom p-3">
-          <div class="col">
-            <h4>Intitulé de mon emprunt</h4>
-            <%= f.input :name, label: "Renseigner le nom personnalisé de votre emprunt" %>
-          </div>
-        </div>
-        <div class="row border-bottom p-3">
-          <div class="col">
-            <div class="input_amount_loan">
-              <h4>Montant de mon emprunt</h4>
-              <%= f.input :amount_cents, class: "amount_cents", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  500 } %>
+        <%= simple_form_for(@loan) do |f| %>
+          <div class="row border-bottom p-3">
+            <div class="col">
+              <h4>Intitulé de mon emprunt</h4>
+              <%= f.input :name, label: "Renseigner le nom personnalisé de votre emprunt" %>
             </div>
-            <div class="dropboxnewloan">
-              <div class="dropboxnewloan1">
-                <%= f.select :amount_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
+          </div>
+          <div class="row border-bottom p-3">
+            <div class="col">
+              <div class="input_amount_loan">
+                <h4>Montant de mon emprunt</h4>
+                <%= f.input :amount_cents, class: "amount_cents", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  500 } %>
               </div>
-            </div>
-          </div>
-          <div class="col">
-            <fieldset id="fieldset1">
-                <legend class="legend_new_loan"><h4>Durée de l'emprunt</h4></legend>
-                <p>Durée de votre prochain emprunt (mois)</p>
-                <div>
-                    <label class="toggle-new-load choice-toggle selected">
-                      6
-                      <input  class="input_radio_new_loan" name="month" type="radio" value="6" checked />
-                    </label>
-                    <label class="toggle-new-load choice-toggle">
-                      12
-                      <input  class="input_radio_new_loan" name="month" type="radio" value="12" />
-                    </label>
-                    <label class="toggle-new-load choice-toggle">
-                      24
-                      <input class="input_radio_new_loan" name="month" type="radio" value="24" />
-                    </label>
-                    <label class="toggle-new-load choice-toggle">
-                      36
-                      <input class="input_radio_new_loan" name="month" type="radio" value="36" />
-                    </label>
+              <div class="dropboxnewloan">
+                <div class="dropboxnewloan1">
+                  <%= f.select :amount_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
                 </div>
-            </fieldset>
+              </div>
+            </div>
           </div>
-          <div class="col">
-            <fieldset id="fieldset2">
-                <legend class="legend_new_loan"><h4>Pourcentage d'emprunt</h4></legend>
-                <p>Le pourcentage global de collatéral que vous souhaitez déposer</p>
-                <div>
-                    <label class="toggle-new-load choice-toggle2 selected">
-                      25%
-                      <input class="input_radio_new_loan" name="lvt" type="radio" value="25" checked />
-                    </label>
-                    <label class="toggle-new-load choice-toggle2">
-                      33%
-                      <input class="input_radio_new_loan" name="lvt" type="radio" value="33" />
-                    </label>
-                    <label class="toggle-new-load choice-toggle2">
-                      50%
-                      <input class="input_radio_new_loan" name="lvt" type="radio" value="50" />
-                    </label>
+          <div class="row border-bottom p-3">
+            <div class="col">
+              <fieldset id="fieldset1">
+                  <legend class="legend_new_loan"><h4>Durée de l'emprunt</h4></legend>
+                  <p>Durée de votre prochain emprunt (mois)</p>
+                  <div>
+                      <label class="toggle-new-load choice-toggle selected">
+                        6
+                        <input  class="input_radio_new_loan" name="month" type="radio" value="6" checked />
+                      </label>
+                      <label class="toggle-new-load choice-toggle">
+                        12
+                        <input  class="input_radio_new_loan" name="month" type="radio" value="12" />
+                      </label>
+                      <label class="toggle-new-load choice-toggle">
+                        24
+                        <input class="input_radio_new_loan" name="month" type="radio" value="24" />
+                      </label>
+                      <label class="toggle-new-load choice-toggle">
+                        36
+                        <input class="input_radio_new_loan" name="month" type="radio" value="36" />
+                      </label>
+                  </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="row border-bottom p-3">
+            <div class="col">
+              <fieldset id="fieldset2">
+                  <legend class="legend_new_loan"><h4>Pourcentage d'emprunt</h4></legend>
+                  <p>Le pourcentage global de collatéral que vous souhaitez déposer</p>
+                  <div>
+                      <label class="toggle-new-load choice-toggle2 selected">
+                        25%
+                        <input class="input_radio_new_loan" name="lvt" type="radio" value="25" checked />
+                      </label>
+                      <label class="toggle-new-load choice-toggle2">
+                        33%
+                        <input class="input_radio_new_loan" name="lvt" type="radio" value="33" />
+                      </label>
+                      <label class="toggle-new-load choice-toggle2">
+                        50%
+                        <input class="input_radio_new_loan" name="lvt" type="radio" value="50" />
+                      </label>
+                  </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="row border-bottom p-3">
+            <div class="col">
+              <div class="loan_collateral_cents">
+                <h4>Collatéral nécessaire</h4>
+                <%= f.input :collateral_cents, as: :hidden, label: "Collatéral nécessaire pour pouvoir emprunter", :input_html => { :value => 2000  }, readonly: true %>
+              </div>
+              <div class="dropboxnewloan">
+                <div class="dropboxnewloan2">
+                  <%= f.input :collateral_currency, collection: ["Euros", "Ethereums"], input_html: { class: "genForm_dropBox", data: { new_loan_target: "hiddenCurrencyInput" } }, label: false %>
+                  <%#= f.select :collateral_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox', data: { new_loan_target: "currencyInput" } %>
                 </div>
-            </fieldset>
-          </div>
-        </div>
-
-        <br>
-        <br>
-
-        <div class="row border-bottom p-3">
-          <div class="col">
-            <div class="input_amount_loan">
-              <h4>Collatéral nécessaire</h4>
-              <%= f.input :collateral_cents, label: "Collatéral nécessaire pour pouvoir emprunter", :input_html => { :value => 2000  }, readonly: true %>
-            </div>
-            <div class="dropboxnewloan">
-              <div class="dropboxnewloan2">
-                <%= f.select :collateral_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="interest_new_loan">Montant d'intérêt annuel
-              <br>
-              <div class="interest_span_new_loan">
-                <span class="interest" name="interest" value="2.50">2.50</span>€
-              </div>
+          <%= f.input :interest_cents, as: :hidden , :input_html => { :value => 250 } %>
+          <div class="loan_interest_rate">
+            <%= f.input :interest_rate, as: :hidden, :input_html => { :value => 1 } %>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col">
+              <%= f.submit 'Création de mon emprunt', class: "btn btn-primary btn-block" %>
             </div>
           </div>
-          <div class="col">
-            <div class="apr_new_loan">Intérêt brut
-              <br>
-              <div class="apr_span_new_loan">
-                <span class="apr" value="1">1.00</span>%
-              </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row p-3">
+        <div class="col">
+          <div class="apr_new_loan">
+            <br>
+            <br>
+            <%= select_tag "currency_choice", options_for_select(["Euros", "Ethereums"], "Euros"), data: { action: 'change->new-loan#changeCurrency', new_loan_target: "currencyInput" } %>
+            <div class="collateral_span_new_loan d-flex justify-content-between">Collatéral nécessaire
+              <span class="collateral odometer color-span-collat-loan" value="2000" id="odometer3">2000</span>
             </div>
-          </div>
-        </div>
-        <%= f.input :interest_cents, as: :hidden , :input_html => { :value => 250 } %>
-        <%= f.input :interest_rate, as: :hidden, :input_html => { :value => 1 } %>
-        <br>
-        <div class="row">
-          <div class="col">
-            <%= f.submit 'Création de mon emprunt', class: "btn btn-primary btn-block" %>
           </div>
         </div>
       </div>
-      <% end %>
+      <div class="row p-3">
+        <div class="col">
+          <div class="interest_new_loan">
+            <div class="interest_span_new_loan">
+            <br>
+            <br>
+            <p class="d-flex justify-content-between">Montant d'intérêt annuel (en €)
+              <span class="interest odometer color-span-interest-loan" name="interest" value="2,50" id="odometer">2.50</span>
+            </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row p-3">
+        <div class="col">
+          <div class="apr_new_loan">
+            <br>
+            <br>
+            <div class="apr_span_new_loan d-flex justify-content-between">Intérêt brut (en %)
+              <span class="apr odometer color-span-apr-loan" id="odometer2" value="1">1.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
