@@ -1,0 +1,5 @@
+<h3 class="p-5">Recevoir des euros ou des ethereums sur French Coin</h2>
+<div class="cards-lend">
+  <%= link_to 'Euros <i class="fas fa-euro-sign"></i>'.html_safe, new_loan_transfer_path(@loan, money: 'EUR'), class:"bouton-banner-emp card-category col-md-3"%>
+  <%= link_to 'Ethereums <i class="fab fa-ethereum"></i>'.html_safe, new_loan_transfer_path(@loan, money: 'ETH'), class:"bouton-banner-emp card-category col-md-3"%>
+</div>
