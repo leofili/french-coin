@@ -3,11 +3,20 @@
   margin: auto;
 }
 
+h2 {
+  span {
+    font-weight: 500;
+  }
+}
+
 .table-loan-infos thead {
   th {
     border: none;
-    color: $middle-blue;
     font-size: 20px;
+    // color: $middle-blue;
+  }
+  span {
+    font-weight: 500;
   }
   tr {
     display: flex;

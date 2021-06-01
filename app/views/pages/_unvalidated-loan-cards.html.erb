@@ -9,14 +9,14 @@
       <div class="card-horizontal">
         <div class="mx-2 text-center">
           <p class="text-middle-blue border-b-middle-blue pb-3">Montant du prêt</p>
-          <p class="font-weight-light mb-0"><%=Loan.convert_amount(loan.amount_cents, loan.amount_currency).round(2)%> <%= loan.amount_currency %></p>
+          <div class="mb-0"><%=Loan.convert_amount(loan.amount_cents, loan.amount_currency).round(2)%> <%= loan.amount_currency %></div>
         </div>
         <div class="mr-2 text-center">
-          <p class="text-middle-blue border-b-middle-blue pb-3">Collatéral à déposer</p>
-          <p class="font-weight-light mb-0"><%=Loan.convert_amount(loan.collateral_cents, loan.collateral_currency).round(2)%> <%= loan.collateral_currency %></p>
+          <p class="text-middle-blue border-b-middle-blue pb-3">Garantie à déposer</p>
+          <div class="mb-0"><%=Loan.convert_amount(loan.collateral_cents, loan.collateral_currency).round(2)%> <%= loan.collateral_currency %></div>
         </div>
         <div class="mx-2 text-center ml-auto">
-          <%= link_to 'Voir le détail', loan_path(loan), class: 'bouton btn-middle-blue'%>
+          <%= link_to 'Voir le détail', loan_path(loan), class: 'bouton btn-middle-green'%>
         </div>
       </div>
     </div>
