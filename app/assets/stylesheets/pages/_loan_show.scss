@@ -6,8 +6,12 @@
 .table-loan-infos thead {
   th {
     border: none;
-    color: $light-blue;
+    color: $middle-blue;
     font-size: 20px;
+  }
+  tr {
+    display: flex;
+    justify-content: space-around;
   }
 }
 
