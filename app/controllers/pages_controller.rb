@@ -16,4 +16,8 @@ class PagesController < ApplicationController
     @loan = Loan.find(1)
     @transfer = Transfer.new
   end
+
+  def lend
+    @loan = Loan.find(1)
+  end
 end

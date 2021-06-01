@@ -15,6 +15,13 @@ class LoansController < ApplicationController
     authorize @loan
   end
 
+  def destroy
+    @loan = Loan.find(params[:id])
+    authorize @loan
+    @loan.destroy
+    redirect_to new_loan_path
+  end
+
   def create
     @loan = Loan.new(loan_params)
     @loan.user = current_user

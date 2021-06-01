@@ -8,7 +8,7 @@
       <% else %>
         <%= image_tag 'blank_avatar.png', class: 'avatar' %>
       <% end %>
-      <p class='text-white h5 mt-3'><%= current_user.first_name %> <%= current_user.last_name %></p>
+      <p class='text-white text-center h5 mt-3'>Content de vous revoir <br><%= current_user.first_name %> <%= current_user.last_name %></p>
     </div>
 
     <div class="tabs-vertical w-100 mt-2 pt-2">
@@ -35,7 +35,7 @@
   <div class="dashboard-right">
 
     <div class="dashboard-right-header">
-      <h2 class="mb-3">Mon dashboard</h2>
+      <h2 class="mb-3">Tableau de bord</h2>
     </div>
 
     <div class="my-loans w-100 overflow-auto">
@@ -72,9 +72,40 @@
       </div>
     </div>
 
-    <div class="my-infos">
 
+  <div class=container>
+    <div class="my-infos w-100">
+      <h3 class="mr-auto mt-5">Mes informations</h3>
+      <div class="collateral-infos card-white card-rounded d-flex">
+        <div class="d-flex flex-column text-center flex-grow-1">
+          <h5 class="text-middle-blue mb-0 py-3">Nom</h5>
+          <h5 class="text-middle-blue mb-0 py-3">Prénom</h5>
+          <h5 class="text-middle-blue mb-0 py-3">Courriel</h5>
+          <h5 class="text-middle-blue mb-0 py-3">Adresse principale</h5>
+        </div>
+        <div class="d-flex flex-column text-center flex-grow-1">
+          <p class="mb-0 py-3 h5"><%= current_user.last_name %></p>
+          <p class="mb-0 py-3 h5"><%= current_user.first_name %></p>
+          <p class="mb-0 py-3 h5"><%= current_user.email %></p>
+          <p class="mb-0 py-3 h5"><%= current_user.address %></p>
+        </div>
+      </div>
+        <div class="my-iban mt-5">
+          <h3 class="mr-auto">Mes moyens de paiement</h3>
+          <div class="card-white card-rounded d-flex">
+            <div class="d-flex flex-column text-center flex-grow-1">
+              <h6 class="text-middle-blue mb-0 py-3">RIB</h6>
+              <h6 class="text-middle-blue mb-0 py-3">BIC</h6>
+            </div>
+            <div class="d-flex flex-column text-center flex-grow-1">
+              <p class="mb-0 py-3 h6">BBBBB*****CCCC****CCCKK</p>
+              <p class="mb-0 py-3 h6">AGPKPHHT000</p>
+            </div>
+          </div>
+        </div>
     </div>
+  </div>
+    <%# ----------- %>
 
   </div>
 
