@@ -13,7 +13,16 @@ class TransfersController < ApplicationController
       save_new_loan
     end
     if @transfer.save
-      redirect_to params[:commit] == 'Transférer' ? wallet_path : dashboard_path
+      if @transfer.amount_currency == "EUR" && @transfer.payment_mean == 'card'
+        @transfer.update(checkout_session_id: @session.id)
+        redirect_to new_transfer_transfer_payment_path(@transfer)
+      elsif @transfer.amount_currency == "EUR"
+        redirect_to loan_path(@loan, notice: 'Votre collatéral a été versé avec succès en euros!')
+      elsif @transfer.amount_currency == "ETH" && params[:commit] == 'Transférer'
+        redirect_to wallet_path(notice: 'Vos ethereum ont été transférés avec succès vers votre portefeuille!')
+      else
+        redirect_to loan_path(@loan, notice: 'Votre collatéral a été versé avec succès en ethereum!')
+      end
     else
       render :new
     end
@@ -32,8 +41,13 @@ class TransfersController < ApplicationController
     @transfer.loan = @loan
     @transfer.user = current_user
     @transfer.category = 'account_transfer'
+    @transfer.status = 'pending'
     authorize @loan, :create_transfer?
-    add_to_balance(@transfer)
+    if @transfer.amount_currency == "EUR"
+      @session = create_stripe_session('wallet')
+    else
+      add_to_balance(@transfer)
+    end
   end
 
   def convert_amount
@@ -53,10 +67,9 @@ class TransfersController < ApplicationController
   end
 
   def add_to_balance(money)
-    if money.amount_currency == 'EUR'
-      current_user.euro_balance += money.amount_cents
-    else
-      current_user.crypto_balance += money.amount_cents
+    case money.amount_currency
+    when "EUR" then current_user.euro_balance += money.amount_cents
+    when "ETH" then current_user.crypto_balance += money.amount_cents
     end
     current_user.save
   end
@@ -65,11 +78,16 @@ class TransfersController < ApplicationController
     @transfer = Transfer.new(transfer_params)
     collateral_transfer
     authorize @loan, :create_transfer?
-    @loan.accepted!
-    @loan.start_date = Date.today
-    @loan.end_date = @loan.start_date + @loan.duration.months
-    create_empty_payments
-    balance_operations
+    if @transfer.amount_currency == "EUR" && @transfer.payment_mean == "card"
+      @session = create_stripe_session("loans/#{@loan.id}")
+    else
+      @loan.accepted!
+      @loan.start_date = Date.today
+      @loan.end_date = @loan.start_date + @loan.duration.months
+      @loan.save
+      create_empty_payments
+      balance_operations
+    end
   end
 
   def collateral_transfer
@@ -79,6 +97,7 @@ class TransfersController < ApplicationController
     @transfer.amount_currency = @loan.collateral_currency
     @transfer.user = current_user
     @transfer.category = 'collateral_payment'
+    @transfer.status = 'pending'
   end
 
   def create_empty_payments
@@ -92,5 +111,19 @@ class TransfersController < ApplicationController
       payment.amount_cents = payment.interest_amount_cents + payment.refund_amount_cents
       payment.save
     end
+  end
+
+  def create_stripe_session(path_word)
+    Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      line_items: [{
+        name: @transfer.category,
+        amount: @transfer.amount_cents,
+        currency: 'eur',
+        quantity: 1
+      }],
+      success_url: "http://www.french-coin.cash/#{path_word}?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: "http://www.french-coin.cash/#{path_word}?session_id={CHECKOUT_SESSION_ID}"
+    )
   end
 end

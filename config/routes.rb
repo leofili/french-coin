@@ -7,5 +7,11 @@ Rails.application.routes.draw do
   end
   get '/dashboard', to: 'pages#dashboard'
   get '/wallet', to: 'pages#wallet'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  resources :transfers do
+    resources :transfer_payments, only: %i[new]
+  end
+
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
+
 end

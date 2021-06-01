@@ -36,6 +36,9 @@ gem 'simple_form'
 gem 'devise'
 gem 'pundit'
 
+gem 'stripe'
+gem 'stripe_event'
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
