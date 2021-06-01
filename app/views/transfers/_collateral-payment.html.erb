@@ -1,26 +1,26 @@
 <%= simple_form_for [loan, transfer] do |f| %>
 
   <% if (loan.collateral_currency == 'EUR' && current_user.euro_balance < loan.collateral_cents) || (loan.collateral_currency == 'ETH' && current_user.crypto_balance < loan.collateral_cents) %>
-    <p class='alert alert-warning'>Vous ne pouvez pas utiliser votre portefeuille <%= @loan.collateral_currency %> pour payer la garantie, parce que vous n'avez pas assez d'argent dessus. Vous devez utiliser un autre moyen de paiement.</p>
+    <p class='alert alert-warning'>Vous ne pouvez pas utiliser votre portefeuille <%= @loan.collateral_currency %> pour payer le collatéral, parce que vous n'avez pas assez d'argent dessus. Vous devez utiliser un autre moyen de paiement.</p>
     <%= f.hidden_field :payment_mean, value: @loan.collateral_currency == "EUR" ? "card" : "crypto" %>
 
   <% elsif loan.collateral_currency == 'EUR' %>
-    <%= f.input :payment_mean, as: :radio_buttons, collection: [['euro_wallet', 'Yes'], ['card', 'No']], label_method: :second, value_method: :first, class: 'payment_button', label: "Voulez-vous utiliser votre portefeuille pour payer la garantie ?" %>
+    <%= f.input :payment_mean, as: :radio_buttons, collection: [['euro_wallet', 'Yes'], ['card', 'No']], label_method: :second, value_method: :first, class: 'payment_button', label: "Do you want to use your wallet to pay the collateral ?" %>
 
   <% elsif loan.collateral_currency == 'ETH' %>
-    <%= f.input :payment_mean, as: :radio_buttons, collection: [['crypto_wallet', 'Yes'], ['crypto', 'No']], label_method: :second, value_method: :first, class: 'payment_button', label: "Voulez-vous utiliser votre portefeuille pour payer la garantie ?" %>
+    <%= f.input :payment_mean, as: :radio_buttons, collection: [['crypto_wallet', 'Yes'], ['crypto', 'No']], label_method: :second, value_method: :first, class: 'payment_button', label: "Do you want to use your wallet to pay the collateral ?" %>
 
   <% end %>
 
   <div class="d-flex align-items-center justify-content-center mt-4">
     <i class="fas fa-exclamation-triangle mr-4 h2 text-danger"></i>
-    <p class='h6 mb-0'>Vous êtes sur le point de payer une garantie d'un montant de <%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency) %> <%= @loan.collateral_currency %>. Une fois le paiement effecuté, votre emprunt sera validé et débutera. Vous recevrez ensuite : <%= Loan.convert_amount(@loan.amount_cents, @loan.amount_currency) %> <%= @loan.amount_currency %> (montant de votre emprunt) sur votre portefeuille <%= @loan.amount_currency %>.</p>
+    <p class='h6 mb-0'>Vous êtes sur le point de payer un collatéral d'un montant de <%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency) %> <%= @loan.collateral_currency %>. Une fois le paiement effecuté, votre emprunt sera validé et débutera. Vous recevrez ensuite : <%= Loan.convert_amount(@loan.amount_cents, @loan.amount_currency) %> <%= @loan.amount_currency %> (montant de votre emprunt) sur votre portefeuille <%= @loan.amount_currency %>.</p>
   </div>
 
   <div class="d-flex align-items-center justify-content-between mt-5">
     <%= link_to 'Modifier mon emprunt', dashboard_path, class:'bouton btn-middle-blue w-100 text-center' %>
     <p class='h4 mx-4 mb-0'>OU</p>
-    <%= f.button :submit, 'Payer la garantie', class:'bouton btn-middle-blue w-100 text-center' %>
+    <%= f.button :submit, 'Payer le collatéral', class:'bouton btn-middle-blue w-100 text-center' %>
   </div>
 
 <% end %>
