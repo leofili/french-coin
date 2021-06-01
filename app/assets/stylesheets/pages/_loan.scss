@@ -6,11 +6,7 @@
 
 .titre-new-loan{
   color:$middle-blue;
-}
-
-.background-new-loan{
-  background-color: #b2bbdf1f;
-  border-radius: 5px;
+  font-size: bold;
 }
 
 .legend_new_loan {
@@ -22,10 +18,10 @@
   display: block;
   float: left;
   padding: .2em .4em;
-  background-color: #ccc;
-  border-style: solid;
+  background-color: rgb(233, 233, 233);
+  border-style: solid 2px;
   border-width: 1px 1px 1px 0;
-  border-color: #666;
+  border-color: rgb(255, 255, 255);
   background-image: -moz-linear-gradient(rgba(255,255,255,.2), rgba(0,0,0,.2));
   background-image: -webkit-linear-gradient(rgba(255,255,255,.2), rgba(0,0,0,.2));
   background-image: linear-gradient(rgba(255,255,255,.2), rgba(0,0,0,.2));
@@ -46,7 +42,7 @@
   border-color: darkblue;
   background-image: -moz-linear-gradient(rgba(0,0,0,.2), rgba(255,255,255,.2));
   background-image: -webkit-linear-gradient(rgba(0,0,0,.2), rgba(255,255,255,.2));
-  background-image: linear-gradient(rgba(0,0,0,.2), rgba(255,255,255,.2));
+  background-image: linear-gradient(rgba(0,0,0,.54), rgba(255,255,255,.4));
   box-shadow: 1px 1px 1px rgba(0,0,0,.2) inset;
 }
 
@@ -75,9 +71,13 @@
 .add-a-loan{
   h4{
     color:$middle-blue;
+    font-size: large;
+    font-weight: bold;
   }
-  background-image: url("../../images/investir-etranger.jpg");
-  background-size: cover;
+
+  label{
+    font-size: initial;
+  }
 }
 
 .background-new-loan-plant{
@@ -101,4 +101,26 @@
 .color-span-collat-loan{
   color: blue;
   font-weight: bold;
+}
+
+.dropboxnewloan2 select{
+  font-size: 16px;
+  color: white;
+  background-color: #0066CC;
+  border-color: darkblue;
+  background-image: -moz-linear-gradient(rgba(0,0,0,.2), rgba(255,255,255,.2));
+  background-image: -webkit-linear-gradient(rgba(0,0,0,.2), rgba(255,255,255,.2));
+  background-image: linear-gradient(rgba(0,0,0,.54), rgba(255,255,255,.4));
+  border-radius: 5px;
+}
+
+.dropboxnewloan1 select{
+  font-size: 16px;
+  color: white;
+  background-color: #0066CC;
+  border-color: darkblue;
+  background-image: -moz-linear-gradient(rgba(0,0,0,.2), rgba(255,255,255,.2));
+  background-image: -webkit-linear-gradient(rgba(0,0,0,.2), rgba(255,255,255,.2));
+  background-image: linear-gradient(rgba(0,0,0,.54), rgba(255,255,255,.4));
+  border-radius: 5px;
 }
