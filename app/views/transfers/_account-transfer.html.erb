@@ -1,4 +1,4 @@
-<h3 class="mt-5 pt-5">Transférer de l'argent sur mon portefeuille</h3>
+<h3 class="mt-5 pt-5 titre-new-loan">Transférer de l'argent sur mon portefeuille</h3>
 <%= simple_form_for [loan, transfer] do |f| %>
   <% if transfer.amount_currency == 'EUR' %>
   <%= f.input :amount_cents, label: "Combien d'euros voulez-vous transférer sur votre portefeuille French-Coin ?" %>
