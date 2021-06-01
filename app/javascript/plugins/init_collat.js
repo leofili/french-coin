@@ -12,11 +12,14 @@ const initCollat = () => {
       const selectElmt2 = document.querySelector(".dropboxnewloan2 select");
       let currency2 = selectElmt2.options[selectElmt2.selectedIndex].value;
       let lvt = document.querySelector(".choice-toggle2.selected input").value;
+
       if (lvt === "25") {
         if (currency2 === "Ethereums") {
           document.querySelector(".loan_collateral_cents input").value = (amount * 4) / 2273;
+          document.querySelector(".collateral_span_new_loan span").innerText = (amount * 4) / 2273;
         } else if (currency2 === "Euros") {
           document.querySelector(".loan_collateral_cents input").value = (amount * 4);
+          document.querySelector(".collateral_span_new_loan span").innerText = (amount * 4);
         };
         let apr = 100 / 10000;
         let month = document.querySelector(".choice-toggle.selected input").value;
@@ -26,8 +29,10 @@ const initCollat = () => {
       } else if (lvt === "33") {
         if (currency2 === "Ethereums") {
           document.querySelector(".loan_collateral_cents input").value = (amount * 3) / 2273;
+          document.querySelector(".collateral_span_new_loan span").innerText = (amount * 3) / 2273;
         } else if (currency2 === "Euros") {
           document.querySelector(".loan_collateral_cents input").value = (amount * 3);
+          document.querySelector(".collateral_span_new_loan span").innerText = (amount * 3);
         };
         let apr = 695 / 10000;
         let month = document.querySelector(".choice-toggle.selected input").value;
@@ -37,8 +42,10 @@ const initCollat = () => {
       } else if (lvt === "50") {
         if (currency2 === "Ethereums") {
           document.querySelector(".loan_collateral_cents input").value = (amount * 2) / 2273;
+          document.querySelector(".collateral_span_new_loan span").innerText = (amount * 2) / 2273;
         } else if (currency2 === "Euros") {
           document.querySelector(".loan_collateral_cents input").value = (amount * 2);
+          document.querySelector(".collateral_span_new_loan span").innerText = (amount * 2);
         };
         let apr = 895 / 10000;
         let month = document.querySelector(".choice-toggle.selected input").value;
