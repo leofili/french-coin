@@ -1,26 +1,76 @@
 <%= simple_form_for [loan, transfer] do |f| %>
 
-  <% if (loan.collateral_currency == 'EUR' && current_user.euro_balance < loan.collateral_cents) || (loan.collateral_currency == 'ETH' && current_user.crypto_balance < loan.collateral_cents) %>
-    <p class='alert alert-warning'>Vous ne pouvez pas utiliser votre portefeuille <%= @loan.collateral_currency %> pour payer la garantie, parce que vous n'avez pas assez d'argent dessus ( <%= loan.collateral_currency == 'EUR' ? "#{Loan.convert_amount(current_user.euro_balance, 'EUR')} euros " : "#{Loan.convert_amount(current_user.crypto_balance, 'ETH')} ethereum "%>). Vous devez utiliser un autre moyen de paiement.</p>
-    <%= f.hidden_field :payment_mean, value: @loan.collateral_currency == "EUR" ? "card" : "crypto" %>
+  <div data-controller="collateral-ethereum">
+    <div class="d-flex align-items-center justify-content-center mb-4">
+      <i class="fas fa-exclamation-triangle mr-4 h2 text-danger"></i>
+      <p class='h6 mb-0'>Vous êtes sur le point de payer une garantie d'un montant de <%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency) %> <%= @loan.collateral_currency %>. Une fois le paiement effectué, votre emprunt sera validé et débutera. Vous recevrez ensuite : <%= Loan.convert_amount(@loan.amount_cents, @loan.amount_currency) %> <%= @loan.amount_currency %> (montant de votre emprunt) sur votre portefeuille <%= @loan.amount_currency %>.</p>
+    </div>
 
-  <% elsif loan.collateral_currency == 'EUR' %>
-    <p class= 'mb-0'><%= "Le solde actuel de votre portefeuille EURO est suffisant pour verser la garantie, il s'élève à #{Loan.convert_amount(current_user.euro_balance, 'EUR')} euros. Voulez-vous alors utiliser votre portefeuille EURO pour verser la garantie ?" %></p>
-    <%= f.input :payment_mean, as: :radio_buttons, collection: [['euro_wallet', 'Oui'], ['card', 'Non']], label_method: :second, value_method: :first, class: 'payment_button', label: "" %>
+    <hr>
 
-  <% elsif loan.collateral_currency == 'ETH' %>
-    <p class= 'mb-0'><%= "Le solde actuel de votre portefeuille CRYPTO est suffisant pour verser la garantie, il s'élève à #{Loan.convert_amount(current_user.crypto_balance, 'ETH')} ethereum. Voulez-vous alors utiliser votre portefeuille CRYPTO pour verser la garantie ?" %></p>
-    <%= f.input :payment_mean, as: :radio_buttons, collection: [['crypto_wallet', 'Oui'], ['crypto', 'Non']], label_method: :second, value_method: :first, class: 'payment_button', label: "" %>
+    <% if (loan.collateral_currency == 'EUR' && current_user.euro_balance < loan.collateral_cents) || (loan.collateral_currency == 'ETH' && current_user.crypto_balance < loan.collateral_cents) %>
+      <p class='alert alert-warning'>Vous ne pouvez pas utiliser votre portefeuille <%= @loan.collateral_currency %> pour payer la garantie, parce que vous n'avez pas assez d'argent dessus ( <%= loan.collateral_currency == 'EUR' ? "#{Loan.convert_amount(current_user.euro_balance, 'EUR')} euros " : "#{Loan.convert_amount(current_user.crypto_balance, 'ETH')} ethereum "%>). Vous devez utiliser un autre moyen de paiement.</p>
+      <%= f.hidden_field :payment_mean, value: @loan.collateral_currency == "EUR" ? "card" : "crypto" %>
 
-  <% end %>
+    <% elsif loan.collateral_currency == 'EUR' %>
+      <p class= 'mb-0'><%= "Le solde actuel de votre portefeuille EURO est suffisant pour verser la garantie, il s'élève à #{Loan.convert_amount(current_user.euro_balance, 'EUR')} euros. Voulez-vous alors utiliser votre portefeuille EURO pour verser la garantie ?" %></p>
+      <%= f.input :payment_mean, as: :radio_buttons, collection: [['euro_wallet', 'Oui'], ['card', 'Non']], label_method: :second, value_method: :first, class: 'payment_button', label: "" %>
 
-  <div class="d-flex align-items-center justify-content-center mt-4">
-    <i class="fas fa-exclamation-triangle mr-4 h2 text-danger"></i>
-    <p class='h6 mb-0'>Vous êtes sur le point de payer une garantie d'un montant de <%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency) %> <%= @loan.collateral_currency %>. Une fois le paiement effectué, votre emprunt sera validé et débutera. Vous recevrez ensuite : <%= Loan.convert_amount(@loan.amount_cents, @loan.amount_currency) %> <%= @loan.amount_currency %> (montant de votre emprunt) sur votre portefeuille <%= @loan.amount_currency %>.</p>
+    <% elsif loan.collateral_currency == 'ETH' %>
+      <p class= 'mb-0'><%= "Le solde actuel de votre portefeuille CRYPTO est suffisant pour verser la garantie, il s'élève à #{Loan.convert_amount(current_user.crypto_balance, 'ETH')} ethereum. Voulez-vous alors utiliser votre portefeuille CRYPTO pour verser la garantie ?" %></p>
+      <%= f.input :payment_mean, as: :radio_buttons, collection: [['crypto_wallet', 'Oui'], ['crypto', 'Non']], label_method: :second, value_method: :first, class: 'payment_button', label: "", input_html: { data: {
+         collateral_ethereum_target: "answer",
+         action: "click->collateral-ethereum#display"
+         } } %>
+
+    <% end %>
+
+
+    <div class="no-display mt-4" data-collateral-ethereum-target = 'popup'>
+      <div class="d-flex">
+        <%= image_tag "qrcode-ethereum.png", width: "150px", height: "150px"%>
+        <div class="flex-direction-columns ml-3">
+          <div>Verser de l'Ethereum <i class="fab fa-ethereum"></i> (ETH) sur le portefeuille de l'entreprise French-Coin</div>
+          <div>Attention :
+            <ul>
+              <li>Transférer uniquement de l'Ethereum (ETH) sur ce portefeuille, en utilisant sa blockchain native</li>
+              <li>Si vous envoyez une autre cryptomonnaie sur cette adresse, ou utilisez une blockchain tiers, alors vos fonds seront perdus définitivement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div>Adresse ETH du portefeuille de l'entreprise French-Coin
+        <div data-controller="clipboard">
+          <input data-clipboard-target="input" type="text" value="0x027f0e387B3D7814F6Bead9c9ac73A3F3AB099E3" readonly>
+          <button class="btn btn-primary" data-action="click->clipboard#copy"><i class="far fa-copy"></i></button>
+        </div>
+      </div>
+    </div>
   </div>
 
+
   <div class="d-flex align-items-center mt-5">
-    <%= f.button :submit, 'Verser la garantie', class:'btn btn-success w-100 text-center' %>
+    <button type="button" class="btn btn-success w-100 text-center" data-toggle="modal" data-target="#exampleModalCenter">Verser la garantie</button>
+  </div>
+
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Confirmation de garantie</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Êtes-vous sûr de vouloir verser la garantie ? Une fois la garantie versée, le prêt sera déclenché, sans retour possible.
+        </div>
+        <div class="modal-footer">
+          <%= f.button :submit, 'Oui', class: "btn btn-middle-green text-white" %>
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Non</button>
+        </div>
+      </div>
+    </div>
   </div>
 
 <% end %>
