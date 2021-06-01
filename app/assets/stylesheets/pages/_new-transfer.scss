@@ -1,7 +1,16 @@
 .new_transfer {
   margin-top: 60px;
+  margin-bottom: 40px;
 }
 
 .payment-button {
   display: block !important;
+}
+
+.back-link {
+  color: $blue;
+  &:hover {
+    text-decoration: none;
+    color: $middle-blue;
+  }
 }
