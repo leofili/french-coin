@@ -2,6 +2,7 @@
   <h2>Mon portefeuille</h2>
   <% if flash[:notice] %>
     <p class='alert alert-success'><%= flash[:notice] %></p>
+    <% flash[:notice] = '' %>
   <% end %>
   <div class="mt-4">
     <div class="wallets">
