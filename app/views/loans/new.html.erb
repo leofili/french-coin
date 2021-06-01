@@ -8,13 +8,13 @@
           <div class="row mt-2">
             <div class="col intitule-new-loan">
               <h4>Intitulé de mon emprunt</h4>
-              <%= f.input :name, label: "Renseigner le nom personnalisé de votre emprunt" %>
+              <%= f.input :name, label: "Renseigner le nom personnalisé de votre emprunt", class:"shadow" %>
             </div>
           </div>
           <br>
           <br>
           <div class="row mt-2">
-            <div class="col">
+            <div class="col border-bottom ">
               <div class="input_amount_loan">
                 <div class="dropboxnewloan d-flex justify-content-between"> 
                   <h4 class="">Montant de mon emprunt</h4>
@@ -22,7 +22,7 @@
                     <%= f.select :amount_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
                   </div>
                 </div>
-                <%= f.input :amount_cents, class: "amount_cents", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  500 } %>
+                <%= f.input :amount_cents, class: "amount_cents shadow-sm", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  500 } %>
               </div>
             </div>
           </div>
@@ -100,7 +100,7 @@
           <div class="apr_new_loan">
             <% select_tag "currency_choice", options_for_select(["Euros", "Ethereums"], "Euros"), data: { action: 'change->new-loan#changeCurrency', new_loan_target: "currencyInput" } %>
             <div class="dropboxnewloan">
-              <div class="dropboxnewloan2 d-flex justify-content-end mb-1">
+              <div class="dropboxnewloan2 d-flex justify-content-end mb-2">
                 <%= f.select :collateral_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox', label: false, default:"Euros" %>
               </div>
             </div>
