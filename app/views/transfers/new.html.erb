@@ -4,8 +4,14 @@
       <p class='alert alert-warning mt-5'>Vous n'avez pas accès à cette page.</p>
     <% elsif @loan.id == 1 %>
       <%= render 'account-transfer', loan: @loan, transfer: @transfer %>
+      <%= link_to wallet_path, class: 'back-link' do %>
+        <i class="fas fa-undo-alt mr-2"></i> Back to my wallet
+      <% end %>
     <% elsif @loan.status == 'pending' %>
-    <%= render 'collateral-payment', loan: @loan, transfer: @transfer %>
+      <%= render 'collateral-payment', loan: @loan, transfer: @transfer %>
+      <%= link_to loan_path(@loan), class: 'back-link' do %>
+        <i class="fas fa-undo-alt mr-2"></i> Back to the loan page
+      <% end %>
     <% elsif @loan.status == 'accepted' %>
       <p class='alert alert-warning mt-5'>Vous n'avez pas accès à cette page.</p>
     <% elsif @loan.status == 'cancelled' %>
