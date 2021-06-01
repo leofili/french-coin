@@ -32,7 +32,6 @@ const initToggle = () => {
           document.querySelector(".apr").innerText = (apr * 100).toFixed(2);
           let interest = ((amount * apr) / (12 / month)).toFixed(2);
           document.querySelector(".interest").innerText = interest;
-          //document.querySelector(".interest").innerText = interest;
           document.querySelector(".loan_interest_cents input").value = interest * 100;
         } else if (document.querySelector(".choice-toggle2.selected input").value === "33") {
           let apr = 695 / 10000;
@@ -69,7 +68,7 @@ const initToggle = () => {
           amount = document.querySelector(".loan_amount_cents input").value * 2273;
         };
 
-        const selectElmt2 = document.querySelectorAll(".dropboxnewloan1 input[type='radio']")
+        const selectElmt2 = document.querySelectorAll(".dropboxnewloan2 input[type='radio']")
         selectedInput = Array.from(selectElmt2).find(cb => cb.checked)
         const currency2 = selectedInput.value;
         let apr = 0;
