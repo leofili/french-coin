@@ -122,8 +122,8 @@ class TransfersController < ApplicationController
         currency: 'eur',
         quantity: 1
       }],
-      success_url: "http://260e71ab79d4.ngrok.io/#{path_word}?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "http://260e71ab79d4.ngrok.io/#{path_word}?session_id={CHECKOUT_SESSION_ID}"
+      success_url: "http://www.french-coin.cash/#{path_word}?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: "http://www.french-coin.cash/#{path_word}?session_id={CHECKOUT_SESSION_ID}"
     )
   end
 end
