@@ -17,6 +17,11 @@
     background-color: white;
     color: black;
     margin-right: 20px;
+  }
+}
+
+#logout {
+  border: none;
 }
 
 .navbar-left {
@@ -27,10 +32,17 @@
     margin-right: 30px;
   }
 }
-}
+
 
 .navbar-right {
   li {
     list-style: none;
   }
+  a {
+    &:hover {
+      border-bottom: solid;
+      border-color: blanchedalmond;
+      text-decoration: none;
+  }
+}
 }

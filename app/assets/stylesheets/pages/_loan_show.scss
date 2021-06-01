@@ -9,12 +9,12 @@
 
 .table-loan-infos thead {
   th {
-    border: none;
+    border-bottom: none;
     font-size: 20px;
-    // color: $middle-blue;
+    color: $middle-blue;
   }
   span {
-    font-weight: 500;
+    font-weight: 300;
   }
   tr {
     display: flex;
