@@ -1,6 +1,6 @@
 const initConversion = () => {
   if (document.getElementById("new_loan")) {
-    const dropdowns = document.querySelectorAll("select");
+    const dropdowns = document.querySelectorAll(".dropboxnewloan1 input[type='radio']");
     dropdowns.forEach((dropdown) => {
       dropdown.addEventListener("change", (event) => {
         event.preventDefault();

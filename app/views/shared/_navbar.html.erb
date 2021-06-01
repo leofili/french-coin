@@ -6,7 +6,7 @@
   </div>
   <div class="navbar-right d-flex align-items-center">
     <% if user_signed_in? %>
-      <%= link_to 'Emprunter', new_loan_path %>
+      <%= link_to 'Emprunter', new_loan_path, data: { turbolinks: "false" } %>
       <%= link_to 'Mon portefeuille', wallet_path %>
        <%= link_to 'Mon tableau de bord', dashboard_path %>
         <% if current_user.avatar.attached? %>

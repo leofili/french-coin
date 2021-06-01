@@ -3,15 +3,22 @@ const initCollat = () => {
   document.querySelectorAll(".input_amount_loan").forEach((choice) => {
     choice.addEventListener("change", function (event) {
       event.preventDefault();
-      const selectElmt = document.querySelector(".dropboxnewloan1 select");
-      let currency = selectElmt.options[selectElmt.selectedIndex].value;
+      let checkboxes = document.querySelectorAll(".dropboxnewloan1 input[type='radio']")
+      let selectedInput = Array.from(checkboxes).find(cb => cb.checked)
+      let selectedValue = selectedInput.value;
       let amount = document.querySelector(".loan_amount_cents input").value;
-      if (currency === "Ethereums") {
+      if (selectedValue === "Ethereums") {
         amount = document.querySelector(".loan_amount_cents input").value * 2273;
       };
-      const selectElmt2 = document.querySelector(".dropboxnewloan2 select");
-      let currency2 = selectElmt2.options[selectElmt2.selectedIndex].value;
-      let lvt = document.querySelector(".choice-toggle2.selected input").value;
+
+      checkboxes = document.querySelectorAll(".dropboxnewloan2 input[type='radio']");
+      selectedInput = Array.from(checkboxes).find(cb => cb.checked)
+      let currency2 = selectedInput.value;
+      amount = document.querySelector(".loan_amount_cents input").value;
+      if (selectedValue === "Ethereums") {
+        amount = document.querySelector(".loan_amount_cents input").value * 2273;
+      };
+      const lvt = document.querySelector("#fieldset2 input[checked]").value
 
       if (lvt === "25") {
         if (currency2 === "Ethereums") {
