@@ -1,38 +1,33 @@
-<div class="add-a-loan mb-5 m-5" id="new-loan" data-controller="new-loan">
+<div class="add-a-loan mb-5 mx-5 mt-4" id="new-loan" data-controller="new-loan">
   <h2 class="titre-new-loan text-center">Nouvel Emprunt</h2>
   <div class="row align-items-start custom-line">
-    <div class="col background-new-loan">
+    <div class="col background-new-loan border-right-frenchcoin">
       <div class="container">
         <%= simple_form_for(@loan) do |f| %>
-          <br>
-          <div class="row mt-2">
+          <div class="row">
             <div class="col intitule-new-loan">
               <h4>Intitulé de mon emprunt</h4>
               <%= f.input :name, label: "Renseigner le nom personnalisé de votre emprunt", class:"shadow" %>
             </div>
           </div>
-          <br>
-          <br>
-          <div class="row mt-2">
-            <div class="col border-bottom ">
+          <div class="row mt-4">
+            <div class="col">
               <div class="input_amount_loan">
                 <div class="dropboxnewloan d-flex justify-content-between"> 
                   <h4 class="">Montant de mon emprunt</h4>
                   <div class="dropboxnewloan1">
-                    <%= f.select :amount_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox'%>
+                    <%= f.input :amount_currency, wrapper_html: { class: "switch-field"}, label: false , wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
                   </div>
                 </div>
                 <%= f.input :amount_cents, class: "amount_cents shadow-sm", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  500 } %>
               </div>
             </div>
           </div>
-          <br>
-          <br>
-          <div class="row mt-2">
+          <div class="row mt-4">
             <div class="col">
               <fieldset id="fieldset1">
-                  <legend class="legend_new_loan d-flex justify-content-between"><h4>Durée de l'emprunt (mois)</h4>
-                    <div>
+                  <legend class="legend_new_loan d-flex justify-content-between"><h4 class="mt-3">Durée de l'emprunt (mois)</h4>
+                    <div class="d-flex">
                       <label class="toggle-new-load choice-toggle selected">
                         6
                         <input  class="input_radio_new_loan" name="month" type="radio" value="6" checked />
@@ -54,13 +49,11 @@
               </fieldset>
             </div>
           </div>
-          <br>
-          <br>
-          <div class="row mt-2">
+          <div class="row mt-4">
             <div class="col">
               <fieldset id="fieldset2">
-                  <legend class="legend_new_loan d-flex justify-content-between"><h4>Répartition Emprunt/Garantie (en %)</h4>
-                    <div>
+                  <legend class="legend_new_loan d-flex justify-content-between"><h4 class="mt-3">Répartition Emprunt/Garantie (en %)</h4>
+                    <div class="d-flex">
                       <label class=" ml-2 toggle-new-load choice-toggle2 selected">
                         25%
                         <input class="input_radio_new_loan" name="lvt" type="radio" value="25" checked />
@@ -78,7 +71,7 @@
               </fieldset>
             </div>
           </div>
-          <div class="row mt-2">
+          <div class="row mt-4">
             <div class="col">
               <div class="loan_collateral_cents">
                 <%= f.input :collateral_cents, as: :hidden, :input_html => { :value => 2000  }, readonly: true %>
@@ -91,17 +84,13 @@
           </div>
       </div>
     </div>
-    <div class="col border-left">
-      <br>
-      <br>
-      <br>
-      <div class="row p-3">
+    <div class="col my-auto">
+      <div class="row px-3 pb-4">
         <div class="col">
-          <div class="apr_new_loan">
-            <% select_tag "currency_choice", options_for_select(["Euros", "Ethereums"], "Euros"), data: { action: 'change->new-loan#changeCurrency', new_loan_target: "currencyInput" } %>
+          <div class="apr_new_loan input_amount_loan">
             <div class="dropboxnewloan">
-              <div class="dropboxnewloan2 d-flex justify-content-end mb-2">
-                <%= f.select :collateral_currency, options_for_select(["Euros", "Ethereums"]), :class => 'genForm_dropBox', label: false, default:"Euros" %>
+              <div class="dropboxnewloan2 d-flex justify-content-end">
+                <%= f.input :collateral_currency, wrapper_html: { class: "switch-field"}, label: false, wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
               </div>
             </div>
             <div class="collateral_span_new_loan d-flex justify-content-between">Garantie nécessaire
@@ -110,11 +99,10 @@
           </div>
         </div>
       </div>
-      <div class="row p-3">
+      <div class="row px-3 py-4">
         <div class="col">
           <div class="interest_new_loan">
             <div class="interest_span_new_loan">
-            <br>
             <p class="d-flex justify-content-between">Montant d'intérêt total (en €)
               <span class="interest odometer color-span-interest-loan" name="interest" value="2,50" id="odometer">2.50</span>
             </p>
@@ -122,29 +110,22 @@
           </div>
         </div>
       </div>
-      <div class="row p-3">
+      <div class="row px-3 py-4">
         <div class="col">
           <div class="apr_new_loan">
-            <br>
             <div class="apr_span_new_loan d-flex justify-content-between">Intérêt brut (en %)
               <span class="apr odometer color-span-apr-loan" id="odometer2" value="1">1.00</span>
             </div>
           </div>
         </div>
       </div>
-      <br>
-      <br>
           <div class="row">
-            <div class="col">
-              <%= f.submit 'Création de mon emprunt', class: "btn btn-primary btn-block" %>
+            <div class="col text-center mt-2">
+              <%= f.submit 'Création de mon emprunt', class: "btn btn-primary" %>
             </div>
           </div>
           <%# fin du simple form %>
       <% end %>
-      <br>
-      <br>
-      <br>
-      <br>
     </div>
   </div>
 </div>

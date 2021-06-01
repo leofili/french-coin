@@ -18,11 +18,12 @@ const initToggle = () => {
         choice.querySelector("input").setAttribute("checked", "");
         // update Interets et APR
         let month = document.querySelector(".choice-toggle.selected input").value;
-        const selectElmt = document.querySelector(".dropboxnewloan1 select");
-        let currency = selectElmt.options[selectElmt.selectedIndex].value;
 
+        let checkboxes = document.querySelectorAll(".dropboxnewloan1 input[type='radio']")
+        let selectedInput = Array.from(checkboxes).find(cb => cb.checked)
+        const selectedValue = selectedInput.value;
         let amount = document.querySelector(".loan_amount_cents input").value;
-        if (currency === "Ethereums") {
+        if (selectedValue === "Ethereums") {
           amount = document.querySelector(".loan_amount_cents input").value * 2273;
         };
 
@@ -60,14 +61,17 @@ const initToggle = () => {
         // update du collateral selon emprunt
         // update de Interets et APR
         let lvt = document.querySelector(".choice-toggle2.selected input").value;
-        const selectElmt = document.querySelector(".dropboxnewloan1 select");
-        let currency = selectElmt.options[selectElmt.selectedIndex].value;
+        let checkboxes = document.querySelectorAll(".dropboxnewloan1 input[type='radio']")
+        let selectedInput = Array.from(checkboxes).find(cb => cb.checked)
+        const selectedValue = selectedInput.value;
         let amount = document.querySelector(".loan_amount_cents input").value;
-        if (currency === "Ethereums") {
+        if (selectedValue === "Ethereums") {
           amount = document.querySelector(".loan_amount_cents input").value * 2273;
         };
-        const selectElmt2 = document.querySelector(".dropboxnewloan2 select");
-        let currency2 = selectElmt2.options[selectElmt2.selectedIndex].value;
+
+        const selectElmt2 = document.querySelectorAll(".dropboxnewloan1 input[type='radio']")
+        selectedInput = Array.from(selectElmt2).find(cb => cb.checked)
+        const currency2 = selectedInput.value;
         let apr = 0;
         let begin = document.querySelector(".collateral_span_new_loan span").innerText;
         begin = parseFloat(begin);
