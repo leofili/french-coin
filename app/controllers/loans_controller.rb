@@ -52,6 +52,25 @@ class LoansController < ApplicationController
       end
   end
 
+  def edit
+    @loan = Loan.find(params[:id])
+    authorize @loan
+    if @loan.user != current_user
+      redirect_to root_path
+    end
+  end
+
+  def update
+    @loan = Loan.find(params[:id])
+    authorize @loan
+    @loan.update(loan_params)
+    if @loan.save!
+      redirect_to loan_path
+    else
+      render :edit
+    end
+  end
+
   private
 
   def loan_params

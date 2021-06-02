@@ -1,0 +1,131 @@
+<div class="add-a-loan mb-5 mx-5 mt-4" id="new-loan" data-controller="new-loan">
+  <h2 class="titre-new-loan text-center">Nouvel Emprunt</h2>
+  <div class="row align-items-start custom-line">
+    <div class="col background-new-loan border-right-frenchcoin">
+      <div class="container">
+        <%= simple_form_for(@loan) do |f| %>
+          <div class="row">
+            <div class="col intitule-new-loan">
+              <h4>Intitulé de mon emprunt</h4>
+              <%= f.input :name, label: "Renseigner le nom personnalisé de votre emprunt", class:"shadow" %>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <div class="input_amount_loan">
+                <div class="dropboxnewloan d-flex justify-content-between"> 
+                  <h4 class="">Montant de mon emprunt</h4>
+                  <div class="dropboxnewloan1">
+                    <%= f.input :amount_currency, wrapper_html: { class: "switch-field"}, label: false , wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
+                  </div>
+                </div>
+                <%= f.input :amount_cents, class: "amount_cents shadow-sm", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  500 } %>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <fieldset id="fieldset1">
+                  <legend class="legend_new_loan d-flex justify-content-between"><h4 class="mt-3">Durée de l'emprunt (mois)</h4>
+                    <div class="d-flex">
+                      <label class="toggle-new-load choice-toggle selected">
+                        6
+                        <input  class="input_radio_new_loan" name="month" type="radio" value="6" checked />
+                      </label>
+                      <label class="toggle-new-load choice-toggle">
+                        12
+                        <input  class="input_radio_new_loan" name="month" type="radio" value="12" />
+                      </label>
+                      <label class="toggle-new-load choice-toggle">
+                        24
+                        <input class="input_radio_new_loan" name="month" type="radio" value="24" />
+                      </label>
+                      <label class="toggle-new-load choice-toggle">
+                        36
+                        <input class="input_radio_new_loan" name="month" type="radio" value="36" />
+                      </label>
+                    </div>
+                  </legend>
+              </fieldset>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <fieldset id="fieldset2">
+                  <legend class="legend_new_loan d-flex justify-content-between"><h4 class="mt-3">Répartition Emprunt/Garantie (en %)</h4>
+                    <div class="d-flex">
+                      <label class=" ml-2 toggle-new-load choice-toggle2 selected">
+                        25%
+                        <input class="input_radio_new_loan" name="lvt" type="radio" value="25" checked />
+                      </label>
+                      <label class="toggle-new-load choice-toggle2">
+                        33%
+                        <input class="input_radio_new_loan" name="lvt" type="radio" value="33" />
+                      </label>
+                      <label class="toggle-new-load choice-toggle2">
+                        50%
+                        <input class="input_radio_new_loan" name="lvt" type="radio" value="50" />
+                      </label>
+                    </div>
+                  </legend>
+              </fieldset>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+              <div class="loan_collateral_cents">
+                <%= f.input :collateral_cents, as: :hidden, :input_html => { :value => 2000  }, readonly: true %>
+              </div>
+            </div>
+          </div>
+          <%= f.input :interest_cents, as: :hidden , :input_html => { :value => 250 } %>
+          <div class="loan_interest_rate">
+            <%= f.input :interest_rate, as: :hidden, :input_html => { :value => 1 } %>
+          </div>
+      </div>
+    </div>
+    <div class="col my-auto">
+      <div class="row px-3 pb-4">
+        <div class="col">
+          <div class="apr_new_loan input_amount_loan">
+            <div class="dropboxnewloan">
+              <div class="dropboxnewloan2 d-flex justify-content-end">
+                <%= f.input :collateral_currency, wrapper_html: { class: "switch-field"}, label: false, wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
+              </div>
+            </div>
+            <div class="collateral_span_new_loan d-flex justify-content-between">Garantie nécessaire
+              <span class="collateral odometer color-span-collat-loan" value="2000" id="odometer3">2000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row px-3 py-4">
+        <div class="col">
+          <div class="interest_new_loan">
+            <div class="interest_span_new_loan">
+            <p class="d-flex justify-content-between">Montant d'intérêt total (en €)
+              <span class="interest odometer color-span-interest-loan" name="interest" value="2,50" id="odometer">2.50</span>
+            </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row px-3 py-4">
+        <div class="col">
+          <div class="apr_new_loan">
+            <div class="apr_span_new_loan d-flex justify-content-between">Intérêt brut (en %)
+              <span class="apr odometer color-span-apr-loan" id="odometer2" value="1">1.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+          <div class="row">
+            <div class="col text-center mt-2">
+              <%= f.submit 'Création de mon emprunt', class: "btn btn-primary" %>
+            </div>
+          </div>
+          <%# fin du simple form %>
+      <% end %>
+    </div>
+  </div>
+</div>
