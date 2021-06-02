@@ -20,10 +20,6 @@
         <p class="mb-0">Mes emprunts à confirmer</p>
         <i class="fas fa-caret-right"></i>
       </div>
-      <div class="tab tab-vertical tab-blue text-white text-center p-3" id="collateral-fluctuation">
-        <p class="mb-0">Évolution de ma garantie</p>
-        <i class="fas fa-caret-right"></i>
-      </div>
       <div class="tab tab-vertical tab-blue text-white text-center p-3" id="my-infos">
         <p class="mb-0">Mes informations</p>
         <i class="fas fa-caret-right"></i>
@@ -52,22 +48,6 @@
       <div class="d-flex flex-column">
         <div class="unvalidated-loan-cards">
           <%= render 'unvalidated-loan-cards', loans: @loans %>
-        </div>
-      </div>
-    </div>
-
-    <div class="collateral-fluctuation w-100">
-      <h3 class="mr-auto mb-4">Évolution de mes garanties</h3>
-      <div class="collateral-infos card-white card-rounded d-flex">
-        <div class="d-flex flex-column text-center flex-grow-1">
-          <h4 class="text-middle-blue mb-0 py-3">Garantie déposée</h4>
-          <h4 class="text-middle-blue mb-0 py-3">Variation</h4>
-          <h4 class="text-middle-blue mb-0 py-3">Valeur actuelle de la garantie</h4>
-        </div>
-        <div class="d-flex flex-column text-center flex-grow-1">
-          <div class="mb-0 py-3 h4">140 000 €</div>
-          <div class="mb-0 py-3 h4">+ 5 000 €</div>
-          <div class="mb-0 py-3 h4">145 000 €</div>
         </div>
       </div>
     </div>

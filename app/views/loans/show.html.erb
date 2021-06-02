@@ -7,132 +7,141 @@
     <p class='alert alert-success'> <%= flash[:notice] %> </p>
   <% end %>
   <ul class="tabs list-inline" id="mytabs">
-    <li class="tab tab-horizontal list-inline-item active" id="resume">Résumé</li>
     <% if @loan.transfers != [] %>
+      <li class="tab tab-horizontal list-inline-item active" id="resume">Résumé</li>
       <li class="tab tab-horizontal list-inline-item" id="historical-payment">Historique</li>
     <%end%>
   </ul>
   <div data-controller="update-status">
     <div class="resume">
       <% if @loan.transfers == [] %>
+        <div class="card-white mb-5 p-3" id="loan-information">
+          <div class="information-card-container mr-3">
+            <div class="information-card">
+              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Garantie à déposer</div>
+              <div><%= (Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency)).round(2)%> <%= @loan.collateral_currency%></div>
+            </div>
+            <div class="information-card">
+              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Capital emprunté</div>
+              <div><%= (Loan.convert_amount(@loan.amount_cents, @loan.amount_currency)).round(2)%> <%= @loan.amount_currency%></div>
+            </div>
+            <div class="information-card">
+              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Taux d'intérêt (%)</div>
+              <div><%= @loan.interest_rate%></div>
+            </div>
+            <div class="information-card">
+              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Intérêts par mois</div>
+              <div><%= (Loan.convert_amount(@loan.interest_cents, @loan.amount_currency) / @loan.duration).round(2) %> <%= @loan.amount_currency%></div>
+            </div>
+            <div class="information-card">
+              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Durée du prêt (mois)</div>
+              <div><%= @loan.duration %></div>
+            </div>
+            <div class="information-card">
+              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Pourcentage d'emprunt (%)</div>
+              <div><%= (@loan.amount_cents * 100 / @loan.collateral_cents)  %></div>
+            </div>
+          </div>
+          <%= link_to edit_loan_path(@loan), method: :get, data: { turbolinks: "false" } do %>
+            <i class="fas fa-pen edit-icon"></i>
+          <% end %>
+          <%= link_to loan_path(@loan), method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce prêt ?'} do %>
+            <i class="fas fa-times delete-icon"></i>
+          <% end %>
+        </div>
         <div class="loan-title mb-4">
           <h4>Merci de verser la garantie nécessaire pour déclencher le prêt</h4>
           <%= link_to 'Verser la garantie', new_loan_transfer_path(@loan), class: "bouton btn-middle-green"%>
         </div>
 
-      <div class="card-white mb-5 p-3" id="loan-information">
-        <div class="information-card-container mr-3">
-          <div class="information-card">
-            <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Garantie à déposer</div>
-            <div><%= (Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency)).round(2)%> <%= @loan.collateral_currency%></div>
-          </div>
-          <div class="information-card">
-            <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Capital emprunté</div>
-            <div><%= (Loan.convert_amount(@loan.amount_cents, @loan.amount_currency)).round(2)%> <%= @loan.amount_currency%></div>
-          </div>
-          <div class="information-card">
-            <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Taux d'intérêt (%)</div>
-            <div><%= @loan.interest_rate%></div>
-          </div>
-          <div class="information-card">
-            <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Intérêts par mois</div>
-            <div><%= (Loan.convert_amount(@loan.interest_cents, @loan.amount_currency) / @loan.duration).round(2) %> <%= @loan.amount_currency%></div>
-          </div>
-          <div class="information-card">
-            <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Durée du prêt (mois)</div>
-            <div><%= @loan.duration %></div>
-          </div>
-          <div class="information-card">
-            <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Pourcentage d'emprunt (%)</div>
-            <div><%= (@loan.amount_cents * 100 / @loan.collateral_cents)  %></div>
-          </div>
-      </div>
-      <div class="button-container">
-        <%= link_to 'Modifier', edit_loan_path(@loan), class: "bouton btn-middle-light-blue", data: { turbolinks: "false" }%>
-      </div>
-        <%= link_to loan_path(@loan), method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce prêt ?'} do %>
-          <i class="fas fa-times delete-icon"></i>
-        <% end %>
-      </div>
-
-    <% else %>
-      <div id="loan-information" class="justify-content-center w-100 flex-wrap">
-        <div class="w-100">
-          <div class="information-card-container2 card-white p-3 mr-3">
-            <div class="information-card my-2">
-              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Garantie déposée</div>
-              <div><%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency)%> <%= @loan.collateral_currency%></div>
-            </div>
-            <div class="information-card my-2">
-              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Capital emprunté</div>
-              <div><%= Loan.convert_amount(@loan.amount_cents, @loan.amount_currency)%> <%= @loan.amount_currency%></div>
-            </div>
-            <div class="information-card my-2">
-              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Montant remboursé</div>
-              <div><%= Loan.convert_amount(@loan.payments.where('transfer_id IS NOT NULL').sum('amount_cents'), @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></div>
-            </div>
-            <div class="information-card my-2">
-              <div class="text-green border-b-middle-blue mb-3 pb-3">Prochaine échéance</div>
-              <div><%= @loan.payments.where('transfer_id IS NULL').first.due_date.strftime("%d-%m-%y") %></div>
-            </div>
-            <div class="information-card2 my-2">
-              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Intérêts par mois</div>
-              <div><%= (Loan.convert_amount(@loan.interest_cents, @loan.amount_currency) / @loan.duration).round(2) %> <%= @loan.amount_currency%></div>
-            </div>
-            <div class="information-card my-2">
-              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Durée du prêt (mois)</div>
-              <div><%= @loan.duration %></div>
-            </div>
-            <div class="information-card my-2">
-              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Capital restant dû</div>
-              <div><%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').sum('amount_cents'), @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></div>
-            </div>
-            <div class="information-card2 my-2">
-              <div class="text-green border-b-middle-blue mb-3 pb-3">Prochain prélévement</div>
-              <div><%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').first.amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="d-flex justify-content-between w-100 align-items-center">
-          <% if @loan.collateral_currency == 'ETH' %>
-          <div class="w-75 mr-5 pb-2 card-white">
-            <div class="text-center p-3">Évolution de votre garantie</div>
-            <div class="container">
-              <div class="row">
-                <div class="col-sm">
-                  <table class="table">
-                    <tr>
-                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Garantie déposée</td>
-                      <td class="col-ms-2 text-right"><%= @loan.collateral_cents.fdiv(100).fdiv(Conversion.find_by(unixtime: @loan.collateral_graph_values[0]).value).round(2) %> <%= @loan.collateral_currency%></td>
-                    </tr>
-                    <tr>
-                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Valeur initiale de la garantie</td>
-                      <td class="col-ms-2 text-right"><%= @loan.collateral_graph_array[0][1] %> EUR </td>
-                    </tr>
-                    <tr>
-                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Variation</td>
-                      <td class="col-ms-2 text-right">+ <%= @loan.collateral_graph_array.last[1] - @loan.collateral_graph_array[0][1]%> EUR </td>
-                    </tr>
-                    <tr>
-                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Valeur actuelle de la garantie</td>
-                      <td class="col-ms-2 text-right"><%= @loan.collateral_graph_array.last[1] %> EUR </td>
-                    </tr>
-                  </table>
-                </div>
+      <% else %>
+        <div id="loan-information" class="justify-content-center w-100 flex-wrap">
+          <div class="w-75">
+            <div class="information-card-container card-white p-3 mr-3">
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Garantie déposée</div>
+                <div><%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency)%> <%= @loan.collateral_currency%></div>
+              </div>
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Capital emprunté</div>
+                <div><%= Loan.convert_amount(@loan.amount_cents, @loan.amount_currency)%> <%= @loan.amount_currency%></div>
+              </div>
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Montant remboursé</div>
+                <div><%= Loan.convert_amount(@loan.payments.where('transfer_id IS NOT NULL').sum('amount_cents'), @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></div>
+              </div>
+              <div class="information-card2 my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Intérêts par mois</div>
+                <div><%= (Loan.convert_amount(@loan.interest_cents, @loan.amount_currency) / @loan.duration).round(2) %> <%= @loan.amount_currency%></div>
+              </div>
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Durée du prêt (mois)</div>
+                <div><%= @loan.duration %></div>
+              </div>
+              <div class="information-card my-2">
+                <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Capital restant dû</div>
+                <div><%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').sum('amount_cents'), @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></div>
               </div>
             </div>
           </div>
-          <%= line_chart @loan.collateral_graph_array.map do |array|
-            {name: array[0], data: array[1]}
-          end %>
-        </div>
+          <div class="w-25">
+            <div class="information-card-container2 card-white p-3 mr-3">
+              <div class="information-card my-2">
+                <div class="text-green border-b-middle-blue mb-3 pb-3">Prochaine échéance</div>
+                <div class="next-payment"><%= @loan.payments.where('transfer_id IS NULL').first.due_date.strftime("%d-%m-%Y") %></div>
+              </div>
+              <div class="information-card2 my-2">
+                <div class="text-green border-b-middle-blue mb-3 pb-3">Prochain prélévement</div>
+                <div class="next-payment"><%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').first.amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></div>
+              </div>
+            </div>
+          </div>
 
-        <% end %>
-      </div>
+          <% if @loan.collateral_currency == 'ETH' %>
+            <div class="text-center p-3 mt-2">Évolution de votre garantie</div>
+            <div class="d-flex justify-content-between w-100 mt-2 mb-5 align-items-center">
+              <div class="w-50 h-100 mr-5 d-flex align-items-center card-white">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm">
+                      <table class="table">
+                        <tr>
+                          <td class="col-ms-2 bg-gradient-primary text-middle-blue">Garantie déposée</td>
+                          <td class="col-ms-2 text-right"><%= @loan.collateral_cents.fdiv(100).fdiv(Conversion.find_by(unixtime: @loan.collateral_graph_values[0]).value).round(2) %> <%= @loan.collateral_currency%></td>
+                        </tr>
+                        <tr>
+                          <td class="col-ms-2 bg-gradient-primary text-middle-blue">Valeur initiale de la garantie</td>
+                          <td class="col-ms-2 text-right"><%= @loan.collateral_graph_array[0][1] %> EUR </td>
+                        </tr>
+                        <tr>
+                          <td class="col-ms-2 bg-gradient-primary text-middle-blue">Variation</td>
+                          <% variation =  (@loan.collateral_graph_array[0][1]*100 / @loan.collateral_graph_array.last[1]) %>
+                          <% if variation >= 0 %>
+                            <td class="col-ms-2 text-right hausse">+ <%= variation %> % </td>
+                          <% else %>
+                            <td class="col-ms-2 text-right baisse">- <%= variation %> % </td>
+                          <% end %>
+                        </tr>
+                        <tr>
+                          <td class="col-ms-2 bg-gradient-primary text-middle-blue">Valeur actuelle de la garantie</td>
+                          <td class="col-ms-2 text-right"><%= @loan.collateral_graph_array.last[1] %> EUR </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-white w-50">
+                <%= column_chart @loan.collateral_graph_array.map do |array|
+                  {name: array[0], data: array[1]}
+                end %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <% end %>
-  </div>
 
 
   <% if @loan.transfers != [] %>
@@ -142,9 +151,9 @@
           <div class="col-sm">
             <table class="table table-loan-infos card-white">
               <thead>
-                <th><span>Restant dû au <%= Date.today.strftime("%d-%m-%y")  %> :</span> <%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').sum('amount_cents'), @loan.amount_currency).round(2)%> <%= @loan.amount_currency %></th>
+                <th><span>Restant dû au <%= Date.today.strftime("%d-%m-%Y")  %> :</span> <%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').sum('amount_cents'), @loan.amount_currency).round(2)%> <%= @loan.amount_currency %></th>
                 <th><span>Durée du prêt :</span> <%= @loan.duration %> mois</th>
-                <th><span>Prochaine échéance :</span> <%= @loan.payments.where('transfer_id IS NULL').first.due_date.strftime("%d-%m-%y") %></th>
+                <th><span>Prochaine échéance :</span> <%= @loan.payments.where('transfer_id IS NULL').first.due_date.strftime("%d-%m-%Y") %></th>
               </thead>
             </table>
             <hr>
@@ -161,7 +170,7 @@
                 <% refund = 0 %>
                 <% @loan.payments.where('transfer_id IS NOT NULL').each do |payment| %>
                 <tr>
-                  <td class="text-center"><%= payment.due_date.strftime("%d-%m-%y") %></td>
+                  <td class="text-center"><%= payment.due_date.strftime("%d-%m-%Y") %></td>
                   <td class="text-center"><%= Loan.convert_amount(payment.refund_amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></td>
                   <td class="text-center"><%= Loan.convert_amount(payment.interest_amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></td>
                   <td class="text-center"><%= Loan.convert_amount((payment.interest_amount_cents + payment.refund_amount_cents), @loan.amount_currency).round(2)%> <%= @loan.amount_currency%></td>
