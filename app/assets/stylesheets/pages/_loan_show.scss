@@ -35,9 +35,26 @@
   display: none;
 }
 
+.hausse {
+  color: $green;
+}
+
+#chart-1 {
+  margin: 0px;
+  padding: 24px;
+}
+
+.baisse {
+  color: $red;
+}
+
 #loan-information {
   display: flex;
   position: relative;
+}
+
+.next-payment {
+  font-weight: bold;
 }
 
 .information-card-container {
@@ -48,7 +65,7 @@
 
 .information-card-container2 {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   flex: 1;
 }
 
@@ -67,6 +84,12 @@
 .delete-icon {
   position: absolute;
   right: 29px;
+  top: 10%;
+}
+
+.edit-icon {
+  position: absolute;
+  right: 49px;
   top: 10%;
 }
 
