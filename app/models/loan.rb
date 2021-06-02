@@ -13,13 +13,23 @@ class Loan < ApplicationRecord
   end
 
   def collateral_graph_values
-    today = Date.today.to_time.to_i + 7_200
-    start = start_date.to_time.to_i + 7_200
-    graph_values = [start]
-    until start == today
-      start += 86_400
-      start -= 3600 if start == 1_616_979_600
-      graph_values << start
+    if Rails.env == "development"
+      today = Date.today.to_time.to_i + 7_200
+      start = start_date.to_time.to_i + 7_200
+      graph_values = [start]
+      until start == today
+        start += 86_400
+        start -= 3600 if start == 1_616_979_600
+        graph_values << start
+      end
+    else
+      today = Date.today.to_time.to_i
+      start = start_date.to_time.to_i
+      graph_values = [start]
+      until start == today
+        start += 86_400
+        graph_values << start
+      end
     end
     graph_values
   end
