@@ -39,6 +39,8 @@ gem 'pundit'
 gem 'stripe'
 gem 'stripe_event'
 
+gem "chartkick"
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
