@@ -1,5 +1,5 @@
-meta_product_name: "Product Name"
-meta_title: "Product name - Product tagline"
-meta_description: "Relevant description"
+meta_product_name: "French-Coin"
+meta_title: "French Coin - Moula entre particuliers"
+meta_description: "La question est vite répondue"
 meta_image: "cover.png" # should exist in `app/assets/images/`
 twitter_account: "@product_twitter_account"   # required for Twitter Cards
