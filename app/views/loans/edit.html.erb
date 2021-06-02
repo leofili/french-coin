@@ -1,5 +1,5 @@
-<div class="add-a-loan mb-5 mx-5 mt-4" id="new-loan" data-controller="new-loan">
-  <h2 class="titre-new-loan text-center">Nouvel Emprunt</h2>
+<div class="add-a-loan mb-5 mx-5 mt-4" id="edit-loan">
+  <h2 class="titre-new-loan text-center">Modifier mon Emprunt: <%= @loan.name %> </h2>
   <div class="row align-items-start custom-line">
     <div class="col background-new-loan border-right-frenchcoin">
       <div class="container">
@@ -16,10 +16,19 @@
                 <div class="dropboxnewloan d-flex justify-content-between"> 
                   <h4 class="">Montant de mon emprunt</h4>
                   <div class="dropboxnewloan1">
-                    <%= f.input :amount_currency, wrapper_html: { class: "switch-field"}, label: false , wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
+                    <% if @loan.amount_currency == "EUR" %>
+                      <%= f.input :amount_currency, wrapper_html: { class: "switch-field"}, label: false , wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
+                    <% else %>
+                      <%= f.input :amount_currency, wrapper_html: { class: "switch-field"}, label: false , wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Ethereums" %>
+                    <% end %>
                   </div>
                 </div>
-                <%= f.input :amount_cents, class: "amount_cents shadow-sm", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  500 } %>
+                <% if @loan.amount_currency == "EUR" %>
+                    <%= f.input :amount_cents, class: "amount_cents shadow-sm", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  @loan.amount_cents / 100 } %>
+                  <% else %>
+                    <% a = ((@loan.amount_cents * 100) / 2273).to_f %>
+                    <%= f.input :amount_cents, class: "amount_cents shadow-sm", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  (a / 10000).to_s } %>
+                  <% end %>
               </div>
             </div>
           </div>
@@ -28,22 +37,50 @@
               <fieldset id="fieldset1">
                   <legend class="legend_new_loan d-flex justify-content-between"><h4 class="mt-3">Durée de l'emprunt (mois)</h4>
                     <div class="d-flex">
-                      <label class="toggle-new-load choice-toggle selected">
-                        6
-                        <input  class="input_radio_new_loan" name="month" type="radio" value="6" checked />
-                      </label>
-                      <label class="toggle-new-load choice-toggle">
-                        12
-                        <input  class="input_radio_new_loan" name="month" type="radio" value="12" />
-                      </label>
-                      <label class="toggle-new-load choice-toggle">
-                        24
-                        <input class="input_radio_new_loan" name="month" type="radio" value="24" />
-                      </label>
-                      <label class="toggle-new-load choice-toggle">
-                        36
-                        <input class="input_radio_new_loan" name="month" type="radio" value="36" />
-                      </label>
+                      <% if @loan.duration == 6 %>
+                        <label class="toggle-new-load choice-toggle selected">
+                          6
+                          <input  class="input_radio_new_loan" name="month" type="radio" value="6" checked />
+                        </label>
+                      <% else %>
+                        <label class="toggle-new-load choice-toggle">
+                          6
+                          <input  class="input_radio_new_loan" name="month" type="radio" value="6" />
+                        </label>
+                      <% end %>
+                        <% if @loan.duration == 12 %>
+                          <label class="toggle-new-load choice-toggle selected">
+                            12
+                            <input  class="input_radio_new_loan" name="month" type="radio" value="12" checked />
+                          </label>
+                        <% else %>
+                          <label class="toggle-new-load choice-toggle">
+                            12
+                            <input  class="input_radio_new_loan" name="month" type="radio" value="12" />
+                          </label>
+                        <% end %>
+                        <% if @loan.duration == 24 %>
+                          <label class="toggle-new-load choice-toggle selected">
+                            24
+                            <input  class="input_radio_new_loan" name="month" type="radio" value="24" checked />
+                          </label>
+                        <% else %>
+                          <label class="toggle-new-load choice-toggle">
+                            24
+                            <input  class="input_radio_new_loan" name="month" type="radio" value="24" />
+                          </label>
+                        <% end %>
+                        <% if @loan.duration == 36 %>
+                          <label class="toggle-new-load choice-toggle selected">
+                            36
+                            <input  class="input_radio_new_loan" name="month" type="radio" value="36" checked />
+                          </label>
+                        <% else %>
+                          <label class="toggle-new-load choice-toggle">
+                            36
+                            <input  class="input_radio_new_loan" name="month" type="radio" value="36" />
+                          </label>
+                        <% end %>
                     </div>
                   </legend>
               </fieldset>
@@ -54,18 +91,48 @@
               <fieldset id="fieldset2">
                   <legend class="legend_new_loan d-flex justify-content-between"><h4 class="mt-3">Répartition Emprunt/Garantie (en %)</h4>
                     <div class="d-flex">
-                      <label class=" ml-2 toggle-new-load choice-toggle2 selected">
-                        25%
-                        <input class="input_radio_new_loan" name="lvt" type="radio" value="25" checked />
-                      </label>
-                      <label class="toggle-new-load choice-toggle2">
-                        33%
-                        <input class="input_radio_new_loan" name="lvt" type="radio" value="33" />
-                      </label>
-                      <label class="toggle-new-load choice-toggle2">
-                        50%
-                        <input class="input_radio_new_loan" name="lvt" type="radio" value="50" />
-                      </label>
+                    <% b = 0 %>
+                      <% if @loan.interest_rate == 1  %>
+                        <% b = "25" %>
+                      <% elsif @loan.interest_rate == 6.95 %>
+                        <% b = "33" %>
+                      <% else %>
+                        <% b = "50" %>
+                      <% end %>
+
+                      <% if b == "25" %>
+                        <label class=" ml-2 toggle-new-load choice-toggle2 selected">
+                          25%        
+                          <input class="input_radio_new_loan" name="lvt" type="radio" value="25" checked />             
+                        </label>
+                      <% else %>
+                        <label class=" ml-2 toggle-new-load choice-toggle2">
+                          25%        
+                          <input class="input_radio_new_loan" name="lvt" type="radio" value="25"/>             
+                        </label>
+                      <% end %>
+                      <% if b == "33" %>
+                        <label class=" ml-2 toggle-new-load choice-toggle2 selected">
+                          33%        
+                          <input class="input_radio_new_loan" name="lvt" type="radio" value="33" checked />             
+                        </label>
+                      <% else %>
+                        <label class=" ml-2 toggle-new-load choice-toggle2">
+                          33%        
+                          <input class="input_radio_new_loan" name="lvt" type="radio" value="33"/>             
+                        </label>
+                      <% end %>
+                      <% if b == "50" %>
+                        <label class=" ml-2 toggle-new-load choice-toggle2 selected">
+                          50%        
+                          <input class="input_radio_new_loan" name="lvt" type="radio" value="50" checked />             
+                        </label>
+                      <% else %>
+                        <label class=" ml-2 toggle-new-load choice-toggle2">
+                          50%        
+                          <input class="input_radio_new_loan" name="lvt" type="radio" value="50"/>             
+                        </label>
+                      <% end %>
                     </div>
                   </legend>
               </fieldset>
@@ -74,13 +141,13 @@
           <div class="row mt-4">
             <div class="col">
               <div class="loan_collateral_cents">
-                <%= f.input :collateral_cents, as: :hidden, :input_html => { :value => 2000  }, readonly: true %>
+                <%= f.input :collateral_cents, as: :hidden, :input_html => { :value => @loan.collateral_cents / 100  }, readonly: true %>
               </div>
             </div>
           </div>
-          <%= f.input :interest_cents, as: :hidden , :input_html => { :value => 250 } %>
+            <%= f.input :interest_cents, as: :hidden , :input_html => { :value => @loan.interest_cents / 100 } %>
           <div class="loan_interest_rate">
-            <%= f.input :interest_rate, as: :hidden, :input_html => { :value => 1 } %>
+            <%= f.input :interest_rate, as: :hidden, :input_html => { :value =>  @loan.interest_rate } %>
           </div>
       </div>
     </div>
@@ -90,11 +157,20 @@
           <div class="apr_new_loan input_amount_loan">
             <div class="dropboxnewloan">
               <div class="dropboxnewloan2 d-flex justify-content-end">
-                <%= f.input :collateral_currency, wrapper_html: { class: "switch-field"}, label: false, wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
+                <% if @loan.collateral_currency == "EUR" %>
+                  <%= f.input :collateral_currency, wrapper_html: { class: "switch-field"}, label: false, wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
+                <% else %>
+                  <%= f.input :collateral_currency, wrapper_html: { class: "switch-field"}, label: false, wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Ethereums" %>
+                <% end %>
               </div>
             </div>
             <div class="collateral_span_new_loan d-flex justify-content-between">Garantie nécessaire
-              <span class="collateral odometer color-span-collat-loan" value="2000" id="odometer3">2000</span>
+              <% if @loan.collateral_currency == "EUR" %>
+                <span class="collateral odometer color-span-collat-loan" value=<%= @loan.collateral_cents / 100 %> id="odometer3"><%= @loan.collateral_cents / 100 %></span>
+              <% else %>
+                <% a = ((@loan.collateral_cents * 100) / 2273).to_f %>
+                <span class="collateral odometer color-span-collat-loan" value=<%= (a/10000).round(2) %> id="odometer3"><%= (a/10000).round(2) %></span>
+              <% end %>
             </div>
           </div>
         </div>
@@ -104,7 +180,8 @@
           <div class="interest_new_loan">
             <div class="interest_span_new_loan">
             <p class="d-flex justify-content-between">Montant d'intérêt total (en €)
-              <span class="interest odometer color-span-interest-loan" name="interest" value="2,50" id="odometer">2.50</span>
+              <% a = (@loan.interest_cents).to_f %>
+              <span class="interest odometer color-span-interest-loan" name="interest" value=<%= a.round(2) %> id="odometer"><%= (a/100).round(2) %></span>
             </p>
             </div>
           </div>
@@ -114,14 +191,14 @@
         <div class="col">
           <div class="apr_new_loan">
             <div class="apr_span_new_loan d-flex justify-content-between">Intérêt brut (en %)
-              <span class="apr odometer color-span-apr-loan" id="odometer2" value="1">1.00</span>
+              <span class="apr odometer color-span-apr-loan" id="odometer2" value=<%= (@loan.interest_rate) %>><%= (@loan.interest_rate) %></span>
             </div>
           </div>
         </div>
       </div>
           <div class="row">
             <div class="col text-center mt-2">
-              <%= f.submit 'Création de mon emprunt', class: "btn btn-primary" %>
+              <%= f.submit 'Modifier mon emprunt', class: "btn btn-primary", data: { turbolinks: "false" } %>
             </div>
           </div>
           <%# fin du simple form %>
