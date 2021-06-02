@@ -14,7 +14,7 @@
             <div class="col">
               <div class="input_amount_loan">
                 <div class="dropboxnewloan d-flex justify-content-between"> 
-                  <h4 class="">Montant de mon emprunt</h4>
+                  <h4 class="mt-1">Montant de mon emprunt</h4>
                   <div class="dropboxnewloan1">
                     <%= f.input :amount_currency, wrapper_html: { class: "switch-field"}, label: false , wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
                   </div>
@@ -93,7 +93,7 @@
                 <%= f.input :collateral_currency, wrapper_html: { class: "switch-field"}, label: false, wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
               </div>
             </div>
-            <div class="collateral_span_new_loan d-flex justify-content-between">Garantie nécessaire
+            <div class="collateral_span_new_loan d-flex justify-content-between align-self-center">Garantie nécessaire
               <span class="collateral odometer color-span-collat-loan" value="2000" id="odometer3">2000</span>
             </div>
           </div>
