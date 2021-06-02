@@ -4,7 +4,11 @@ class Conversion < ApplicationRecord
     data_serialized = URI.open(url).read
     data = JSON.parse(data_serialized)
     data['Data']['Data'].each do |hash|
-      unixtime = hash['time'] <= 1_616_889_600 ? hash['time'] + 3_600 : hash['time']
+      if Rails.env == "development"
+        unixtime = hash['time'] <= 1_616_889_600 ? hash['time'] : hash['time']
+      else
+        unixtime = hash['time']
+      end
       Conversion.create(unixtime: unixtime, value: hash['open'])
     end
   end
