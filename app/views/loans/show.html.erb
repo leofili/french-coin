@@ -61,11 +61,11 @@
           <div class="information-card-container2 card-white p-3 mr-3">
             <div class="information-card my-2">
               <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Garantie déposée</div>
-              <div><%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency)%> <%= @loan.collateral_currency%></div>
+              <div><%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency).round(2)%> <%= @loan.collateral_currency%></div>
             </div>
             <div class="information-card my-2">
-              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Capital emprunté</div>
-              <div><%= Loan.convert_amount(@loan.amount_cents, @loan.amount_currency)%> <%= @loan.amount_currency%></div>
+              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Montant à rembourser</div>
+              <div><%= Loan.convert_amount(@loan.payments.sum('amount_cents'), @loan.amount_currency)%> <%= @loan.amount_currency%></div>
             </div>
             <div class="information-card my-2">
               <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Montant remboursé</div>
@@ -76,8 +76,8 @@
               <div><%= @loan.payments.where('transfer_id IS NULL').first.due_date.strftime("%d-%m-%y") %></div>
             </div>
             <div class="information-card2 my-2">
-              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Intérêts par mois</div>
-              <div><%= (Loan.convert_amount(@loan.interest_cents, @loan.amount_currency) / @loan.duration).round(2) %> <%= @loan.amount_currency%></div>
+              <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Mensualité</div>
+              <div><%= Loan.convert_amount(@loan.payments.first.amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></div>
             </div>
             <div class="information-card my-2">
               <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Durée du prêt (mois)</div>
@@ -88,7 +88,7 @@
               <div><%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').sum('amount_cents'), @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></div>
             </div>
             <div class="information-card2 my-2">
-              <div class="text-green border-b-middle-blue mb-3 pb-3">Prochain prélévement</div>
+              <div class="text-green border-b-middle-blue mb-3 pb-3">Prochain prélèvement</div>
               <div><%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').first.amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></div>
             </div>
           </div>
@@ -155,7 +155,7 @@
                   <td class="text-center bg-gradient-primary text-middle-blue">Date</td>
                   <td class="text-center bg-gradient-primary text-middle-blue">Emprunt</td>
                   <td class="text-center bg-gradient-primary text-middle-blue">Intérêts</td>
-                  <td class="text-center bg-gradient-primary text-middle-blue">Prélèvements</td>
+                  <td class="text-center bg-gradient-primary text-middle-blue">Mensualité</td>
                   <td class="text-center bg-gradient-primary text-middle-blue">Capital amorti</td>
                 </tr>
                 <% refund = 0 %>
@@ -164,8 +164,8 @@
                   <td class="text-center"><%= payment.due_date.strftime("%d-%m-%y") %></td>
                   <td class="text-center"><%= Loan.convert_amount(payment.refund_amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></td>
                   <td class="text-center"><%= Loan.convert_amount(payment.interest_amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></td>
-                  <td class="text-center"><%= Loan.convert_amount((payment.interest_amount_cents + payment.refund_amount_cents), @loan.amount_currency).round(2)%> <%= @loan.amount_currency%></td>
-                  <td class="text-center"><%= Loan.convert_amount((refund += ((payment.interest_amount_cents + payment.refund_amount_cents))), @loan.amount_currency).round(2)%> <%= @loan.amount_currency%></td>
+                  <td class="text-center"><%= Loan.convert_amount(payment.amount_cents, @loan.amount_currency).round(2)%> <%= @loan.amount_currency%></td>
+                  <td class="text-center"><%= Loan.convert_amount((refund += payment.amount_cents), @loan.amount_currency).round(2)%> <%= @loan.amount_currency%></td>
                 </tr>
                 <%end%>
               </table>

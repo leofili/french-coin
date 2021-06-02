@@ -5,7 +5,7 @@ class Conversion < ApplicationRecord
     data = JSON.parse(data_serialized)
     data['Data']['Data'].each do |hash|
       if Rails.env == "development"
-        unixtime = hash['time'] <= 1_616_889_600 ? hash['time'] : hash['time']
+        unixtime = hash['time'] <= 1_616_889_600 ? hash['time'] + 3_600 : hash['time']
       else
         unixtime = hash['time']
       end
