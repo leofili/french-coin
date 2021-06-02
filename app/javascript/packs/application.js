@@ -26,6 +26,7 @@ require("particles.js")
 
 // External imports
 import "bootstrap";
+import "chartkick/chart.js";
 import { initToggle } from "../plugins/init_toggle";
 import { initTabsClick } from "../plugins/init_tabs_click";
 import { initCollat } from "../plugins/init_collat";

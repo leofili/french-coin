@@ -94,29 +94,38 @@
           </div>
         </div>
 
-        <div class="w-75 my-4 pb-2 card-white">
-          <div class="text-center p-3">Évolution de votre garantie</div>
-          <div class="container">
-            <div class="row">
-              <div class="col-sm">
-                <table class="table">
-                  <tr>
-                    <td class="col-ms-2 bg-gradient-primary text-middle-blue">Garantie déposée</td>
-                    <td class="col-ms-2 text-right"><%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency)%> <%= @loan.collateral_currency%></td>
-                  </tr>
-                  <tr>
-                    <td class="col-ms-2 bg-gradient-primary text-middle-blue">Variation</td>
-                    <td class="col-ms-2 text-right">+1000€</td>
-                  </tr>
-                  <tr>
-                    <td class="col-ms-2 bg-gradient-primary text-middle-blue">Valeur actuelle de la garantie</td>
-                    <td class="col-ms-2 text-right"><%= Loan.convert_amount(@loan.collateral_cents, "EUR").to_i + 1000%> <%= "EUR" %></td>
-                  </tr>
-                </table>
+        <% if @loan.collateral_currency == 'ETH' %>
+          <div class="w-75 mt-5 pb-2 card-white">
+            <div class="text-center p-3">Évolution de votre garantie</div>
+            <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  <table class="table">
+                    <tr>
+                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Garantie déposée</td>
+                      <td class="col-ms-2 text-right"><%= @loan.collateral_cents.fdiv(100).fdiv(Conversion.find_by(unixtime: @loan.collateral_graph_values[0]).value).round(2) %> <%= @loan.collateral_currency%></td>
+                    </tr>
+                    <tr>
+                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Valeur initiale de la garantie</td>
+                      <td class="col-ms-2 text-right"><%= @loan.collateral_graph_array[0][1] %> EUR </td>
+                    </tr>
+                    <tr>
+                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Variation</td>
+                      <td class="col-ms-2 text-right">+ <%= @loan.collateral_graph_array.last[1] - @loan.collateral_graph_array[0][1]%> EUR </td>
+                    </tr>
+                    <tr>
+                      <td class="col-ms-2 bg-gradient-primary text-middle-blue">Valeur actuelle de la garantie</td>
+                      <td class="col-ms-2 text-right"><%= @loan.collateral_graph_array.last[1] %> EUR </td>
+                    </tr>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          <%= line_chart @loan.collateral_graph_array.map do |array|
+            {name: array[0], data: array[1]}
+          end %>
+        <% end %>
       </div>
     </div>
     <% end %>
