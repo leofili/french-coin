@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 2021_05_31_094453) do
     t.string "phone_number"
     t.string "iban"
     t.string "bic"
-    t.integer "crypto_balance", default: 0
+    t.integer "crypto_balance", default: O
     t.integer "euro_balance", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
