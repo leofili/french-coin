@@ -7,19 +7,22 @@
           <div class="row">
             <div class="col intitule-new-loan">
               <h4>Intitulé de mon emprunt</h4>
-              <%= f.input :name, label: "Renseigner le nom personnalisé de votre emprunt", class:"shadow" %>
+              <%= f.input :name, label: false, placeholder: "Travaux, achat de maison ..." ,class:"shadow" %>
             </div>
           </div>
           <div class="row mt-4">
             <div class="col">
               <div class="input_amount_loan">
                 <div class="dropboxnewloan d-flex justify-content-between"> 
-                  <h4 class="mt-1">Montant de mon emprunt</h4>
+                  <h4 class="mt-1">Devise de mon emprunt</h4>
                   <div class="dropboxnewloan1">
                     <%= f.input :amount_currency, wrapper_html: { class: "switch-field"}, label: false , wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
                   </div>
                 </div>
-                <%= f.input :amount_cents, class: "amount_cents shadow-sm", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  500 } %>
+                <div class="d-flex align-items justify-content-between">
+                  <h4 class="mt-3">Montant de mon emprunt</h4>
+                  <%= f.input :amount_cents, class: "amount_cents shadow-sm", label: false, placeholder: "Exemple: 500, 1000, 2500 ..." %>
+                </div>
               </div>
             </div>
           </div>
@@ -74,11 +77,11 @@
           <div class="row mt-4">
             <div class="col">
               <div class="loan_collateral_cents">
-                <%= f.input :collateral_cents, as: :hidden, :input_html => { :value => 2000  }, readonly: true %>
+                <%= f.input :collateral_cents, as: :hidden, :input_html => { :value => 0  }, readonly: true %>
               </div>
             </div>
           </div>
-          <%= f.input :interest_cents, as: :hidden , :input_html => { :value => 250 } %>
+          <%= f.input :interest_cents, as: :hidden , :input_html => { :value => 0 } %>
           <div class="loan_interest_rate">
             <%= f.input :interest_rate, as: :hidden, :input_html => { :value => 1 } %>
           </div>
@@ -86,35 +89,43 @@
     </div>
     <div class="col my-auto">
       <div class="row px-3 pb-4">
-        <div class="col">
+        <div class="col border-bottom-frenchcoin">
           <div class="apr_new_loan input_amount_loan">
-            <div class="dropboxnewloan">
-              <div class="dropboxnewloan2 d-flex justify-content-end">
-                <%= f.input :collateral_currency, wrapper_html: { class: "switch-field"}, label: false, wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
+            <div class="dropboxnewloan d-flex align-items justify-content-between">
+              <div class="dropboxnewloan2 d-flex font-weight-bold">Garantie nécessaire
+                <%= f.input :collateral_currency, wrapper_html: { class: "switch-field ml-2"}, label: false, wrapper: :horizontal_multi_select, as: :radio_buttons, collection: ["Euros", "Ethereums"], checked: "Euros" %>
+              </div>
+              <div class="collateral_span_new_loan d-flex justify-content-end">
+                <span class="collateral odometer color-span-collat-loan" value="0" id="odometer3">0</span>
+                <span class="devise-new-loan">/EUR</span>
               </div>
             </div>
-            <div class="collateral_span_new_loan d-flex justify-content-between align-self-center">Garantie nécessaire
-              <span class="collateral odometer color-span-collat-loan" value="2000" id="odometer3">2000</span>
-            </div>
           </div>
         </div>
       </div>
-      <div class="row px-3 py-4">
+      <br>
+      <div class="row px-3 pt-5">
         <div class="col">
           <div class="interest_new_loan">
-            <div class="interest_span_new_loan">
-            <p class="d-flex justify-content-between">Montant d'intérêt total (en €)
-              <span class="interest odometer color-span-interest-loan" name="interest" value="2,50" id="odometer">2.50</span>
-            </p>
+            <div class="interest_span_new_loan d-flex align-items justify-content-between">
+            <span class="d-flex justify-content-between size-font-interest">Montant d'intérêt total (en €)</span>
+            <div>
+              <span class="interest odometer color-span-interest-loan" name="interest" value="0" id="odometer">0</span>
+              <span class="devise-new-loan-interest">/EUR</span>
+            </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row px-3 py-4">
+      <div class="row px-3 py-3">
         <div class="col">
           <div class="apr_new_loan">
-            <div class="apr_span_new_loan d-flex justify-content-between">Intérêt brut (en %)
-              <span class="apr odometer color-span-apr-loan" id="odometer2" value="1">1.00</span>
+            <div class="apr_span_new_loan d-flex align-items justify-content-between">
+            <span>Intérêt brut (en %)</span>  
+              <div>
+                <span class="apr odometer color-span-apr-loan" id="odometer2" value="1">1.00</span>
+                <span class="pourcentage-new-loan-interest">%</span>
+              </div>
             </div>
           </div>
         </div>

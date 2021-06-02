@@ -51,9 +51,13 @@
   font-size: 20px;
   text-align: left;
   .interest_span_new_loan{
-    font-size: 20px;
-    span {
-      font-size: 40px;
+    font-size: 18px;
+    .devise-new-loan-interest{
+      margin-top: 26px;
+      font-size: 14px;
+    }
+    .size-font-interest{
+      font-size: 32px
     }
   }
 }
@@ -62,9 +66,13 @@
   font-size: 20px;
   text-align: left;
   .apr_span_new_loan {
-    font-size: 20px;
+    font-size: 18px;
     span {
-      font-size: 40px;
+      font-size: 32px;
+    }
+    .pourcentage-new-loan-interest{
+      margin-top: 26px;
+      font-size: 14px;
     }
   }
 }
@@ -107,11 +115,17 @@
 
 .collateral_span_new_loan {
   span {
-    font-size: 40px;
+    font-size: 48px;
+  }
+  .devise-new-loan{
+    margin-top: 26px;
+    font-size: 14px;
   }
 }
 
-.dropboxnewloan2 select{
+.dropboxnewloan2 {
+  font-size: 28px;
+  select{
   font-size: 16px;
   color: white;
   background-color: #0066CC;
@@ -120,6 +134,7 @@
   background-image: -webkit-linear-gradient(rgba(0,0,0,.2), rgba(255,255,255,.2));
   background-image: linear-gradient(rgba(0,0,0,.54), rgba(255,255,255,.4));
   border-radius: 5px;
+  }
 }
 
 .dropboxnewloan1 select{
@@ -142,6 +157,10 @@
 
 .border-right-frenchcoin {
   border-right: 2px solid #AEB0B7;
+}
+
+.border-bottom-frenchcoin{
+  border-bottom: 2px solid #AEB0B7;
 }
 
 .switch-field {

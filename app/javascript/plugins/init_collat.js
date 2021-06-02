@@ -13,10 +13,13 @@ const initCollat = () => {
 
       checkboxes = document.querySelectorAll(".dropboxnewloan2 input[type='radio']");
       selectedInput = Array.from(checkboxes).find(cb => cb.checked)
-      let currency2 = selectedInput.value;
+      let currency2 = selectedInput.value;   
       amount = document.querySelector(".loan_amount_cents input").value;
-      if (selectedValue === "Ethereums") {
+      if (currency2 === "Ethereums") {
         amount = document.querySelector(".loan_amount_cents input").value * 2273;
+        document.querySelector(".devise-new-loan").innerText = "/ETR"
+      } else {
+        document.querySelector(".devise-new-loan").innerText = "/EUR"
       };
       const lvt = document.querySelector("#fieldset2 input[checked]").value
 
