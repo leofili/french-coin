@@ -1,3 +1,8 @@
+<!-- app/views/loans/show.html.erb -->
+<% content_for :meta_title, "#{@loan.name} is on #{DEFAULT_META["meta_product_name"]}" %>
+<% content_for :meta_description, @loan.description %>
+<% content_for :meta_image, cl_image_path(@loan.photo.path) %>
+
 <div class="container" id="show">
   <h2 class="titre-new-loan text-center p-4">Informations sur votre prêt : <%=@loan.name%></h2>
   <% if flash[:notice] %>
