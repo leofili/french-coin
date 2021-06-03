@@ -1,15 +1,20 @@
 <%= simple_form_for [loan, transfer] do |f| %>
 
   <div data-controller="collateral-ethereum">
-    <div class="d-flex align-items-center justify-content-center mb-4">
+    <div class="d-flex align-items-center mb-4">
       <i class="fas fa-exclamation-triangle mr-4 h2 text-danger"></i>
-      <p class='h6 mb-0'>Vous êtes sur le point de payer une garantie d'un montant de <%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency) %> <%= @loan.collateral_currency %>. Une fois le paiement effectué, votre emprunt sera validé et débutera. Vous recevrez ensuite : <%= Loan.convert_amount(@loan.amount_cents, @loan.amount_currency) %> <%= @loan.amount_currency %> (montant de votre emprunt) sur votre portefeuille <%= @loan.amount_currency %>.</p>
+      <div class="prevent-message">
+        <p class='h6 mb-1'>Lisez attentivement le récapitulatif de la transaction.</p>
+        <p class='h6 mb-1'>Montant de la garantie à régler: <%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency).round(2) %> <%= @loan.collateral_currency %>.</p>
+        <p class='h6 mb-0'>Montant emprunté: <%= Loan.convert_amount(@loan.amount_cents, @loan.amount_currency) %> <%= @loan.amount_currency %></p>
+      </div>
+
     </div>
 
     <hr>
 
     <% if (loan.collateral_currency == 'EUR' && current_user.euro_balance < loan.collateral_cents) || (loan.collateral_currency == 'ETH' && current_user.crypto_balance < loan.collateral_cents) %>
-      <p class='alert alert-warning'>Vous ne pouvez pas utiliser votre portefeuille <%= @loan.collateral_currency %> pour payer la garantie, parce que vous n'avez pas assez d'argent dessus ( <%= loan.collateral_currency == 'EUR' ? "#{Loan.convert_amount(current_user.euro_balance, 'EUR')} euros " : "#{Loan.convert_amount(current_user.crypto_balance, 'ETH')} ethereum "%>). Vous devez utiliser un autre moyen de paiement.</p>
+      <p class='alert alert-warning'>Vous ne pouvez pas utiliser votre portefeuille <%= @loan.collateral_currency %> pour payer la garantie, parce que vous n'avez pas assez d'argent dessus ( solde actuel: <%= loan.collateral_currency == 'EUR' ? "#{Loan.convert_amount(current_user.euro_balance, 'EUR').round(2)} euros " : "#{Loan.convert_amount(current_user.crypto_balance, 'ETH').round(2)} ETH "%>). Vous devez utiliser un autre moyen de paiement.</p>
       <%= f.hidden_field :payment_mean, value: @loan.collateral_currency == "EUR" ? "card" : "crypto" %>
       <div class="mt-4" data-collateral-ethereum-target = 'popup'>
         <div class="d-flex">
@@ -25,8 +30,8 @@
           </div>
         </div>
         <div>Adresse ETH du portefeuille de l'entreprise French-Coin
-          <div data-controller="clipboard">
-            <input data-clipboard-target="input" type="text" value="0x027f0e387B3D7814F6Bead9c9ac73A3F3AB099E3" readonly>
+          <div data-controller="clipboard" class="w-100 d-flex mt-1">
+            <input class='flex-grow-1 eth-address-input' data-clipboard-target="input" type="text" value="0x027f0e387B3D7814F6Bead9c9ac73A3F3AB099E3" readonly>
             <button class="btn btn-primary" data-action="click->clipboard#copy"><i class="far fa-copy"></i></button>
           </div>
         </div>
@@ -37,7 +42,7 @@
       <%= f.input :payment_mean, as: :radio_buttons, collection: [['euro_wallet', 'Oui'], ['card', 'Non']], label_method: :second, value_method: :first, class: 'payment_button', label: "" %>
 
     <% elsif loan.collateral_currency == 'ETH' %>
-      <p class= 'mb-0'><%= "Le solde actuel de votre portefeuille CRYPTO est suffisant pour verser la garantie, il s'élève à #{Loan.convert_amount(current_user.crypto_balance, 'ETH')} ethereum. Voulez-vous alors utiliser votre portefeuille CRYPTO pour verser la garantie ?" %></p>
+      <p class= 'mb-0'><%= "Le solde actuel de votre portefeuille CRYPTO est suffisant pour verser la garantie, il s'élève à #{Loan.convert_amount(current_user.crypto_balance, 'ETH')} ETH. Voulez-vous alors utiliser votre portefeuille CRYPTO pour verser la garantie ?" %></p>
       <%= f.input :payment_mean, as: :radio_buttons, collection: [['crypto_wallet', 'Oui'], ['crypto', 'Non']], label_method: :second, value_method: :first, class: 'payment_button', label: "", input_html: { data: {
          collateral_ethereum_target: "answer",
          action: "click->collateral-ethereum#display"
