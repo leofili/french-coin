@@ -15,7 +15,7 @@ const initCollat = () => {
       selectedInput = Array.from(checkboxes).find(cb => cb.checked)
       let currency2 = selectedInput.value; 
       if (currency2 === "Ethereums") {
-        document.querySelector(".devise-new-loan").innerText = "/ETR"
+        document.querySelector(".devise-new-loan").innerText = "/ETH"
       } else {
         document.querySelector(".devise-new-loan").innerText = "/EUR"
       };
@@ -36,7 +36,7 @@ const initCollat = () => {
         document.querySelector(".loan_interest_cents input").value = interest * 100;
       } else if (lvt === "33") {
         if (currency2 === "Ethereums") {
-          document.querySelector(".loan_collateral_cents input").value = (amount * 3) / 2217.86;
+          document.querySelector(".loan_collateral_cents input").value = ((amount * 3) / 2217.86);
           document.querySelector(".collateral_span_new_loan .color-span-collat-loan").innerText = (amount * 3) / 2217.86;
         } else if (currency2 === "Euros") {
           document.querySelector(".loan_collateral_cents input").value = (amount * 3);

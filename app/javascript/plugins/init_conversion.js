@@ -10,16 +10,8 @@ const initConversion = () => {
         let currency = event.currentTarget.value;
         if (currency === "Euros") {
           inputResult.value = amount * 2217.86;
-          if (inputResult === document.querySelector(`.loan_collateral_cents input`)) {
-          //document.querySelector(`.collateral_span_new_loan .color-span-collat-loan`).innerText  = amount * 2217.86;
-          }
-        };
-
-        if (currency === "Ethereums") {
+        } else if (currency === "Ethereums") {
           inputResult.value = amount / 2217.86;
-          if (inputResult === document.querySelector(`.loan_collateral_cents input`)) {
-            //document.querySelector(`.collateral_span_new_loan .color-span-collat-loan`).innerText = amount / 2217.86;
-          }
         };
       });
     })
@@ -31,21 +23,27 @@ const initConversion = () => {
         event.preventDefault();
         const dropdownType = event.currentTarget.id.split("_currency")[0];
         const inputResult = document.querySelector(`#${dropdownType}_cents`);
-
         let amount = inputResult.value;
         let currency = event.currentTarget.value;
         if (currency === "Euros") {
           inputResult.value = (amount * 2217.86).toFixed(2);
-          if (inputResult === document.querySelector(`.loan_collateral_cents input`)) {
-          document.querySelector(`.collateral_span_new_loan .color-span-collat-loan`).innerText  = amount * 2217.86;
-          }
-        };
-
-        if (currency === "Ethereums") {
+        } else if (currency === "Ethereums") {
           inputResult.value = amount / 2217.86;
-          if (inputResult === document.querySelector(`.loan_collateral_cents input`)) {
-            document.querySelector(`.collateral_span_new_loan .color-span-collat-loan`).innerText = amount / 2217.86;
-          }
+        };
+      });
+    })
+    dropdowns = document.querySelectorAll(".dropboxnewloan2 input[type='radio']");
+    dropdowns.forEach((dropdown) => {
+      dropdown.addEventListener("change", (event) => {
+        event.preventDefault();
+        selectedInput = Array.from(checkboxes).find(cb => cb.checked)
+        let currency = selectedInput.value; 
+        if (currency === "Euros") {
+          document.querySelector(".loan_collateral_cents input").value = (amount * 4);
+          document.querySelector(".devise-new-loan").innerText = "/EUR"
+        } else if (currency === "Ethereums") {
+          document.querySelector(".loan_collateral_cents input").value = (amount * 4) / 2217.86;
+          document.querySelector(".devise-new-loan").innerText = "/ETH"
         };
       });
     })

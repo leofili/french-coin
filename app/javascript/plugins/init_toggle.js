@@ -1,12 +1,3 @@
-function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
-}
-
-const speed = 200;
 const initToggle = () => {
   if (document.getElementById('fieldset1')) {
     document.querySelectorAll(".choice-toggle").forEach((choice) => {
@@ -73,7 +64,7 @@ const initToggle = () => {
         const currency2 = selectedInput.value;
         let apr = 0;
         let begin = document.querySelector(".collateral_span_new_loan .color-span-collat-loan").innerText;
-        console.log(begin)
+
         begin = parseFloat(begin);
         const odometer = document.querySelector('.collateral_span_new_loan .odometer');
         const od = new Odometer({
@@ -123,7 +114,6 @@ const initToggle = () => {
 
         if (document.querySelector(".choice-toggle.selected input").value === "6") {
           document.querySelector(".interest").innerText = ((amount * apr) / 2).toFixed(2);
-          console.log(document.querySelector(".interest").innerText = ((amount * apr) / 2).toFixed(2))
           document.querySelector(".loan_interest_cents input").value = (((amount * apr) / 2).toFixed(2)) * 100
         } else if (document.querySelector(".choice-toggle.selected input").value === "12") {
           document.querySelector(".interest").innerText = (amount * apr).toFixed(2);
