@@ -49,10 +49,11 @@
             <i class="fas fa-times delete-icon"></i>
           <% end %>
         </div>
-        <div class="loan-title mb-4">
-          <h4>Merci de verser la garantie nécessaire pour déclencher le prêt</h4>
-          <%= link_to 'Verser la garantie', new_loan_transfer_path(@loan), class: "bouton btn-middle-green"%>
-        </div>
+      </div>
+      <div class="loan-title mb-4">
+        <h4>Merci de verser la garantie nécessaire pour déclencher le prêt</h4>
+        <%= link_to 'Verser la garantie', new_loan_transfer_path(@loan), class: "bouton btn-middle-green"%>
+      </div>
 
       <% else %>
         <div id="loan-information" class="justify-content-center w-100 flex-wrap">
