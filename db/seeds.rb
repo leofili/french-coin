@@ -1,8 +1,8 @@
 # admin = User.create(email: "admin@example.com", password: "admin@example.com", password_confirmation: "admin@example.com")
 
-User.create(first_name: "Paul", last_name: "Bismuth", email: "bismuth@example.com", password: "bismuth@example.com", password_confirmation: "bismuth@example.com", phone_number: "0606060606", address: "6, rue du Faucon, 75011 Paris", crypto_balance: 10000, euro_balance: 10000)
+User.create(first_name: "Paul", last_name: "Bismuth", email: "bismuth2@example.com", password: "bismuth2@example.com", password_confirmation: "bismuth2@example.com", phone_number: "0606060606", address: "6, rue du Faucon, 75011 Paris", crypto_balance: 10000, euro_balance: 10000)
 
-helen = User.find_by(email: "bismuth@example.com")
+helen = User.find_by(email: "bismuth2@example.com")
 
 #Creating fake loan
 # Loan.create(user: admin)
@@ -32,16 +32,26 @@ helen = User.find_by(email: "bismuth@example.com")
 # end
 
 # Creating a validated loan in euros with three already done payments
-third_loan = Loan.create(name: 'Achat voiture', user: helen, collateral_cents: 1000000, collateral_currency: 'ETH', amount_cents: 500000, amount_currency: 'EUR', start_date: Date.today - 3.months, duration: 6, end_date: Date.today + 3.months, interest_rate: 0.0675, interest_cents: 33750)
+third_loan = Loan.create(name: 'Achat voiture', user: helen, collateral_cents: 1000000, collateral_currency: 'ETH', amount_cents: 500000, amount_currency: 'EUR', start_date: Date.today - 3.months, duration: 6, end_date: Date.today + 3.months, interest_rate: 6.75, interest_cents: 33750)
 
 Transfer.create(user: helen, loan: third_loan, amount_cents: 1000000, amount_currency: 'ETH', category: 'collateral_payment')
 
+mensuality = (third_loan.amount_cents * third_loan.interest_rate.fdiv(1200)).fdiv(1 - (1 + third_loan.interest_rate.fdiv(1200))**-third_loan.duration)
+rest = third_loan.amount_cents
 third_loan.duration.times do |num|
-  Payment.create(amount_cents: 88959, interest_amount_cents: 5625, refund_amount_cents: 83334, loan: third_loan, due_date: third_loan.start_date + (num + 1).months)
+  payment = Payment.new(
+    amount_cents: mensuality,
+    loan: third_loan,
+    due_date: third_loan.start_date + (num + 1).months
+  )
+  payment.interest_amount_cents = rest * third_loan.interest_rate.fdiv(1200)
+  payment.refund_amount_cents = payment.amount_cents - payment.interest_amount_cents
+  rest -= payment.refund_amount_cents
+  payment.save
 end
 
-3.times do |num|
-  new_transfer = Transfer.create(user: helen, loan: third_loan, amount_cents: 88959, amount_currency: 'EUR', category: 'monthly_payment')
+4.times do |num|
+  new_transfer = Transfer.create(user: helen, loan: third_loan, amount_cents: mensuality, amount_currency: 'EUR', category: 'monthly_payment')
   pay = third_loan.payments[num]
   pay.transfer = new_transfer
   pay.save

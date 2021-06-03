@@ -8,7 +8,7 @@ const initCollat = () => {
       let selectedValue = selectedInput.value;
       let amount = document.querySelector(".loan_amount_cents input").value;
       if (selectedValue === "Ethereums") {
-        amount = document.querySelector(".loan_amount_cents input").value * 2273;
+        amount = document.querySelector(".loan_amount_cents input").value * 2217.86;
       };
 
       checkboxes = document.querySelectorAll(".dropboxnewloan2 input[type='radio']");
@@ -23,8 +23,8 @@ const initCollat = () => {
 
       if (lvt === "25") {
         if (currency2 === "Ethereums") {
-          document.querySelector(".loan_collateral_cents input").value = (amount * 4) / 2273;
-          document.querySelector(".collateral_span_new_loan .color-span-collat-loan").innerText = (amount * 4) / 2273;
+          document.querySelector(".loan_collateral_cents input").value = (amount * 4) / 2217.86;
+          document.querySelector(".collateral_span_new_loan .color-span-collat-loan").innerText = (amount * 4) / 2217.86;
         } else if (currency2 === "Euros") {
           document.querySelector(".loan_collateral_cents input").value = (amount * 4);
           document.querySelector(".collateral_span_new_loan .color-span-collat-loan").innerText = (amount * 4);
@@ -36,8 +36,8 @@ const initCollat = () => {
         document.querySelector(".loan_interest_cents input").value = interest * 100;
       } else if (lvt === "33") {
         if (currency2 === "Ethereums") {
-          document.querySelector(".loan_collateral_cents input").value = (amount * 3) / 2273;
-          document.querySelector(".collateral_span_new_loan .color-span-collat-loan").innerText = (amount * 3) / 2273;
+          document.querySelector(".loan_collateral_cents input").value = (amount * 3) / 2217.86;
+          document.querySelector(".collateral_span_new_loan .color-span-collat-loan").innerText = (amount * 3) / 2217.86;
         } else if (currency2 === "Euros") {
           document.querySelector(".loan_collateral_cents input").value = (amount * 3);
           document.querySelector(".collateral_span_new_loan .color-span-collat-loan").innerText = (amount * 3);
@@ -49,8 +49,8 @@ const initCollat = () => {
         document.querySelector(".loan_interest_cents input").value = interest * 100;
       } else if (lvt === "50") {
         if (currency2 === "Ethereums") {
-          document.querySelector(".collateral_span_new_loan .color-span-collat-loan").innerText = (amount * 2) / 2273;
-          document.querySelector(".loan_collateral_cents input").value = (amount * 2) / 2273;
+          document.querySelector(".collateral_span_new_loan .color-span-collat-loan").innerText = (amount * 2) / 2217.86;
+          document.querySelector(".loan_collateral_cents input").value = (amount * 2) / 2217.86;
         } else if (currency2 === "Euros") {
           document.querySelector(".collateral_span_new_loan .color-span-collat-loan").innerText = (amount * 2);
           document.querySelector(".loan_collateral_cents input").value = (amount * 2);
