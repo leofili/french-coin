@@ -17,11 +17,14 @@ class TransfersController < ApplicationController
         @transfer.update(checkout_session_id: @session.id)
         redirect_to new_transfer_transfer_payment_path(@transfer)
       elsif @transfer.amount_currency == "EUR"
-        redirect_to loan_path(@loan, notice: 'Votre collatéral a été versé avec succès en euros!')
+        flash[:notice] = 'Votre garantie a été versée avec succès en euros!'
+        redirect_to loan_path(@loan)
       elsif @transfer.amount_currency == "ETH" && params[:commit] == 'Transférer'
-        redirect_to wallet_path(notice: 'Vos ethereum ont été transférés avec succès vers votre portefeuille!')
+        flash[:notice] = 'Vos ethereum ont été transférés avec succès vers votre portefeuille!'
+        redirect_to wallet_path
       else
-        redirect_to loan_path(@loan, notice: 'Votre collatéral a été versé avec succès en ethereum!')
+        flash[:notice] = 'Votre garantie a été versée avec succès en ethereum!'
+        redirect_to loan_path(@loan)
       end
     else
       render :new

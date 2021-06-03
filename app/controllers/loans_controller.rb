@@ -4,7 +4,7 @@ class LoansController < ApplicationController
   def show
     if params[:session_id]
       session = Stripe::Checkout::Session.retrieve(params[:session_id])
-      flash[:notice] = session.payment_status == "paid" ? "Votre collatéral a bien été versé !" : "Votre collatéral n'a pas pu être versé !"
+      flash[:notice] = session.payment_status == "paid" ? "Votre garantie a bien été versée !" : "Votre garantie n'a pas pu être versée !"
     end
     @loan = Loan.find(params[:id])
     authorize @loan
@@ -63,7 +63,7 @@ class LoansController < ApplicationController
   def update
     @loan = Loan.find(params[:id])
     @loan.update(loan_params)
-    @loan.user = current_user   
+    @loan.user = current_user
     @loan.duration =  params[:month].to_i
     # Envoi des données amount en centimes d'euros
     if params[:loan][:amount_currency] == "Ethereums"
