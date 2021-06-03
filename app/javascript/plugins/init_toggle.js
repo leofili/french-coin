@@ -21,19 +21,19 @@ const initToggle = () => {
         if (document.querySelector(".choice-toggle2.selected input").value === "25") {
           let apr = 100 / 10000;
           document.querySelector(".apr").innerText = (apr * 100).toFixed(2);
-          let interest = ((amount * apr) / (12 / month)).toFixed(2);
+          let interest = ((((amount * (apr /12)) / (1 - Math.pow((1 + (apr / 12)),-month))) * month) - amount).toFixed(2);
           document.querySelector(".interest").innerText = interest;
           document.querySelector(".loan_interest_cents input").value = interest * 100;
         } else if (document.querySelector(".choice-toggle2.selected input").value === "33") {
           let apr = 695 / 10000;
           document.querySelector(".apr").innerText = (apr * 100).toFixed(2);
-          let interest = ((amount * apr) / (12 / month)).toFixed(2);
+          let interest = ((((amount * (apr /12)) / (1 - Math.pow((1 + (apr / 12)),-month))) * month) - amount).toFixed(2);
           document.querySelector(".interest").innerText = interest;
           document.querySelector(".loan_interest_cents input").value = interest * 100;
         } else if (document.querySelector(".choice-toggle2.selected input").value === "50") {
           let apr = 895 / 10000;
           document.querySelector(".apr").innerText = (apr * 100).toFixed(2);
-          let interest = ((amount * apr) / (12 / month)).toFixed(2);
+          let interest = ((((amount * (apr /12)) / (1 - Math.pow((1 + (apr / 12)),-month))) * month) - amount).toFixed(2);
           document.querySelector(".interest").innerText = interest;
           document.querySelector(".loan_interest_cents input").value = interest * 100
         };
@@ -113,17 +113,21 @@ const initToggle = () => {
         };
 
         if (document.querySelector(".choice-toggle.selected input").value === "6") {
-          document.querySelector(".interest").innerText = ((amount * apr) / 2).toFixed(2);
-          document.querySelector(".loan_interest_cents input").value = (((amount * apr) / 2).toFixed(2)) * 100
+          let interest = ((((amount * (apr /12)) / (1 - Math.pow((1 + (apr / 12)),- 6 ))) * 6) - amount).toFixed(2);
+          document.querySelector(".interest").innerText = interest;
+          document.querySelector(".loan_interest_cents input").value = interest * 100;
         } else if (document.querySelector(".choice-toggle.selected input").value === "12") {
-          document.querySelector(".interest").innerText = (amount * apr).toFixed(2);
-          document.querySelector(".loan_interest_cents input").value = (((amount * apr)).toFixed(2)) * 100
+          let interest = ((((amount * (apr /12)) / (1 - Math.pow((1 + (apr / 12)),- 12 ))) * 12) - amount).toFixed(2);
+          document.querySelector(".interest").innerText = interest;
+          document.querySelector(".loan_interest_cents input").value = interest * 100;
         } else if (document.querySelector(".choice-toggle.selected input").value === "24") {
-          document.querySelector(".interest").innerText = ((amount * apr) / (12 / 24)).toFixed(2);
-          document.querySelector(".loan_interest_cents input").value = (((amount * apr) / (12 / 24)).toFixed(2)) * 100
+          let interest = ((((amount * (apr /12)) / (1 - Math.pow((1 + (apr / 12)),- 24 ))) * 24) - amount).toFixed(2);
+          document.querySelector(".interest").innerText = interest;
+          document.querySelector(".loan_interest_cents input").value = interest * 100;
         } else if (document.querySelector(".choice-toggle.selected input").value === "36") {
-          document.querySelector(".interest").innerText = ((amount * apr) / (12 / 36)).toFixed(2);
-          document.querySelector(".loan_interest_cents input").value = (((amount * apr) / (12 / 36)).toFixed(2)) * 100
+          let interest = ((((amount * (apr /12)) / (1 - Math.pow((1 + (apr / 12)),- 36 ))) * 36) - amount).toFixed(2);
+          document.querySelector(".interest").innerText = interest;
+          document.querySelector(".loan_interest_cents input").value = interest * 100;
         };
       });
     });

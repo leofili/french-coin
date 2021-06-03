@@ -31,7 +31,7 @@ const initCollat = () => {
         };
         let apr = 100 / 10000;
         let month = document.querySelector(".choice-toggle.selected input").value;
-        let interest = ((amount * apr) / (12 / month)).toFixed(2);
+        let interest = ((((amount * (apr /12)) / (1 - Math.pow((1 + (apr / 12)),-month))) * month) - amount).toFixed(2);
         document.querySelector(".interest").innerText = interest;
         document.querySelector(".loan_interest_cents input").value = interest * 100;
       } else if (lvt === "33") {
@@ -44,7 +44,7 @@ const initCollat = () => {
         };
         let apr = 695 / 10000;
         let month = document.querySelector(".choice-toggle.selected input").value;
-        let interest = ((amount * apr) / (12 / month)).toFixed(2);
+        let interest = ((((amount * (apr /12)) / (1 - Math.pow((1 + (apr / 12)),-month))) * month) - amount).toFixed(2);
         document.querySelector(".interest").innerText = interest;
         document.querySelector(".loan_interest_cents input").value = interest * 100;
       } else if (lvt === "50") {
@@ -57,7 +57,7 @@ const initCollat = () => {
         };
         let apr = 895 / 10000;
         let month = document.querySelector(".choice-toggle.selected input").value;
-        let interest = ((amount * apr) / (12 / month)).toFixed(2);
+        let interest = ((((amount * (apr /12)) / (1 - Math.pow((1 + (apr / 12)),-month))) * month) - amount).toFixed(2);
         document.querySelector(".interest").innerText = interest;
         document.querySelector(".loan_interest_cents input").value = interest * 100;
       };
