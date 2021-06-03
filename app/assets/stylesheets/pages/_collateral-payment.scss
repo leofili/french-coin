@@ -4,3 +4,19 @@
     margin-right: 10px;
   }
 }
+
+
+.modal-header {
+  background-image: url(https://t3.ftcdn.net/jpg/03/75/84/32/240_F_375843287_n3HbGJMFfFefCMBGJrdAZAyrRQHe4qQh.jpg);
+  border-start-end-radius: 10px;
+  border-start-start-radius: 10px;
+  color: $blue;
+  opacity: 1
+
+
+}
+
+.modal-content {
+  border-radius: 10px;
+  color: $middle-blue;
+}
