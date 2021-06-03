@@ -91,7 +91,7 @@
                 <div class="next-payment"><%= @loan.payments.where('transfer_id IS NULL').first.due_date.strftime("%d-%m-%Y") %></div>
               </div>
               <div class="information-card2 my-2">
-                <div class="text-green border-b-middle-blue mb-3 pb-3">Prochain prélévement</div>
+                <div class="text-green border-b-middle-blue mb-3 pb-3">Prochain prélèvement</div>
                 <div class="next-payment"><%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').first.amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></div>
               </div>
             </div>
@@ -132,7 +132,7 @@
                 </div>
               </div>
               <div class="card-white w-50">
-                <%= column_chart @loan.collateral_graph_array.map do |array|
+                <%= line_chart @loan.collateral_graph_array.map do |array|
                   {name: array[0], data: array[1]}
                 end %>
               </div>
