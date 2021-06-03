@@ -40,11 +40,11 @@
       <% end %>
 
     <% elsif loan.collateral_currency == 'EUR' %>
-      <p class= 'mb-0'><%= "Le solde actuel de votre portefeuille EURO est suffisant pour verser la garantie, il s'élève à #{Loan.convert_amount(current_user.euro_balance, 'EUR')} euros. Voulez-vous alors utiliser votre portefeuille EURO pour verser la garantie ?" %></p>
+      <p class= 'mb-0'><%= "Le solde actuel de votre portefeuille EURO est suffisant pour verser la garantie, il s'élève à #{Loan.convert_amount(current_user.euro_balance, 'EUR').round(1)} euros. Voulez-vous alors utiliser votre portefeuille EURO pour verser la garantie ?" %></p>
       <%= f.input :payment_mean, as: :radio_buttons, collection: [['euro_wallet', 'Oui'], ['card', 'Non']], label_method: :second, value_method: :first, class: 'payment_button', label: "" %>
 
     <% elsif loan.collateral_currency == 'ETH' %>
-      <p class= 'mb-0'><%= "Le solde actuel de votre portefeuille CRYPTO est suffisant pour verser la garantie, il s'élève à #{Loan.convert_amount(current_user.crypto_balance, 'ETH')} ETH. Voulez-vous alors utiliser votre portefeuille CRYPTO pour verser la garantie ?" %></p>
+      <p class= 'mb-0'><%= "Le solde actuel de votre portefeuille CRYPTO est suffisant pour verser la garantie, il s'élève à #{Loan.convert_amount(current_user.crypto_balance, 'ETH').round(1)} ETH. Voulez-vous alors utiliser votre portefeuille CRYPTO pour verser la garantie ?" %></p>
       <%= f.input :payment_mean, as: :radio_buttons, collection: [['crypto_wallet', 'Oui'], ['crypto', 'Non']], label_method: :second, value_method: :first, class: 'payment_button', label: "", input_html: { data: {
          collateral_ethereum_target: "answer",
          action: "click->collateral-ethereum#display"
