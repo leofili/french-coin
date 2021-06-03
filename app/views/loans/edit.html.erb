@@ -26,7 +26,7 @@
                 <% if @loan.amount_currency == "EUR" %>
                     <%= f.input :amount_cents, class: "amount_cents shadow-sm", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  @loan.amount_cents / 100 } %>
                   <% else %>
-                    <% a = ((@loan.amount_cents * 100) / 2273).to_f %>
+                    <% a = ((@loan.amount_cents * 100) / 2217.86).to_f %>
                     <%= f.input :amount_cents, class: "amount_cents shadow-sm", label: "Indiquer l'emprunteur en EUR ou en ETH", :input_html => { :value =>  (a / 10000).to_s } %>
                   <% end %>
               </div>
@@ -168,7 +168,7 @@
               <% if @loan.collateral_currency == "EUR" %>
                 <span class="collateral odometer color-span-collat-loan" value=<%= @loan.collateral_cents / 100 %> id="odometer3"><%= @loan.collateral_cents / 100 %></span>
               <% else %>
-                <% a = ((@loan.collateral_cents * 100) / 2273).to_f %>
+                <% a = ((@loan.collateral_cents * 100) / 2217.86).to_f %>
                 <span class="collateral odometer color-span-collat-loan" value=<%= (a/10000).round(2) %> id="odometer3"><%= (a/10000).round(2) %></span>
               <% end %>
             </div>

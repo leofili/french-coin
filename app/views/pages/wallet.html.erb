@@ -37,11 +37,11 @@
           <div class="d-flex align-items-center">
             <div class="wallet-value mr-5">
               <p>Balance</p>
-              <p class="amount text-blue"><%= (current_user.crypto_balance.fdiv(100) * 0.00044).round(2) %> ETH</p>
+              <p class="amount text-blue"><%= (current_user.crypto_balance.fdiv(100).fdiv(2217.86)).round(2) %> ETH</p>
             </div>
             <div class="wallet-value">
               <p>Total des gains</p>
-              <p class="amount text-green"><%= (current_user.crypto_balance.fdiv(1000) * 0.00044).round(2) %> ETH</p>
+              <p class="amount text-green"><%= (current_user.crypto_balance.fdiv(1000).fdiv(2217.86)).round(2) %> ETH</p>
             </div>
           </div>
           <div class="d-flex align-items-center w-25 justify-content-around">
