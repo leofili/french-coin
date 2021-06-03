@@ -88,7 +88,7 @@
             <div class="information-card-container2 card-white p-3 mr-3">
               <div class="information-card my-2">
                 <div class="text-green border-b-middle-blue mb-3 pb-3">Prochaine échéance</div>
-                <div class="next-payment"><%= @loan.payments.where('transfer_id IS NULL').first.due_date.strftime("%d-%m-%Y") %></div>
+                <div class="next-payment"><%= l(@loan.payments.where('transfer_id IS NULL').first.due_date, format: "%e %B %Y", locale: :fr) %></div>
               </div>
               <div class="information-card2 my-2">
                 <div class="text-green border-b-middle-blue mb-3 pb-3">Prochain prélèvement</div>
@@ -151,9 +151,9 @@
           <div class="col-sm">
             <table class="table table-loan-infos card-white">
               <thead>
-                <th><span>Restant dû au <%= Date.today.strftime("%d-%m-%Y")  %> :</span> <%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').sum('amount_cents'), @loan.amount_currency).round(2)%> <%= @loan.amount_currency %></th>
+                <th><span>Restant dû au <%= l(Date.today, format: "%e %B %Y", locale: :fr)  %> :</span> <%= Loan.convert_amount(@loan.payments.where('transfer_id IS NULL').sum('amount_cents'), @loan.amount_currency).round(2)%> <%= @loan.amount_currency %></th>
                 <th><span>Durée du prêt :</span> <%= @loan.duration %> mois</th>
-                <th><span>Prochaine échéance :</span> <%= @loan.payments.where('transfer_id IS NULL').first.due_date.strftime("%d-%m-%Y") %></th>
+                <th><span>Prochaine échéance :</span> <%= l(@loan.payments.where('transfer_id IS NULL').first.due_date, format: "%e %b %Y", locale: :fr) %></th>
               </thead>
             </table>
             <hr>
@@ -170,7 +170,7 @@
                 <% refund = 0 %>
                 <% @loan.payments.where('transfer_id IS NOT NULL').each do |payment| %>
                 <tr>
-                  <td class="text-center"><%= payment.due_date.strftime("%d-%m-%Y") %></td>
+                  <td class="text-center"><%= l(payment.due_date, format: "%e %b %Y", locale: :fr) %></td>
                   <td class="text-center"><%= Loan.convert_amount(payment.refund_amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></td>
                   <td class="text-center"><%= Loan.convert_amount(payment.interest_amount_cents, @loan.amount_currency).round(2) %> <%= @loan.amount_currency%></td>
                   <td class="text-center"><%= Loan.convert_amount(payment.amount_cents, @loan.amount_currency).round(2)%> <%= @loan.amount_currency%></td>
