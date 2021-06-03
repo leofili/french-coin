@@ -60,7 +60,7 @@
             <div class="information-card-container card-white p-3 mr-3">
               <div class="information-card my-2">
                 <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Garantie déposée</div>
-                <div><%= Loan.convert_amount(@loan.collateral_cents, @loan.collateral_currency).round(1)%> <%= @loan.collateral_currency%></div>
+                <div><%= @loan.collateral_cents.fdiv(100).fdiv(Conversion.find_by(unixtime: @loan.collateral_graph_values[0]).value).round(1) %> <%= @loan.collateral_currency%></div>
               </div>
               <div class="information-card my-2">
                 <div class="text-middle-blue border-b-middle-blue mb-3 pb-3">Coût total du prêt</div>
