@@ -1,17 +1,17 @@
 <div class="row justify-content-center">
-  <div class="col-12 col-lg-6">
+  <div class="col-12 col-lg-6 mt-5">
     <% if @loan.id == 1 && params[:money].nil? %>
       <p class='alert alert-warning mt-5'>Vous n'avez pas accès à cette page.</p>
     <% elsif @loan.id == 1 %>
-      <%= render 'account-transfer', loan: @loan, transfer: @transfer %>
       <%= link_to wallet_path, class: 'back-link' do %>
-        <i class="fas fa-undo-alt mr-2"></i> Back to my wallet
+        <i class="fas fa-undo-alt mr-2"></i> Retour vers mon portefeuille
       <% end %>
+      <%= render 'account-transfer', loan: @loan, transfer: @transfer %>
     <% elsif @loan.status == 'pending' %>
-      <%= render 'collateral-payment', loan: @loan, transfer: @transfer %>
       <%= link_to loan_path(@loan), class: 'back-link' do %>
-        <i class="fas fa-undo-alt mr-2"></i> Back to the loan page
+        <i class="fas fa-undo-alt mr-2"></i> Retour au récapitulatif de l'emprunt
       <% end %>
+      <%= render 'collateral-payment', loan: @loan, transfer: @transfer %>
     <% elsif @loan.status == 'accepted' %>
       <p class='alert alert-warning mt-5'>Vous n'avez pas accès à cette page.</p>
     <% elsif @loan.status == 'cancelled' %>

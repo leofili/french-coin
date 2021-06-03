@@ -1,8 +1,8 @@
 # admin = User.create(email: "admin@example.com", password: "admin@example.com", password_confirmation: "admin@example.com")
 
-User.create(first_name: "Paul", last_name: "Bismuth", email: "bismuth2@example.com", password: "bismuth2@example.com", password_confirmation: "bismuth2@example.com", phone_number: "0606060606", address: "6, rue du Faucon, 75011 Paris", crypto_balance: 10000, euro_balance: 10000)
+User.create(first_name: "Paul", last_name: "Bismuth", email: "bismuth3@example.com", password: "bismuth3@example.com", password_confirmation: "bismuth2@example.com", phone_number: "0606060606", address: "6, rue du Faucon, 75011 Paris", crypto_balance: 10000, euro_balance: 10000)
 
-helen = User.find_by(email: "bismuth2@example.com")
+helen = User.find_by(email: "bismuth3@example.com")
 
 #Creating fake loan
 # Loan.create(user: admin)
@@ -32,7 +32,10 @@ helen = User.find_by(email: "bismuth2@example.com")
 # end
 
 # Creating a validated loan in euros with three already done payments
-third_loan = Loan.create(name: 'Achat voiture', user: helen, collateral_cents: 1000000, collateral_currency: 'ETH', amount_cents: 500000, amount_currency: 'EUR', start_date: Date.today - 3.months, duration: 6, end_date: Date.today + 3.months, interest_rate: 6.75, interest_cents: 33750)
+Conversion.destroy_all
+Conversion.fill_conversion
+
+third_loan = Loan.create(name: 'Achat voiture', user: helen, collateral_cents: 1000000, collateral_currency: 'ETH', amount_cents: 500000, amount_currency: 'EUR', start_date: Date.today - 4.months, duration: 6, end_date: Date.today + 2.months, interest_rate: 6.75, interest_cents: 33750)
 
 Transfer.create(user: helen, loan: third_loan, amount_cents: 1000000, amount_currency: 'ETH', category: 'collateral_payment')
 

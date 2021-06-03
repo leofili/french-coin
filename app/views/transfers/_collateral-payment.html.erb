@@ -16,26 +16,28 @@
     <% if (loan.collateral_currency == 'EUR' && current_user.euro_balance < loan.collateral_cents) || (loan.collateral_currency == 'ETH' && current_user.crypto_balance < loan.collateral_cents) %>
       <p class='alert alert-warning'>Vous ne pouvez pas utiliser votre portefeuille <%= @loan.collateral_currency %> pour payer la garantie, parce que vous n'avez pas assez d'argent dessus ( solde actuel: <%= loan.collateral_currency == 'EUR' ? "#{Loan.convert_amount(current_user.euro_balance, 'EUR').round(2)} euros " : "#{Loan.convert_amount(current_user.crypto_balance, 'ETH').round(2)} ETH "%>). Vous devez utiliser un autre moyen de paiement.</p>
       <%= f.hidden_field :payment_mean, value: @loan.collateral_currency == "EUR" ? "card" : "crypto" %>
-      <div class="mt-4" data-collateral-ethereum-target = 'popup'>
-        <div class="d-flex">
-          <%= image_tag "qrcode-ethereum.png", width: "150px", height: "150px"%>
-          <div class="flex-direction-columns ml-3">
-            <div>Verser de l'Ethereum <i class="fab fa-ethereum"></i> (ETH) sur le portefeuille de l'entreprise French-Coin</div>
-            <div>Attention :
-              <ul>
-                <li>Transférer uniquement de l'Ethereum (ETH) sur ce portefeuille, en utilisant sa blockchain native</li>
-                <li>Si vous envoyez une autre cryptomonnaie sur cette adresse, ou utilisez une blockchain tiers, alors vos fonds seront perdus définitivement</li>
-              </ul>
+      <% if loan.collateral_currency == 'ETH' %>
+        <div class="mt-4" data-collateral-ethereum-target = 'popup'>
+          <div class="d-flex">
+            <%= image_tag "qrcode-ethereum.png", width: "150px", height: "150px"%>
+            <div class="flex-direction-columns ml-3">
+              <div>Verser de l'Ethereum <i class="fab fa-ethereum"></i> (ETH) sur le portefeuille de l'entreprise French-Coin</div>
+              <div>Attention :
+                <ul>
+                  <li>Transférer uniquement de l'Ethereum (ETH) sur ce portefeuille, en utilisant sa blockchain native</li>
+                  <li>Si vous envoyez une autre cryptomonnaie sur cette adresse, ou utilisez une blockchain tiers, alors vos fonds seront perdus définitivement</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div>Adresse ETH du portefeuille de l'entreprise French-Coin
+            <div data-controller="clipboard" class="w-100 d-flex mt-1">
+              <input class='flex-grow-1 eth-address-input' data-clipboard-target="input" type="text" value="0x027f0e387B3D7814F6Bead9c9ac73A3F3AB099E3" readonly>
+              <button class="btn btn-primary" data-action="click->clipboard#copy"><i class="far fa-copy"></i></button>
             </div>
           </div>
         </div>
-        <div>Adresse ETH du portefeuille de l'entreprise French-Coin
-          <div data-controller="clipboard" class="w-100 d-flex mt-1">
-            <input class='flex-grow-1 eth-address-input' data-clipboard-target="input" type="text" value="0x027f0e387B3D7814F6Bead9c9ac73A3F3AB099E3" readonly>
-            <button class="btn btn-primary" data-action="click->clipboard#copy"><i class="far fa-copy"></i></button>
-          </div>
-        </div>
-      </div>
+      <% end %>
 
     <% elsif loan.collateral_currency == 'EUR' %>
       <p class= 'mb-0'><%= "Le solde actuel de votre portefeuille EURO est suffisant pour verser la garantie, il s'élève à #{Loan.convert_amount(current_user.euro_balance, 'EUR')} euros. Voulez-vous alors utiliser votre portefeuille EURO pour verser la garantie ?" %></p>
@@ -65,8 +67,8 @@
         </div>
       </div>
       <div>Adresse ETH du portefeuille de l'entreprise French-Coin
-        <div data-controller="clipboard">
-          <input data-clipboard-target="input" type="text" value="0x027f0e387B3D7814F6Bead9c9ac73A3F3AB099E3" readonly>
+        <div data-controller="clipboard" class="w-100 d-flex mt-1">
+          <input class='flex-grow-1 eth-address-input' data-clipboard-target="input" type="text" value="0x027f0e387B3D7814F6Bead9c9ac73A3F3AB099E3" readonly>
           <button class="btn btn-primary" data-action="click->clipboard#copy"><i class="far fa-copy"></i></button>
         </div>
       </div>
