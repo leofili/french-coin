@@ -7,7 +7,7 @@
     <div class="card-horizontal">
       <div class="mr-2 text-center">
         <p class="text-middle-blue border-b-middle-blue pb-3">Garantie déposée</p>
-        <p class="mb-0"><%=Loan.convert_amount(loan.collateral_cents, loan.collateral_currency).round(2)%> <%=loan.collateral_currency%></p>
+        <p class="mb-0"><%=loan.collateral_cents.fdiv(100).fdiv(Conversion.find_by(unixtime: loan.collateral_graph_values[0]).value).round(1)%> <%=loan.collateral_currency%></p>
       </div>
       <div class="mx-2 text-center">
         <p class="text-middle-blue border-b-middle-blue pb-3">Capital emprunté</p>

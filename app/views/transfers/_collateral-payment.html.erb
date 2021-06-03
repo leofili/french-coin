@@ -14,7 +14,7 @@
     <hr>
 
     <% if (loan.collateral_currency == 'EUR' && current_user.euro_balance < loan.collateral_cents) || (loan.collateral_currency == 'ETH' && current_user.crypto_balance < loan.collateral_cents) %>
-      <p class='alert alert-warning'>Vous ne pouvez pas utiliser votre portefeuille <%= @loan.collateral_currency %> pour payer la garantie, parce que vous n'avez pas assez d'argent dessus ( solde actuel: <%= loan.collateral_currency == 'EUR' ? "#{Loan.convert_amount(current_user.euro_balance, 'EUR').round(2)} euros " : "#{Loan.convert_amount(current_user.crypto_balance, 'ETH').round(2)} ETH "%>). Vous devez utiliser un autre moyen de paiement.</p>
+      <p class='alert alert-warning'>Vous ne pouvez pas utiliser votre portefeuille <%= @loan.collateral_currency %> pour payer la garantie, parce que vous n'avez pas assez d'argent dessus (solde actuel: <%= loan.collateral_currency == 'EUR' ? "#{Loan.convert_amount(current_user.euro_balance, 'EUR').round(2)} euros " : "#{Loan.convert_amount(current_user.crypto_balance, 'ETH').round(2)} ETH "%>). Vous devez utiliser un autre moyen de paiement.</p>
       <%= f.hidden_field :payment_mean, value: @loan.collateral_currency == "EUR" ? "card" : "crypto" %>
       <% if loan.collateral_currency == 'ETH' %>
         <div class="mt-4" data-collateral-ethereum-target = 'popup'>
