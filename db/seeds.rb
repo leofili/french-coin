@@ -35,7 +35,7 @@ helen = User.find_by(email: "bismuth3@example.com")
 Conversion.destroy_all
 Conversion.fill_conversion
 
-third_loan = Loan.create(name: 'Achat voiture', user: helen, collateral_cents: 1000000, collateral_currency: 'ETH', amount_cents: 500000, amount_currency: 'EUR', start_date: Date.today - 4.months, duration: 6, end_date: Date.today + 2.months, interest_rate: 6.75, interest_cents: 33750)
+third_loan = Loan.create(name: 'Achat voiture', user: helen, collateral_cents: 1000000, collateral_currency: 'ETH', amount_cents: 500000, amount_currency: 'EUR', start_date: Date.today - 4.months, duration: 6, end_date: Date.today + 2.months, interest_rate: 8.95, interest_cents: 22375)
 
 Transfer.create(user: helen, loan: third_loan, amount_cents: 1000000, amount_currency: 'ETH', category: 'collateral_payment')
 
