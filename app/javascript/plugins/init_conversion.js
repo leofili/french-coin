@@ -9,9 +9,9 @@ const initConversion = () => {
         let amount = inputResult.value;
         let currency = event.currentTarget.value;
         if (currency === "Euros") {
-          inputResult.value = amount * 2217.86;
+          inputResult.value = amount * 2223.83;
         } else if (currency === "Ethereums") {
-          inputResult.value = amount / 2217.86;
+          inputResult.value = amount / 2223.83;
         };
       });
     })
@@ -26,9 +26,9 @@ const initConversion = () => {
         let amount = inputResult.value;
         let currency = event.currentTarget.value;
         if (currency === "Euros") {
-          inputResult.value = (amount * 2217.86).toFixed(2);
+          inputResult.value = (amount * 2223.83).toFixed(2);
         } else if (currency === "Ethereums") {
-          inputResult.value = amount / 2217.86;
+          inputResult.value = amount / 2223.83;
         };
       });
     })
@@ -37,12 +37,12 @@ const initConversion = () => {
       dropdown.addEventListener("change", (event) => {
         event.preventDefault();
         selectedInput = Array.from(checkboxes).find(cb => cb.checked)
-        let currency = selectedInput.value; 
+        let currency = selectedInput.value;
         if (currency === "Euros") {
           document.querySelector(".loan_collateral_cents input").value = (amount * 4);
           document.querySelector(".devise-new-loan").innerText = "/EUR"
         } else if (currency === "Ethereums") {
-          document.querySelector(".loan_collateral_cents input").value = (amount * 4) / 2217.86;
+          document.querySelector(".loan_collateral_cents input").value = (amount * 4) / 2223.83;
           document.querySelector(".devise-new-loan").innerText = "/ETH"
         };
       });

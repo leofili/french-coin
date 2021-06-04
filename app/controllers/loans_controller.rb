@@ -29,7 +29,7 @@ class LoansController < ApplicationController
     # Envoi des données amount en centimes d'euros
     if params[:loan][:amount_currency] == "Ethereums"
       @loan.amount_currency = "ETH"
-      @loan.amount_cents = params[:loan][:amount_cents].to_f * 2217.86 * 100
+      @loan.amount_cents = params[:loan][:amount_cents].to_f * 2223.83 * 100
 
     elsif params[:loan][:amount_currency] == "Euros"
       @loan.amount_currency = "EUR"
@@ -38,7 +38,7 @@ class LoansController < ApplicationController
     # Envoi des données collateral en centimes d'euros
     if params[:loan][:collateral_currency] == "Ethereums"
       @loan.collateral_currency = "ETH"
-      @loan.collateral_cents = params[:loan][:collateral_cents].to_f * 2217.86 * 100
+      @loan.collateral_cents = params[:loan][:collateral_cents].to_f * 2223.83 * 100
     elsif params[:loan][:collateral_currency] == "Euros"
       @loan.collateral_currency = "EUR"
       @loan.collateral_cents = params[:loan][:collateral_cents].to_f * 100
@@ -68,7 +68,7 @@ class LoansController < ApplicationController
     # Envoi des données amount en centimes d'euros
     if params[:loan][:amount_currency] == "Ethereums"
       @loan.amount_currency = "ETH"
-      @loan.amount_cents = params[:loan][:amount_cents].to_f * 2217.86 * 100
+      @loan.amount_cents = params[:loan][:amount_cents].to_f * 2223.83 * 100
     elsif params[:loan][:amount_currency] == "Euros"
       @loan.amount_currency = "EUR"
       @loan.amount_cents = params[:loan][:amount_cents].to_f * 100
@@ -76,7 +76,7 @@ class LoansController < ApplicationController
     # Envoi des données collateral en centimes d'euros
     if params[:loan][:collateral_currency] == "Ethereums"
       @loan.collateral_currency = "ETH"
-      @loan.collateral_cents = params[:loan][:collateral_cents].to_f * 2217.86 * 100
+      @loan.collateral_cents = params[:loan][:collateral_cents].to_f * 2223.83 * 100
     elsif params[:loan][:collateral_currency] == "Euros"
       @loan.collateral_currency = "EUR"
       @loan.collateral_cents = params[:loan][:collateral_cents].to_f * 100
