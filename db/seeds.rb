@@ -1,8 +1,8 @@
 # admin = User.create(email: "admin@example.com", password: "admin@example.com", password_confirmation: "admin@example.com")
 
-User.create(first_name: "Paul", last_name: "Bismuth", email: "bismuth3@example.com", password: "bismuth3@example.com", password_confirmation: "bismuth3@example.com", phone_number: "0606060606", address: "6, rue du Faucon, 75011 Paris", crypto_balance: 10000, euro_balance: 10000)
+User.create(first_name: "Paul", last_name: "Bismuth", email: "bismuth4@example.com", password: "bismuth4@example.com", password_confirmation: "bismuth4@example.com", phone_number: "0606060606", address: "6, rue du Faucon, 75011 Paris", crypto_balance: 10000, euro_balance: 10000)
 
-helen = User.find_by(email: "bismuth3@example.com")
+helen = User.find_by(email: "bismuth4@example.com")
 
 # Creating a validated loan in euros with three already done payments
 Conversion.destroy_all
