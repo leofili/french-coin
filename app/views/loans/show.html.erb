@@ -108,7 +108,6 @@
                       <table class="table">
                         <tr>
                           <td class="col-ms-2 bg-gradient-primary text-middle-blue">Garantie déposée</td>
-                          <%= @loan.collateral_graph_values[0] %>
                           <td class="col-ms-2 text-right"><%= @loan.collateral_cents.fdiv(100).fdiv(Conversion.find_by(unixtime: @loan.collateral_graph_values[0]).value).round(1) %> <%= @loan.collateral_currency%></td>
                         </tr>
                         <tr>
